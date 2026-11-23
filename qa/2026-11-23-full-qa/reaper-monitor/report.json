@@ -1,0 +1,92 @@
+{
+ "fx": "VST3: OpenLimiter (OpenGrid)",
+ "checks": [
+  {
+   "check": "loads",
+   "status": "PASS",
+   "detail": "VST3: OpenLimiter (OpenGrid), 1985 parameters"
+  },
+  {
+   "check": "finite output",
+   "status": "PASS",
+   "detail": "peak -3.5 dBFS"
+  },
+  {
+   "check": "not silent",
+   "status": "PASS",
+   "detail": "rms -14.9 dBFS"
+  },
+  {
+   "check": "deterministic render",
+   "status": "PASS",
+   "detail": "repeat differs by -240.0 dB"
+  },
+  {
+   "check": "editor opens",
+   "status": "PASS",
+   "detail": "1080x913, 0.3% animates by itself"
+  },
+  {
+   "check": "every parameter changes the sound",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "every parameter is shown in the GUI",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "state survives save and reopen",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "editor reopens",
+   "status": "PASS",
+   "detail": "5 close/open cycles"
+  }
+ ],
+ "params": [
+  {
+   "index": 1979,
+   "name": "Autogain",
+   "ident": "1979:1979",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": -49.8,
+   "audio": "ok",
+   "visualChange": 7.113,
+   "visual": "ok"
+  },
+  {
+   "index": 1980,
+   "name": "Delta",
+   "ident": "1980:1980",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": -3.5,
+   "audio": "ok",
+   "visualChange": 7.522,
+   "visual": "ok"
+  },
+  {
+   "index": 1984,
+   "name": "Delta",
+   "ident": "1984:delta",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": -3.5,
+   "audio": "ok",
+   "visualChange": 8.009,
+   "visual": "ok"
+  }
+ ],
+ "info": {
+  "numParams": 1985,
+  "name": "VST3: OpenLimiter (OpenGrid)",
+  "latency": "0",
+  "fx": 0
+ },
+ "failed": []
+}

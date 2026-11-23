@@ -1,0 +1,11 @@
+[package]
+name = "eq-parametric"
+version = "0.1.0"
+edition = "2021"
+description = "32-band static EQ with phase modes and transient/tonal split (port of OpenEQ 1.0.1) for OpenLimiter"
+
+[dependencies]
+olm-api = { path = "../api" }
+eq-core = { path = "../eq-core" }
+
+[workspace]

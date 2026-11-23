@@ -1,0 +1,10 @@
+[package]
+name = "tone-six"
+version = "0.1.0"
+edition = "2021"
+description = "Six-band equaliser with low cut and a stereo / mid-side matrix for OpenLimiter"
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[workspace]

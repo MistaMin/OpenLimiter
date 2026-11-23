@@ -1,0 +1,13 @@
+[package]
+name = "comp-dual"
+version = "0.1.0"
+edition = "2021"
+description = "Dual-set wideband compressor / de-esser module for OpenLimiter (clean-room, from measured behaviour)"
+
+[workspace]
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[profile.release]
+opt-level = 3

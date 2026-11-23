@@ -1,0 +1,18 @@
+[package]
+name = "limiter-wall"
+version = "0.1.0"
+edition = "2021"
+description = "Look-ahead wall limiter with manual and programme-dependent release (OpenLimiter module)"
+
+[workspace]
+
+[lib]
+name = "limiter_wall"
+path = "src/lib.rs"
+
+[features]
+# Exposes the model constants at run time. Only for the fitting test; never enable in the plugin.
+tuning = []
+
+[dependencies]
+olm-api = { path = "../api" }

@@ -1,0 +1,11 @@
+[package]
+name = "reso-suppress"
+version = "0.1.0"
+edition = "2021"
+description = "Resonance suppressor (port of the OpenEQ 1.0.1 suppressor) for OpenLimiter"
+
+[dependencies]
+olm-api = { path = "../api" }
+eq-core = { path = "../eq-core" }
+
+[workspace]

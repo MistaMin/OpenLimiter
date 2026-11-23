@@ -1,0 +1,10 @@
+[package]
+name = "shaper"
+version = "0.1.0"
+edition = "2021"
+description = "Soft clipper with selectable curve families, upward compression and transient shaping (OpenLimiter stages 7 and 8)"
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[workspace]

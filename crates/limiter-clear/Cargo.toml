@@ -1,0 +1,13 @@
+[package]
+name = "limiter-clear"
+version = "0.1.0"
+edition = "2021"
+description = "Transparent look-ahead peak limiter module for OpenLimiter"
+
+[workspace]
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[profile.test]
+opt-level = 3

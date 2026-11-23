@@ -1,0 +1,20 @@
+# Build outputs
+target/
+/build/
+/dist/
+/output/
+# Planning notes and design hand-offs stay out of the public repository
+/NOTES.md
+/design/
+# Large or machine-specific QA files
+qa/**/*.wav
+qa/**/*.ppm
+qa/**/resp.txt
+qa/**/build*.log
+qa/**/montage*.png
+# System files
+.DS_Store
+._*
+# Per-module session reports stay local
+crates/*/REPORT.md
+qa/**/*.rpp

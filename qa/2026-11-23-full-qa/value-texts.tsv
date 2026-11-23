@@ -1,0 +1,1289 @@
+page	id	name	kind	unit	steps	min	mid	mid+step	max
+Classic Limiter	inputGainL	Input Gain L	FaderV	Db	481	-24.0 dB	0.0 dB	0.1 dB	24.0 dB
+Classic Limiter	inputGainR	Input Gain R	FaderV	Db	481	-24.0 dB	0.0 dB	0.1 dB	24.0 dB
+Classic Limiter	threshold	Threshold	Grip	Db	252	-25.0 dB	-12.4 dB	-12.3 dB	0.1 dB
+Classic Limiter	releaseA	Release A	Knob(Big)	None	7	Slow 3	Normal	Fast +1	Fast +3
+Classic Limiter	softClip	Soft Clip	Knob(Small)	Db	37	-12 dB	+6 dB	+7 dB	OFF
+Classic Limiter	gainL	Gain L	Knob(Small)	Db	481	-24.0 dB	+0.0 dB	+0.1 dB	+24.0 dB
+Classic Limiter	gainR	Gain R	Knob(Small)	Db	481	-24.0 dB	+0.0 dB	+0.1 dB	+24.0 dB
+Classic Limiter	output	Output	Knob(Small)	Db	721	-inf dB	-60.0 dB	-59.8 dB	0.0 dB
+Classic Limiter	releaseM	Release M	Knob(Small)	Ms	0	20.0 ms	3510.0 ms	3517.0 ms	7000.0 ms
+Punch & Energy	shaper.curve	Punch & Energy Curve	Grip	Choice	8	Off	Quadratic 6 dB	Quadratic 9 dB	Quadratic 2 dB
+Punch & Energy	shaper.drive	Punch & Energy Drive	Knob(Big)	Db	0	-12.0 dB	6.0 dB	6.0 dB	24.0 dB
+Punch & Energy	shaper.threshold	Punch & Energy Threshold	Knob(Big)	Db	0	-24.0 dB	-9.0 dB	-9.0 dB	6.0 dB
+Punch & Energy	shaper.mix	Punch & Energy Mix	Knob(Big)	Percent	0	0%	50%	50%	100%
+Punch & Energy	shaper.upward	Punch & Energy Upward amount	Knob(Small)	Db	0	0.0 dB	5.0 dB	5.0 dB	10.0 dB
+Punch & Energy	shaper.upwardThreshold	Punch & Energy Upward threshold	Knob(Small)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+Punch & Energy	shaper.transient	Punch & Energy Transient amount	Knob(Small)	Percent	0	0%	100%	100%	200%
+Loudness MAX	modes.drive	Loudness MAX Drive	Knob(Big)	Db	0	+0.0 dB	+10.0 dB	+10.0 dB	+20.0 dB
+Loudness MAX	modes.ceiling	Loudness MAX Ceiling	Knob(Big)	Db	0	-20.0 dB	-10.0 dB	-10.0 dB	0.0 dB
+Loudness MAX	modes.character	Loudness MAX Character	Knob(Big)	None	0	0.0	5.0	5.0	10.0
+Loudness MAX	modes.learnTarget	Loudness MAX Learn Target (LUFS)	Value	None	0	-32 LUFS	-16 LUFS	-16 LUFS	-1 LUFS
+Loudness MAX	modes.style	Loudness MAX Style	Value	Choice	13	STYLE  Clear	STYLE  Legacy	STYLE  Open	STYLE  Glass
+Loudness MAX	modes.stereoLink	Loudness MAX Stereo Link	GripH	Percent	0	0%	50%	50%	100%
+Loudness MAX	modes.learnLoudness	Loudness MAX Learn: Measured Loudness (LUFS)	Value	None	0	no learn yet	last -35.0 LUFS	last -34.9 LUFS	last 0.0 LUFS
+Loudness MAX	modes.inputGain	Loudness MAX Input Gain	Value	Db	0	-144.0 dB	-67.0 dB	-66.8 dB	+10.0 dB
+Loudness MAX	modes.inputGainLeft	Loudness MAX Input Gain Left	Value	Db	0	-144.0 dB	-67.0 dB	-66.8 dB	+10.0 dB
+Loudness MAX	modes.inputGainRight	Loudness MAX Input Gain Right	Value	Db	0	-144.0 dB	-67.0 dB	-66.8 dB	+10.0 dB
+Loudness MAX	modes.outputGain	Loudness MAX Output Gain	Value	Db	0	-144.0 dB	-67.0 dB	-66.8 dB	+10.0 dB
+Loudness MAX	modes.outputGainLeft	Loudness MAX Output Gain Left	Value	Db	0	-144.0 dB	-67.0 dB	-66.8 dB	+10.0 dB
+Loudness MAX	modes.outputGainRight	Loudness MAX Output Gain Right	Value	Db	0	-144.0 dB	-67.0 dB	-66.8 dB	+10.0 dB
+SimplEQ	eq.lowCutFreq	SimplEQ Low Cut Frequency	Knob(Small)	Hz	0	2 Hz	101 Hz	101 Hz	200 Hz
+SimplEQ	eq.b1Gain	SimplEQ Band 1 Gain	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b1Freq	SimplEQ Band 1 Frequency	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b1Width	SimplEQ Band 1 Width	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b2Gain	SimplEQ Band 2 Gain	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b2Freq	SimplEQ Band 2 Frequency	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b2Width	SimplEQ Band 2 Width	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b3Gain	SimplEQ Band 3 Gain	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b3Freq	SimplEQ Band 3 Frequency	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b3Width	SimplEQ Band 3 Width	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b4Gain	SimplEQ Band 4 Gain	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b4Freq	SimplEQ Band 4 Frequency	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b4Width	SimplEQ Band 4 Width	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b5Gain	SimplEQ Band 5 Gain	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b5Freq	SimplEQ Band 5 Frequency	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b5Width	SimplEQ Band 5 Width	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b6Gain	SimplEQ Band 6 Gain	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b6Freq	SimplEQ Band 6 Frequency	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b6Width	SimplEQ Band 6 Width	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b1GainCh2	SimplEQ Band 1 Gain (R/S)	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b1FreqCh2	SimplEQ Band 1 Frequency (R/S)	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b1WidthCh2	SimplEQ Band 1 Width (R/S)	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b2GainCh2	SimplEQ Band 2 Gain (R/S)	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b2FreqCh2	SimplEQ Band 2 Frequency (R/S)	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b2WidthCh2	SimplEQ Band 2 Width (R/S)	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b3GainCh2	SimplEQ Band 3 Gain (R/S)	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b3FreqCh2	SimplEQ Band 3 Frequency (R/S)	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b3WidthCh2	SimplEQ Band 3 Width (R/S)	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b4GainCh2	SimplEQ Band 4 Gain (R/S)	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b4FreqCh2	SimplEQ Band 4 Frequency (R/S)	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b4WidthCh2	SimplEQ Band 4 Width (R/S)	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b5GainCh2	SimplEQ Band 5 Gain (R/S)	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b5FreqCh2	SimplEQ Band 5 Frequency (R/S)	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b5WidthCh2	SimplEQ Band 5 Width (R/S)	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b6GainCh2	SimplEQ Band 6 Gain (R/S)	Knob(Small)	Db	0	-12.0 dB	+0.0 dB	+0.0 dB	+12.0 dB
+SimplEQ	eq.b6FreqCh2	SimplEQ Band 6 Frequency (R/S)	Knob(Mini)	Hz	0	20 Hz	10.0 k	10.0 k	20.0 k
+SimplEQ	eq.b6WidthCh2	SimplEQ Band 6 Width (R/S)	Knob(Mini)	None	0	0.02 oct	2.01 oct	2.01 oct	4.00 oct
+SimplEQ	eq.b1Depth	SimplEQ Band 1 Reject Depth	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b2Depth	SimplEQ Band 2 Reject Depth	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b3Depth	SimplEQ Band 3 Reject Depth	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b4Depth	SimplEQ Band 4 Reject Depth	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b5Depth	SimplEQ Band 5 Reject Depth	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b6Depth	SimplEQ Band 6 Reject Depth	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b1DepthCh2	SimplEQ Band 1 Reject Depth (R/S)	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b2DepthCh2	SimplEQ Band 2 Reject Depth (R/S)	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b3DepthCh2	SimplEQ Band 3 Reject Depth (R/S)	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b4DepthCh2	SimplEQ Band 4 Reject Depth (R/S)	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b5DepthCh2	SimplEQ Band 5 Reject Depth (R/S)	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+SimplEQ	eq.b6DepthCh2	SimplEQ Band 6 Reject Depth (R/S)	Knob(Small)	Db	0	-inf	-50 dB	-50 dB	0 dB
+DualSone	sone.threshold	DualSone Threshold	Knob(Big)	Db	41	-40.0 dB	-20.0 dB	-19.0 dB	0.0 dB
+DualSone	sone.input	DualSone Input	Knob(Mini)	Db	49	-24.0 dB	0.0 dB	1.0 dB	24.0 dB
+DualSone	sone.mix	DualSone Mix	Knob(Mini)	Percent	0	0%	50%	50%	100%
+DualSone	sone.output	DualSone Output	Knob(Mini)	Db	49	-24.0 dB	0.0 dB	1.0 dB	24.0 dB
+DualSone	sone.slowRatio	DualSone Slow Ratio	Knob(Big)	Ratio	10	1:1	6:1	7:1	10:1
+DualSone	sone.slowAttack	DualSone Slow Attack	Knob(Mini)	Ms	0	50.0 ms	2.53 s	2.53 s	5.00 s
+DualSone	sone.slowRelease	DualSone Slow Release	Knob(Mini)	Ms	0	100 ms	5.05 s	5.06 s	10.0 s
+DualSone	sone.fastCrest	DualSone Fast Crest	Knob(Big)	Db	25	0.0 dB	12.0 dB	13.0 dB	24.0 dB
+DualSone	sone.fastRatio	DualSone Fast Ratio	Knob(Mini)	Ratio	20	1:1	11:1	12:1	20:1
+DualSone	sone.fastAttack	DualSone Fast Attack	Knob(Mini)	Ms	0	500 µs	15.2 ms	15.3 ms	30.0 ms
+DualSone	sone.fastRelease	DualSone Fast Release	Knob(Mini)	Ms	0	5.00 ms	502 ms	503 ms	1.00 s
+DualSone	sone.fastLookahead	DualSone Fast Lookahead	Knob(Mini)	Percent	0	0%	50%	50%	100%
+Clean Peak	clear.inputGain	Clean Peak Input Gain	Knob(Big)	Db	0	-18.0 dB	+0.0 dB	+0.0 dB	+18.0 dB
+Clean Peak	clear.threshold	Clean Peak Threshold	Knob(Big)	Db	0	-12.0 dB	-6.0 dB	-6.0 dB	0.0 dB
+Clean Peak	clear.release	Clean Peak Release	Knob(Big)	Ms	0	0.1 ms	519.0 ms	520.1 ms	1038.0 ms
+Clean Peak	clear.attack	Clean Peak Attack	Knob(Small)	Ms	0	0.1 ms	0.5 ms	0.5 ms	1.0 ms
+Clean Peak	clear.knee	Clean Peak Knee	Knob(Small)	Db	0	0.0 dB	5.0 dB	5.0 dB	10.0 dB
+Clean Peak	clear.lift	Clean Peak Lift	Knob(Small)	Percent	0	0%	62%	63%	125%
+Clean Peak	clear.outputTrim	Clean Peak Output Trim	Knob(Small)	Db	0	-18.0 dB	-9.0 dB	-9.0 dB	0.0 dB
+Compressor / De-esser	dual.threshold1	Compressor / De-esser Threshold 1	Knob(Big)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+Compressor / De-esser	dual.ratio1	Compressor / De-esser Ratio 1	Knob(Big)	Ratio	0	1:5.0 UP	500.1:1	501.1:1	∞:1
+Compressor / De-esser	dual.attack1	Compressor / De-esser Attack 1	Knob(Big)	Ms	0	20 µs	400 ms	401 ms	800 ms
+Compressor / De-esser	dual.releaseFast1	Compressor / De-esser Release Fast 1	Knob(Big)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.makeup1	Compressor / De-esser Make-Up 1	Knob(Big)	Db	0	-60.0 dB	0.0 dB	0.1 dB	60.0 dB
+Compressor / De-esser	dual.centerFreq1	Compressor / De-esser Band Frequency 1	Knob(Mini)	Hz	0	41.0 Hz	8.89 kHz	8.91 kHz	17.74 kHz
+Compressor / De-esser	dual.bandwidth1	Compressor / De-esser Band Width 1 (oct)	Knob(Mini)	None	0	0.17 oct	4.08 oct	4.09 oct	8.00 oct
+Compressor / De-esser	dual.softKnee1	Compressor / De-esser Soft Knee 1	Knob(Mini)	Percent	0	0%	50%	50%	100%
+Compressor / De-esser	dual.lookahead	Compressor / De-esser Look-Ahead	Knob(Mini)	Ms	0	OFF	31.5 ms	31.6 ms	63.0 ms
+Compressor / De-esser	dual.inputGain	Compressor / De-esser Input Gain	Knob(Mini)	Db	0	-60.0 dB	-24.0 dB	-23.9 dB	12.0 dB
+Compressor / De-esser	dual.parallelMix	Compressor / De-esser Parallel Mix	Knob(Mini)	Percent	0	0%	50%	50%	100%
+Compressor / De-esser	dual.threshold2	Compressor / De-esser Threshold 2	Knob(Big)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+Compressor / De-esser	dual.ratio2	Compressor / De-esser Ratio 2	Knob(Big)	Ratio	0	1:5.0 UP	500.1:1	501.1:1	∞:1
+Compressor / De-esser	dual.attack2	Compressor / De-esser Attack 2	Knob(Big)	Ms	0	20 µs	400 ms	401 ms	800 ms
+Compressor / De-esser	dual.releaseFast2	Compressor / De-esser Release Fast 2	Knob(Big)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.makeup2	Compressor / De-esser Make-Up 2	Knob(Big)	Db	0	-60.0 dB	0.0 dB	0.1 dB	60.0 dB
+Compressor / De-esser	dual.centerFreq2	Compressor / De-esser Band Frequency 2	Knob(Mini)	Hz	0	41.0 Hz	8.89 kHz	8.91 kHz	17.74 kHz
+Compressor / De-esser	dual.bandwidth2	Compressor / De-esser Band Width 2 (oct)	Knob(Mini)	None	0	0.17 oct	4.08 oct	4.09 oct	8.00 oct
+Compressor / De-esser	dual.softKnee2	Compressor / De-esser Soft Knee 2	Knob(Mini)	Percent	0	0%	50%	50%	100%
+Compressor / De-esser	dual.releaseDelay1	Compressor / De-esser Release Hold 1	Knob(Small)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.releaseAverage1	Compressor / De-esser Release Average 1	Knob(Small)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.releaseSlow1	Compressor / De-esser Release Slow 1	Knob(Small)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.autoReleaseTime1	Compressor / De-esser Auto Release Time 1	Knob(Small)	Ms	0	630 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.rmsTime	Compressor / De-esser RMS Time	Knob(Small)	Ms	0	120 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.limiterGain	Compressor / De-esser Limiter Drive	Knob(Small)	Db	0	0.0 dB	15.0 dB	15.0 dB	30.0 dB
+Compressor / De-esser	dual.outputGain	Compressor / De-esser Output Gain	Value	Db	0				
+Compressor / De-esser	dual.releaseDelay2	Compressor / De-esser Release Hold 2	Knob(Small)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.releaseAverage2	Compressor / De-esser Release Average 2	Knob(Small)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.releaseSlow2	Compressor / De-esser Release Slow 2	Knob(Small)	Ms	0	20 µs	4.00 s	4.01 s	8.00 s
+Compressor / De-esser	dual.autoReleaseTime2	Compressor / De-esser Auto Release Time 2	Knob(Small)	Ms	0	630 µs	4.00 s	4.01 s	8.00 s
+Final Wall	wall.drive	Final Wall Drive	Knob(Big)	Db	0	+0.0 dB	+9.0 dB	+9.0 dB	+18.0 dB
+Final Wall	wall.ceiling	Final Wall Ceiling	Knob(Big)	Db	0	-30.0 dB	-15.0 dB	-15.0 dB	0.0 dB
+Final Wall	wall.release	Final Wall Release	Knob(Big)	Ms	0	0.0 ms	1500.0 ms	1503.0 ms	3000.0 ms
+Final Wall	wall.threshold	Final Wall Threshold	Knob(Small)	Db	0	-30.0 dB	-15.0 dB	-15.0 dB	0.0 dB
+Final Wall	wall.softClipThreshold	Final Wall Soft Clip Threshold	Knob(Small)	Db	0	-20.0 dB	-10.0 dB	-10.0 dB	0.0 dB
+Multiband	bands.lowThreshold	Multiband Low Threshold	Knob(Big)	Db	0	-25.0 dB	-2.5 dB	-2.5 dB	20.0 dB
+Multiband	bands.lowRatio	Multiband Low Ratio	Knob(Big)	Ratio	0	1.0:1	50.5:1	50.6:1	∞:1
+Multiband	bands.lowAttack	Multiband Low Attack	Knob(Big)	Ms	0	0.3 ms	175.2 ms	175.5 ms	350.0 ms
+Multiband	bands.lowRelease	Multiband Low Release	Knob(Big)	Ms	0	20.0 ms	3510.0 ms	3517.0 ms	7000.0 ms
+Multiband	bands.lowMakeup	Multiband Low Make-Up	Knob(Big)	Db	0	-24.0 dB	-6.0 dB	-6.0 dB	12.0 dB
+Multiband	bands.lowLift	Multiband Low Lift Amount	Knob(Mini)	Percent	0	0%	25%	25%	50%
+Multiband	bands.lowCeiling	Multiband Low Limiter Ceiling	Knob(Mini)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Multiband	bands.wetGain	Multiband Parallel Wet Gain	Knob(Mini)	Db	0	OFF	-17.0 dB	-17.0 dB	+6.0 dB
+Multiband	bands.referenceLevel	Multiband Reference Level	Knob(Mini)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Multiband	bands.lookahead	Multiband Look-Ahead	Knob(Mini)	Ms	0	0.0 ms	7.5 ms	7.5 ms	15.0 ms
+Multiband	bands.lowMidThreshold	Multiband Low-Mid Threshold	Knob(Big)	Db	0	-25.0 dB	-2.5 dB	-2.5 dB	20.0 dB
+Multiband	bands.lowMidRatio	Multiband Low-Mid Ratio	Knob(Big)	Ratio	0	1.0:1	50.5:1	50.6:1	∞:1
+Multiband	bands.lowMidAttack	Multiband Low-Mid Attack	Knob(Big)	Ms	0	0.3 ms	175.2 ms	175.5 ms	350.0 ms
+Multiband	bands.lowMidRelease	Multiband Low-Mid Release	Knob(Big)	Ms	0	20.0 ms	3510.0 ms	3517.0 ms	7000.0 ms
+Multiband	bands.lowMidMakeup	Multiband Low-Mid Make-Up	Knob(Big)	Db	0	-24.0 dB	-6.0 dB	-6.0 dB	12.0 dB
+Multiband	bands.lowMidLift	Multiband Low-Mid Lift Amount	Knob(Mini)	Percent	0	0%	25%	25%	50%
+Multiband	bands.lowMidCeiling	Multiband Low-Mid Limiter Ceiling	Knob(Mini)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Multiband	bands.midThreshold	Multiband Mid Threshold	Knob(Big)	Db	0	-25.0 dB	-2.5 dB	-2.5 dB	20.0 dB
+Multiband	bands.midRatio	Multiband Mid Ratio	Knob(Big)	Ratio	0	1.0:1	50.5:1	50.6:1	∞:1
+Multiband	bands.midAttack	Multiband Mid Attack	Knob(Big)	Ms	0	0.3 ms	175.2 ms	175.5 ms	350.0 ms
+Multiband	bands.midRelease	Multiband Mid Release	Knob(Big)	Ms	0	20.0 ms	3510.0 ms	3517.0 ms	7000.0 ms
+Multiband	bands.midMakeup	Multiband Mid Make-Up	Knob(Big)	Db	0	-24.0 dB	-6.0 dB	-6.0 dB	12.0 dB
+Multiband	bands.midLift	Multiband Mid Lift Amount	Knob(Mini)	Percent	0	0%	25%	25%	50%
+Multiband	bands.midCeiling	Multiband Mid Limiter Ceiling	Knob(Mini)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Multiband	bands.highMidThreshold	Multiband High-Mid Threshold	Knob(Big)	Db	0	-25.0 dB	-2.5 dB	-2.5 dB	20.0 dB
+Multiband	bands.highMidRatio	Multiband High-Mid Ratio	Knob(Big)	Ratio	0	1.0:1	50.5:1	50.6:1	∞:1
+Multiband	bands.highMidAttack	Multiband High-Mid Attack	Knob(Big)	Ms	0	0.3 ms	175.2 ms	175.5 ms	350.0 ms
+Multiband	bands.highMidRelease	Multiband High-Mid Release	Knob(Big)	Ms	0	20.0 ms	3510.0 ms	3517.0 ms	7000.0 ms
+Multiband	bands.highMidMakeup	Multiband High-Mid Make-Up	Knob(Big)	Db	0	-24.0 dB	-6.0 dB	-6.0 dB	12.0 dB
+Multiband	bands.highMidLift	Multiband High-Mid Lift Amount	Knob(Mini)	Percent	0	0%	25%	25%	50%
+Multiband	bands.highMidCeiling	Multiband High-Mid Limiter Ceiling	Knob(Mini)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Multiband	bands.highThreshold	Multiband High Threshold	Knob(Big)	Db	0	-25.0 dB	-2.5 dB	-2.5 dB	20.0 dB
+Multiband	bands.highRatio	Multiband High Ratio	Knob(Big)	Ratio	0	1.0:1	50.5:1	50.6:1	∞:1
+Multiband	bands.highAttack	Multiband High Attack	Knob(Big)	Ms	0	0.3 ms	175.2 ms	175.5 ms	350.0 ms
+Multiband	bands.highRelease	Multiband High Release	Knob(Big)	Ms	0	20.0 ms	3510.0 ms	3517.0 ms	7000.0 ms
+Multiband	bands.highMakeup	Multiband High Make-Up	Knob(Big)	Db	0	-24.0 dB	-6.0 dB	-6.0 dB	12.0 dB
+Multiband	bands.highLift	Multiband High Lift Amount	Knob(Mini)	Percent	0	0%	25%	25%	50%
+Multiband	bands.highCeiling	Multiband High Limiter Ceiling	Knob(Mini)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Multiband	bands.split1	Multiband Split 1 (Low | Low-Mid)	Value	Hz	0	OFF	2.0 kHz	2.0 kHz	4.0 kHz
+Multiband	bands.split2	Multiband Split 2 (Low-Mid | Mid)	Value	Hz	0	OFF	2.0 kHz	2.0 kHz	4.0 kHz
+Multiband	bands.split3	Multiband Split 3 (Mid | High-Mid)	Value	Hz	0	100 Hz	10.1 kHz	10.1 kHz	OFF
+Multiband	bands.split4	Multiband Split 4 (High-Mid | High)	Value	Hz	0	100 Hz	10.1 kHz	10.1 kHz	OFF
+Multiband	bands.floorGuardThreshold	Multiband Floor Guard Threshold	Knob(Small)	Db	0	-50.0 dB	-26.5 dB	-26.5 dB	-3.0 dB
+Multiband	bands.floorGuardRatio	Multiband Floor Guard Ratio	Knob(Small)	Ratio	0	OFF	50.5:1	50.6:1	∞
+Multiband	bands.bandLimiterRelease	Multiband Band Limiter Release	Knob(Small)	Ms	0	10.0 ms	505.0 ms	506.0 ms	1000.0 ms
+PrecisionEQ	peq.b1Type	PrecisionEQ Band 1 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b1Freq	PrecisionEQ Band 1 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b1Gain	PrecisionEQ Band 1 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b1Q	PrecisionEQ Band 1 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b1Slope	PrecisionEQ Band 1 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b1Pan	PrecisionEQ Band 1 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b1Phase	PrecisionEQ Band 1 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b1SplitTrans	PrecisionEQ Band 1 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b1SplitTail	PrecisionEQ Band 1 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.inputGain	PrecisionEQ Input Trim	Value	Db	0	-24.0 dB	0.0 dB	0.0 dB	24.0 dB
+PrecisionEQ	peq.outputGain	PrecisionEQ Output Gain	Value	Db	0	-24.0 dB	0.0 dB	0.0 dB	24.0 dB
+PrecisionEQ	peq.gainScale	PrecisionEQ Gain Scale	Value	Percent	0	-200%	0%	0%	200%
+PrecisionEQ	peq.drive	PrecisionEQ Drive	Value	Percent	0	0%	50%	50%	100%
+PrecisionEQ	peq.stereoWidth	PrecisionEQ Stereo Width	Value	Percent	0	0%	100%	100%	200%
+PrecisionEQ	peq.outputPan	PrecisionEQ Balance	Value	Percent	0	-100%	0%	0%	100%
+PrecisionEQ	peq.sideGain	PrecisionEQ Side Level	Value	Db	0	-inf dB	-44.0 dB	-43.9 dB	12.0 dB
+PrecisionEQ	peq.b2Type	PrecisionEQ Band 2 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b2Freq	PrecisionEQ Band 2 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b2Gain	PrecisionEQ Band 2 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b2Q	PrecisionEQ Band 2 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b2Slope	PrecisionEQ Band 2 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b2Pan	PrecisionEQ Band 2 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b2Phase	PrecisionEQ Band 2 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b2SplitTrans	PrecisionEQ Band 2 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b2SplitTail	PrecisionEQ Band 2 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b3Type	PrecisionEQ Band 3 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b3Freq	PrecisionEQ Band 3 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b3Gain	PrecisionEQ Band 3 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b3Q	PrecisionEQ Band 3 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b3Slope	PrecisionEQ Band 3 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b3Pan	PrecisionEQ Band 3 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b3Phase	PrecisionEQ Band 3 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b3SplitTrans	PrecisionEQ Band 3 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b3SplitTail	PrecisionEQ Band 3 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b4Type	PrecisionEQ Band 4 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b4Freq	PrecisionEQ Band 4 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b4Gain	PrecisionEQ Band 4 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b4Q	PrecisionEQ Band 4 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b4Slope	PrecisionEQ Band 4 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b4Pan	PrecisionEQ Band 4 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b4Phase	PrecisionEQ Band 4 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b4SplitTrans	PrecisionEQ Band 4 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b4SplitTail	PrecisionEQ Band 4 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b5Type	PrecisionEQ Band 5 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b5Freq	PrecisionEQ Band 5 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b5Gain	PrecisionEQ Band 5 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b5Q	PrecisionEQ Band 5 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b5Slope	PrecisionEQ Band 5 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b5Pan	PrecisionEQ Band 5 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b5Phase	PrecisionEQ Band 5 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b5SplitTrans	PrecisionEQ Band 5 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b5SplitTail	PrecisionEQ Band 5 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b6Type	PrecisionEQ Band 6 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b6Freq	PrecisionEQ Band 6 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b6Gain	PrecisionEQ Band 6 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b6Q	PrecisionEQ Band 6 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b6Slope	PrecisionEQ Band 6 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b6Pan	PrecisionEQ Band 6 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b6Phase	PrecisionEQ Band 6 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b6SplitTrans	PrecisionEQ Band 6 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b6SplitTail	PrecisionEQ Band 6 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b7Type	PrecisionEQ Band 7 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b7Freq	PrecisionEQ Band 7 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b7Gain	PrecisionEQ Band 7 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b7Q	PrecisionEQ Band 7 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b7Slope	PrecisionEQ Band 7 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b7Pan	PrecisionEQ Band 7 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b7Phase	PrecisionEQ Band 7 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b7SplitTrans	PrecisionEQ Band 7 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b7SplitTail	PrecisionEQ Band 7 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b8Type	PrecisionEQ Band 8 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b8Freq	PrecisionEQ Band 8 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b8Gain	PrecisionEQ Band 8 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b8Q	PrecisionEQ Band 8 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b8Slope	PrecisionEQ Band 8 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b8Pan	PrecisionEQ Band 8 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b8Phase	PrecisionEQ Band 8 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b8SplitTrans	PrecisionEQ Band 8 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b8SplitTail	PrecisionEQ Band 8 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b9Type	PrecisionEQ Band 9 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b9Freq	PrecisionEQ Band 9 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b9Gain	PrecisionEQ Band 9 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b9Q	PrecisionEQ Band 9 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b9Slope	PrecisionEQ Band 9 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b9Pan	PrecisionEQ Band 9 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b9Phase	PrecisionEQ Band 9 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b9SplitTrans	PrecisionEQ Band 9 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b9SplitTail	PrecisionEQ Band 9 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b10Type	PrecisionEQ Band 10 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b10Freq	PrecisionEQ Band 10 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b10Gain	PrecisionEQ Band 10 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b10Q	PrecisionEQ Band 10 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b10Slope	PrecisionEQ Band 10 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b10Pan	PrecisionEQ Band 10 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b10Phase	PrecisionEQ Band 10 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b10SplitTrans	PrecisionEQ Band 10 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b10SplitTail	PrecisionEQ Band 10 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b11Type	PrecisionEQ Band 11 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b11Freq	PrecisionEQ Band 11 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b11Gain	PrecisionEQ Band 11 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b11Q	PrecisionEQ Band 11 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b11Slope	PrecisionEQ Band 11 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b11Pan	PrecisionEQ Band 11 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b11Phase	PrecisionEQ Band 11 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b11SplitTrans	PrecisionEQ Band 11 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b11SplitTail	PrecisionEQ Band 11 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b12Type	PrecisionEQ Band 12 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b12Freq	PrecisionEQ Band 12 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b12Gain	PrecisionEQ Band 12 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b12Q	PrecisionEQ Band 12 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b12Slope	PrecisionEQ Band 12 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b12Pan	PrecisionEQ Band 12 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b12Phase	PrecisionEQ Band 12 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b12SplitTrans	PrecisionEQ Band 12 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b12SplitTail	PrecisionEQ Band 12 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b13Type	PrecisionEQ Band 13 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b13Freq	PrecisionEQ Band 13 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b13Gain	PrecisionEQ Band 13 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b13Q	PrecisionEQ Band 13 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b13Slope	PrecisionEQ Band 13 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b13Pan	PrecisionEQ Band 13 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b13Phase	PrecisionEQ Band 13 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b13SplitTrans	PrecisionEQ Band 13 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b13SplitTail	PrecisionEQ Band 13 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b14Type	PrecisionEQ Band 14 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b14Freq	PrecisionEQ Band 14 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b14Gain	PrecisionEQ Band 14 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b14Q	PrecisionEQ Band 14 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b14Slope	PrecisionEQ Band 14 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b14Pan	PrecisionEQ Band 14 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b14Phase	PrecisionEQ Band 14 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b14SplitTrans	PrecisionEQ Band 14 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b14SplitTail	PrecisionEQ Band 14 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b15Type	PrecisionEQ Band 15 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b15Freq	PrecisionEQ Band 15 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b15Gain	PrecisionEQ Band 15 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b15Q	PrecisionEQ Band 15 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b15Slope	PrecisionEQ Band 15 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b15Pan	PrecisionEQ Band 15 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b15Phase	PrecisionEQ Band 15 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b15SplitTrans	PrecisionEQ Band 15 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b15SplitTail	PrecisionEQ Band 15 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b16Type	PrecisionEQ Band 16 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b16Freq	PrecisionEQ Band 16 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b16Gain	PrecisionEQ Band 16 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b16Q	PrecisionEQ Band 16 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b16Slope	PrecisionEQ Band 16 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b16Pan	PrecisionEQ Band 16 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b16Phase	PrecisionEQ Band 16 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b16SplitTrans	PrecisionEQ Band 16 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b16SplitTail	PrecisionEQ Band 16 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b17Type	PrecisionEQ Band 17 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b17Freq	PrecisionEQ Band 17 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b17Gain	PrecisionEQ Band 17 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b17Q	PrecisionEQ Band 17 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b17Slope	PrecisionEQ Band 17 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b17Pan	PrecisionEQ Band 17 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b17Phase	PrecisionEQ Band 17 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b17SplitTrans	PrecisionEQ Band 17 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b17SplitTail	PrecisionEQ Band 17 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b18Type	PrecisionEQ Band 18 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b18Freq	PrecisionEQ Band 18 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b18Gain	PrecisionEQ Band 18 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b18Q	PrecisionEQ Band 18 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b18Slope	PrecisionEQ Band 18 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b18Pan	PrecisionEQ Band 18 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b18Phase	PrecisionEQ Band 18 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b18SplitTrans	PrecisionEQ Band 18 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b18SplitTail	PrecisionEQ Band 18 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b19Type	PrecisionEQ Band 19 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b19Freq	PrecisionEQ Band 19 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b19Gain	PrecisionEQ Band 19 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b19Q	PrecisionEQ Band 19 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b19Slope	PrecisionEQ Band 19 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b19Pan	PrecisionEQ Band 19 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b19Phase	PrecisionEQ Band 19 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b19SplitTrans	PrecisionEQ Band 19 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b19SplitTail	PrecisionEQ Band 19 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b20Type	PrecisionEQ Band 20 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b20Freq	PrecisionEQ Band 20 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b20Gain	PrecisionEQ Band 20 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b20Q	PrecisionEQ Band 20 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b20Slope	PrecisionEQ Band 20 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b20Pan	PrecisionEQ Band 20 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b20Phase	PrecisionEQ Band 20 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b20SplitTrans	PrecisionEQ Band 20 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b20SplitTail	PrecisionEQ Band 20 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b21Type	PrecisionEQ Band 21 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b21Freq	PrecisionEQ Band 21 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b21Gain	PrecisionEQ Band 21 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b21Q	PrecisionEQ Band 21 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b21Slope	PrecisionEQ Band 21 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b21Pan	PrecisionEQ Band 21 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b21Phase	PrecisionEQ Band 21 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b21SplitTrans	PrecisionEQ Band 21 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b21SplitTail	PrecisionEQ Band 21 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b22Type	PrecisionEQ Band 22 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b22Freq	PrecisionEQ Band 22 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b22Gain	PrecisionEQ Band 22 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b22Q	PrecisionEQ Band 22 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b22Slope	PrecisionEQ Band 22 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b22Pan	PrecisionEQ Band 22 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b22Phase	PrecisionEQ Band 22 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b22SplitTrans	PrecisionEQ Band 22 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b22SplitTail	PrecisionEQ Band 22 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b23Type	PrecisionEQ Band 23 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b23Freq	PrecisionEQ Band 23 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b23Gain	PrecisionEQ Band 23 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b23Q	PrecisionEQ Band 23 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b23Slope	PrecisionEQ Band 23 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b23Pan	PrecisionEQ Band 23 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b23Phase	PrecisionEQ Band 23 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b23SplitTrans	PrecisionEQ Band 23 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b23SplitTail	PrecisionEQ Band 23 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b24Type	PrecisionEQ Band 24 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b24Freq	PrecisionEQ Band 24 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b24Gain	PrecisionEQ Band 24 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b24Q	PrecisionEQ Band 24 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b24Slope	PrecisionEQ Band 24 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b24Pan	PrecisionEQ Band 24 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b24Phase	PrecisionEQ Band 24 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b24SplitTrans	PrecisionEQ Band 24 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b24SplitTail	PrecisionEQ Band 24 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b25Type	PrecisionEQ Band 25 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b25Freq	PrecisionEQ Band 25 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b25Gain	PrecisionEQ Band 25 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b25Q	PrecisionEQ Band 25 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b25Slope	PrecisionEQ Band 25 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b25Pan	PrecisionEQ Band 25 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b25Phase	PrecisionEQ Band 25 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b25SplitTrans	PrecisionEQ Band 25 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b25SplitTail	PrecisionEQ Band 25 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b26Type	PrecisionEQ Band 26 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b26Freq	PrecisionEQ Band 26 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b26Gain	PrecisionEQ Band 26 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b26Q	PrecisionEQ Band 26 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b26Slope	PrecisionEQ Band 26 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b26Pan	PrecisionEQ Band 26 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b26Phase	PrecisionEQ Band 26 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b26SplitTrans	PrecisionEQ Band 26 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b26SplitTail	PrecisionEQ Band 26 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b27Type	PrecisionEQ Band 27 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b27Freq	PrecisionEQ Band 27 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b27Gain	PrecisionEQ Band 27 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b27Q	PrecisionEQ Band 27 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b27Slope	PrecisionEQ Band 27 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b27Pan	PrecisionEQ Band 27 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b27Phase	PrecisionEQ Band 27 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b27SplitTrans	PrecisionEQ Band 27 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b27SplitTail	PrecisionEQ Band 27 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b28Type	PrecisionEQ Band 28 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b28Freq	PrecisionEQ Band 28 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b28Gain	PrecisionEQ Band 28 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b28Q	PrecisionEQ Band 28 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b28Slope	PrecisionEQ Band 28 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b28Pan	PrecisionEQ Band 28 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b28Phase	PrecisionEQ Band 28 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b28SplitTrans	PrecisionEQ Band 28 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b28SplitTail	PrecisionEQ Band 28 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b29Type	PrecisionEQ Band 29 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b29Freq	PrecisionEQ Band 29 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b29Gain	PrecisionEQ Band 29 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b29Q	PrecisionEQ Band 29 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b29Slope	PrecisionEQ Band 29 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b29Pan	PrecisionEQ Band 29 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b29Phase	PrecisionEQ Band 29 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b29SplitTrans	PrecisionEQ Band 29 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b29SplitTail	PrecisionEQ Band 29 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b30Type	PrecisionEQ Band 30 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b30Freq	PrecisionEQ Band 30 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b30Gain	PrecisionEQ Band 30 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b30Q	PrecisionEQ Band 30 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b30Slope	PrecisionEQ Band 30 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b30Pan	PrecisionEQ Band 30 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b30Phase	PrecisionEQ Band 30 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b30SplitTrans	PrecisionEQ Band 30 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b30SplitTail	PrecisionEQ Band 30 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b31Type	PrecisionEQ Band 31 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b31Freq	PrecisionEQ Band 31 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b31Gain	PrecisionEQ Band 31 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b31Q	PrecisionEQ Band 31 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b31Slope	PrecisionEQ Band 31 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b31Pan	PrecisionEQ Band 31 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b31Phase	PrecisionEQ Band 31 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b31SplitTrans	PrecisionEQ Band 31 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b31SplitTail	PrecisionEQ Band 31 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b32Type	PrecisionEQ Band 32 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+PrecisionEQ	peq.b32Freq	PrecisionEQ Band 32 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+PrecisionEQ	peq.b32Gain	PrecisionEQ Band 32 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b32Q	PrecisionEQ Band 32 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+PrecisionEQ	peq.b32Slope	PrecisionEQ Band 32 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.b32Pan	PrecisionEQ Band 32 Pan	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b32Phase	PrecisionEQ Band 32 Phase	Knob(Mini)	Percent	0	-100 %	0 %	0 %	100 %
+PrecisionEQ	peq.b32SplitTrans	PrecisionEQ Band 32 Split Transient Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.b32SplitTail	PrecisionEQ Band 32 Split Tail Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+PrecisionEQ	peq.splitSeparation	PrecisionEQ Transient Separation	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.splitDecay	PrecisionEQ Transient Decay	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+PrecisionEQ	peq.splitSmoothing	PrecisionEQ Split Smoothing	Knob(Small)	Ms	0	0.0 ms	25.0 ms	25.0 ms	50.0 ms
+PrecisionEQ	peq.windowParameter	PrecisionEQ FIR Window Tightening	Value	Percent	0	0%	50%	50%	100%
+DynEQ	deq.lookaheadMs	DynEQ Global Lookahead Time	Value	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b1Type	DynEQ Band 1 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b1Freq	DynEQ Band 1 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b1Gain	DynEQ Band 1 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b1Q	DynEQ Band 1 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b1Slope	DynEQ Band 1 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b1Thresh	DynEQ Band 1 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b1Attack	DynEQ Band 1 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b1Release	DynEQ Band 1 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b1Knee	DynEQ Band 1 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b1Transient	DynEQ Band 1 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b1AboveRange	DynEQ Band 1 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b1AboveRatio	DynEQ Band 1 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b1BelowRange	DynEQ Band 1 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b1BelowRatio	DynEQ Band 1 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b1Pan	DynEQ Band 1 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b2Type	DynEQ Band 2 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b2Freq	DynEQ Band 2 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b2Gain	DynEQ Band 2 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b2Q	DynEQ Band 2 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b2Slope	DynEQ Band 2 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b2Thresh	DynEQ Band 2 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b2Attack	DynEQ Band 2 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b2Release	DynEQ Band 2 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b2Knee	DynEQ Band 2 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b2Transient	DynEQ Band 2 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b2AboveRange	DynEQ Band 2 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b2AboveRatio	DynEQ Band 2 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b2BelowRange	DynEQ Band 2 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b2BelowRatio	DynEQ Band 2 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b2Pan	DynEQ Band 2 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b3Type	DynEQ Band 3 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b3Freq	DynEQ Band 3 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b3Gain	DynEQ Band 3 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b3Q	DynEQ Band 3 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b3Slope	DynEQ Band 3 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b3Thresh	DynEQ Band 3 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b3Attack	DynEQ Band 3 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b3Release	DynEQ Band 3 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b3Knee	DynEQ Band 3 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b3Transient	DynEQ Band 3 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b3AboveRange	DynEQ Band 3 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b3AboveRatio	DynEQ Band 3 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b3BelowRange	DynEQ Band 3 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b3BelowRatio	DynEQ Band 3 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b3Pan	DynEQ Band 3 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b4Type	DynEQ Band 4 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b4Freq	DynEQ Band 4 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b4Gain	DynEQ Band 4 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b4Q	DynEQ Band 4 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b4Slope	DynEQ Band 4 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b4Thresh	DynEQ Band 4 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b4Attack	DynEQ Band 4 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b4Release	DynEQ Band 4 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b4Knee	DynEQ Band 4 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b4Transient	DynEQ Band 4 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b4AboveRange	DynEQ Band 4 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b4AboveRatio	DynEQ Band 4 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b4BelowRange	DynEQ Band 4 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b4BelowRatio	DynEQ Band 4 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b4Pan	DynEQ Band 4 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b5Type	DynEQ Band 5 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b5Freq	DynEQ Band 5 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b5Gain	DynEQ Band 5 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b5Q	DynEQ Band 5 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b5Slope	DynEQ Band 5 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b5Thresh	DynEQ Band 5 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b5Attack	DynEQ Band 5 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b5Release	DynEQ Band 5 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b5Knee	DynEQ Band 5 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b5Transient	DynEQ Band 5 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b5AboveRange	DynEQ Band 5 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b5AboveRatio	DynEQ Band 5 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b5BelowRange	DynEQ Band 5 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b5BelowRatio	DynEQ Band 5 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b5Pan	DynEQ Band 5 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b6Type	DynEQ Band 6 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b6Freq	DynEQ Band 6 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b6Gain	DynEQ Band 6 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b6Q	DynEQ Band 6 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b6Slope	DynEQ Band 6 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b6Thresh	DynEQ Band 6 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b6Attack	DynEQ Band 6 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b6Release	DynEQ Band 6 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b6Knee	DynEQ Band 6 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b6Transient	DynEQ Band 6 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b6AboveRange	DynEQ Band 6 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b6AboveRatio	DynEQ Band 6 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b6BelowRange	DynEQ Band 6 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b6BelowRatio	DynEQ Band 6 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b6Pan	DynEQ Band 6 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b7Type	DynEQ Band 7 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b7Freq	DynEQ Band 7 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b7Gain	DynEQ Band 7 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b7Q	DynEQ Band 7 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b7Slope	DynEQ Band 7 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b7Thresh	DynEQ Band 7 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b7Attack	DynEQ Band 7 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b7Release	DynEQ Band 7 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b7Knee	DynEQ Band 7 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b7Transient	DynEQ Band 7 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b7AboveRange	DynEQ Band 7 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b7AboveRatio	DynEQ Band 7 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b7BelowRange	DynEQ Band 7 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b7BelowRatio	DynEQ Band 7 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b7Pan	DynEQ Band 7 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b8Type	DynEQ Band 8 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b8Freq	DynEQ Band 8 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b8Gain	DynEQ Band 8 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b8Q	DynEQ Band 8 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b8Slope	DynEQ Band 8 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b8Thresh	DynEQ Band 8 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b8Attack	DynEQ Band 8 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b8Release	DynEQ Band 8 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b8Knee	DynEQ Band 8 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b8Transient	DynEQ Band 8 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b8AboveRange	DynEQ Band 8 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b8AboveRatio	DynEQ Band 8 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b8BelowRange	DynEQ Band 8 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b8BelowRatio	DynEQ Band 8 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b8Pan	DynEQ Band 8 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b9Type	DynEQ Band 9 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b9Freq	DynEQ Band 9 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b9Gain	DynEQ Band 9 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b9Q	DynEQ Band 9 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b9Slope	DynEQ Band 9 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b9Thresh	DynEQ Band 9 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b9Attack	DynEQ Band 9 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b9Release	DynEQ Band 9 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b9Knee	DynEQ Band 9 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b9Transient	DynEQ Band 9 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b9AboveRange	DynEQ Band 9 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b9AboveRatio	DynEQ Band 9 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b9BelowRange	DynEQ Band 9 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b9BelowRatio	DynEQ Band 9 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b9Pan	DynEQ Band 9 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b10Type	DynEQ Band 10 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b10Freq	DynEQ Band 10 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b10Gain	DynEQ Band 10 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b10Q	DynEQ Band 10 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b10Slope	DynEQ Band 10 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b10Thresh	DynEQ Band 10 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b10Attack	DynEQ Band 10 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b10Release	DynEQ Band 10 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b10Knee	DynEQ Band 10 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b10Transient	DynEQ Band 10 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b10AboveRange	DynEQ Band 10 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b10AboveRatio	DynEQ Band 10 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b10BelowRange	DynEQ Band 10 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b10BelowRatio	DynEQ Band 10 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b10Pan	DynEQ Band 10 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b11Type	DynEQ Band 11 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b11Freq	DynEQ Band 11 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b11Gain	DynEQ Band 11 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b11Q	DynEQ Band 11 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b11Slope	DynEQ Band 11 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b11Thresh	DynEQ Band 11 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b11Attack	DynEQ Band 11 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b11Release	DynEQ Band 11 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b11Knee	DynEQ Band 11 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b11Transient	DynEQ Band 11 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b11AboveRange	DynEQ Band 11 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b11AboveRatio	DynEQ Band 11 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b11BelowRange	DynEQ Band 11 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b11BelowRatio	DynEQ Band 11 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b11Pan	DynEQ Band 11 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b12Type	DynEQ Band 12 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b12Freq	DynEQ Band 12 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b12Gain	DynEQ Band 12 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b12Q	DynEQ Band 12 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b12Slope	DynEQ Band 12 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b12Thresh	DynEQ Band 12 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b12Attack	DynEQ Band 12 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b12Release	DynEQ Band 12 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b12Knee	DynEQ Band 12 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b12Transient	DynEQ Band 12 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b12AboveRange	DynEQ Band 12 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b12AboveRatio	DynEQ Band 12 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b12BelowRange	DynEQ Band 12 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b12BelowRatio	DynEQ Band 12 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b12Pan	DynEQ Band 12 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b13Type	DynEQ Band 13 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b13Freq	DynEQ Band 13 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b13Gain	DynEQ Band 13 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b13Q	DynEQ Band 13 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b13Slope	DynEQ Band 13 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b13Thresh	DynEQ Band 13 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b13Attack	DynEQ Band 13 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b13Release	DynEQ Band 13 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b13Knee	DynEQ Band 13 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b13Transient	DynEQ Band 13 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b13AboveRange	DynEQ Band 13 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b13AboveRatio	DynEQ Band 13 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b13BelowRange	DynEQ Band 13 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b13BelowRatio	DynEQ Band 13 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b13Pan	DynEQ Band 13 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b14Type	DynEQ Band 14 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b14Freq	DynEQ Band 14 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b14Gain	DynEQ Band 14 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b14Q	DynEQ Band 14 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b14Slope	DynEQ Band 14 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b14Thresh	DynEQ Band 14 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b14Attack	DynEQ Band 14 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b14Release	DynEQ Band 14 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b14Knee	DynEQ Band 14 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b14Transient	DynEQ Band 14 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b14AboveRange	DynEQ Band 14 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b14AboveRatio	DynEQ Band 14 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b14BelowRange	DynEQ Band 14 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b14BelowRatio	DynEQ Band 14 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b14Pan	DynEQ Band 14 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b15Type	DynEQ Band 15 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b15Freq	DynEQ Band 15 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b15Gain	DynEQ Band 15 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b15Q	DynEQ Band 15 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b15Slope	DynEQ Band 15 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b15Thresh	DynEQ Band 15 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b15Attack	DynEQ Band 15 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b15Release	DynEQ Band 15 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b15Knee	DynEQ Band 15 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b15Transient	DynEQ Band 15 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b15AboveRange	DynEQ Band 15 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b15AboveRatio	DynEQ Band 15 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b15BelowRange	DynEQ Band 15 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b15BelowRatio	DynEQ Band 15 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b15Pan	DynEQ Band 15 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b16Type	DynEQ Band 16 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b16Freq	DynEQ Band 16 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b16Gain	DynEQ Band 16 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b16Q	DynEQ Band 16 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b16Slope	DynEQ Band 16 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b16Thresh	DynEQ Band 16 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b16Attack	DynEQ Band 16 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b16Release	DynEQ Band 16 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b16Knee	DynEQ Band 16 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b16Transient	DynEQ Band 16 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b16AboveRange	DynEQ Band 16 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b16AboveRatio	DynEQ Band 16 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b16BelowRange	DynEQ Band 16 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b16BelowRatio	DynEQ Band 16 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b16Pan	DynEQ Band 16 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b17Type	DynEQ Band 17 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b17Freq	DynEQ Band 17 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b17Gain	DynEQ Band 17 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b17Q	DynEQ Band 17 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b17Slope	DynEQ Band 17 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b17Thresh	DynEQ Band 17 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b17Attack	DynEQ Band 17 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b17Release	DynEQ Band 17 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b17Knee	DynEQ Band 17 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b17Transient	DynEQ Band 17 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b17AboveRange	DynEQ Band 17 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b17AboveRatio	DynEQ Band 17 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b17BelowRange	DynEQ Band 17 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b17BelowRatio	DynEQ Band 17 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b17Pan	DynEQ Band 17 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b18Type	DynEQ Band 18 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b18Freq	DynEQ Band 18 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b18Gain	DynEQ Band 18 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b18Q	DynEQ Band 18 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b18Slope	DynEQ Band 18 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b18Thresh	DynEQ Band 18 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b18Attack	DynEQ Band 18 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b18Release	DynEQ Band 18 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b18Knee	DynEQ Band 18 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b18Transient	DynEQ Band 18 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b18AboveRange	DynEQ Band 18 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b18AboveRatio	DynEQ Band 18 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b18BelowRange	DynEQ Band 18 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b18BelowRatio	DynEQ Band 18 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b18Pan	DynEQ Band 18 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b19Type	DynEQ Band 19 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b19Freq	DynEQ Band 19 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b19Gain	DynEQ Band 19 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b19Q	DynEQ Band 19 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b19Slope	DynEQ Band 19 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b19Thresh	DynEQ Band 19 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b19Attack	DynEQ Band 19 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b19Release	DynEQ Band 19 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b19Knee	DynEQ Band 19 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b19Transient	DynEQ Band 19 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b19AboveRange	DynEQ Band 19 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b19AboveRatio	DynEQ Band 19 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b19BelowRange	DynEQ Band 19 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b19BelowRatio	DynEQ Band 19 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b19Pan	DynEQ Band 19 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b20Type	DynEQ Band 20 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b20Freq	DynEQ Band 20 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b20Gain	DynEQ Band 20 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b20Q	DynEQ Band 20 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b20Slope	DynEQ Band 20 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b20Thresh	DynEQ Band 20 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b20Attack	DynEQ Band 20 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b20Release	DynEQ Band 20 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b20Knee	DynEQ Band 20 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b20Transient	DynEQ Band 20 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b20AboveRange	DynEQ Band 20 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b20AboveRatio	DynEQ Band 20 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b20BelowRange	DynEQ Band 20 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b20BelowRatio	DynEQ Band 20 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b20Pan	DynEQ Band 20 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b21Type	DynEQ Band 21 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b21Freq	DynEQ Band 21 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b21Gain	DynEQ Band 21 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b21Q	DynEQ Band 21 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b21Slope	DynEQ Band 21 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b21Thresh	DynEQ Band 21 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b21Attack	DynEQ Band 21 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b21Release	DynEQ Band 21 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b21Knee	DynEQ Band 21 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b21Transient	DynEQ Band 21 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b21AboveRange	DynEQ Band 21 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b21AboveRatio	DynEQ Band 21 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b21BelowRange	DynEQ Band 21 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b21BelowRatio	DynEQ Band 21 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b21Pan	DynEQ Band 21 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b22Type	DynEQ Band 22 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b22Freq	DynEQ Band 22 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b22Gain	DynEQ Band 22 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b22Q	DynEQ Band 22 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b22Slope	DynEQ Band 22 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b22Thresh	DynEQ Band 22 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b22Attack	DynEQ Band 22 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b22Release	DynEQ Band 22 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b22Knee	DynEQ Band 22 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b22Transient	DynEQ Band 22 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b22AboveRange	DynEQ Band 22 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b22AboveRatio	DynEQ Band 22 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b22BelowRange	DynEQ Band 22 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b22BelowRatio	DynEQ Band 22 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b22Pan	DynEQ Band 22 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b23Type	DynEQ Band 23 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b23Freq	DynEQ Band 23 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b23Gain	DynEQ Band 23 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b23Q	DynEQ Band 23 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b23Slope	DynEQ Band 23 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b23Thresh	DynEQ Band 23 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b23Attack	DynEQ Band 23 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b23Release	DynEQ Band 23 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b23Knee	DynEQ Band 23 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b23Transient	DynEQ Band 23 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b23AboveRange	DynEQ Band 23 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b23AboveRatio	DynEQ Band 23 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b23BelowRange	DynEQ Band 23 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b23BelowRatio	DynEQ Band 23 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b23Pan	DynEQ Band 23 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b24Type	DynEQ Band 24 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b24Freq	DynEQ Band 24 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b24Gain	DynEQ Band 24 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b24Q	DynEQ Band 24 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b24Slope	DynEQ Band 24 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b24Thresh	DynEQ Band 24 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b24Attack	DynEQ Band 24 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b24Release	DynEQ Band 24 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b24Knee	DynEQ Band 24 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b24Transient	DynEQ Band 24 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b24AboveRange	DynEQ Band 24 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b24AboveRatio	DynEQ Band 24 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b24BelowRange	DynEQ Band 24 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b24BelowRatio	DynEQ Band 24 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b24Pan	DynEQ Band 24 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b25Type	DynEQ Band 25 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b25Freq	DynEQ Band 25 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b25Gain	DynEQ Band 25 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b25Q	DynEQ Band 25 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b25Slope	DynEQ Band 25 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b25Thresh	DynEQ Band 25 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b25Attack	DynEQ Band 25 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b25Release	DynEQ Band 25 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b25Knee	DynEQ Band 25 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b25Transient	DynEQ Band 25 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b25AboveRange	DynEQ Band 25 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b25AboveRatio	DynEQ Band 25 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b25BelowRange	DynEQ Band 25 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b25BelowRatio	DynEQ Band 25 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b25Pan	DynEQ Band 25 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b26Type	DynEQ Band 26 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b26Freq	DynEQ Band 26 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b26Gain	DynEQ Band 26 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b26Q	DynEQ Band 26 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b26Slope	DynEQ Band 26 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b26Thresh	DynEQ Band 26 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b26Attack	DynEQ Band 26 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b26Release	DynEQ Band 26 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b26Knee	DynEQ Band 26 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b26Transient	DynEQ Band 26 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b26AboveRange	DynEQ Band 26 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b26AboveRatio	DynEQ Band 26 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b26BelowRange	DynEQ Band 26 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b26BelowRatio	DynEQ Band 26 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b26Pan	DynEQ Band 26 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b27Type	DynEQ Band 27 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b27Freq	DynEQ Band 27 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b27Gain	DynEQ Band 27 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b27Q	DynEQ Band 27 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b27Slope	DynEQ Band 27 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b27Thresh	DynEQ Band 27 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b27Attack	DynEQ Band 27 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b27Release	DynEQ Band 27 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b27Knee	DynEQ Band 27 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b27Transient	DynEQ Band 27 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b27AboveRange	DynEQ Band 27 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b27AboveRatio	DynEQ Band 27 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b27BelowRange	DynEQ Band 27 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b27BelowRatio	DynEQ Band 27 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b27Pan	DynEQ Band 27 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b28Type	DynEQ Band 28 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b28Freq	DynEQ Band 28 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b28Gain	DynEQ Band 28 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b28Q	DynEQ Band 28 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b28Slope	DynEQ Band 28 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b28Thresh	DynEQ Band 28 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b28Attack	DynEQ Band 28 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b28Release	DynEQ Band 28 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b28Knee	DynEQ Band 28 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b28Transient	DynEQ Band 28 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b28AboveRange	DynEQ Band 28 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b28AboveRatio	DynEQ Band 28 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b28BelowRange	DynEQ Band 28 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b28BelowRatio	DynEQ Band 28 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b28Pan	DynEQ Band 28 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b29Type	DynEQ Band 29 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b29Freq	DynEQ Band 29 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b29Gain	DynEQ Band 29 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b29Q	DynEQ Band 29 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b29Slope	DynEQ Band 29 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b29Thresh	DynEQ Band 29 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b29Attack	DynEQ Band 29 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b29Release	DynEQ Band 29 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b29Knee	DynEQ Band 29 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b29Transient	DynEQ Band 29 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b29AboveRange	DynEQ Band 29 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b29AboveRatio	DynEQ Band 29 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b29BelowRange	DynEQ Band 29 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b29BelowRatio	DynEQ Band 29 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b29Pan	DynEQ Band 29 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b30Type	DynEQ Band 30 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b30Freq	DynEQ Band 30 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b30Gain	DynEQ Band 30 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b30Q	DynEQ Band 30 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b30Slope	DynEQ Band 30 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b30Thresh	DynEQ Band 30 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b30Attack	DynEQ Band 30 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b30Release	DynEQ Band 30 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b30Knee	DynEQ Band 30 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b30Transient	DynEQ Band 30 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b30AboveRange	DynEQ Band 30 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b30AboveRatio	DynEQ Band 30 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b30BelowRange	DynEQ Band 30 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b30BelowRatio	DynEQ Band 30 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b30Pan	DynEQ Band 30 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b31Type	DynEQ Band 31 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b31Freq	DynEQ Band 31 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b31Gain	DynEQ Band 31 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b31Q	DynEQ Band 31 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b31Slope	DynEQ Band 31 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b31Thresh	DynEQ Band 31 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b31Attack	DynEQ Band 31 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b31Release	DynEQ Band 31 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b31Knee	DynEQ Band 31 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b31Transient	DynEQ Band 31 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b31AboveRange	DynEQ Band 31 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b31AboveRatio	DynEQ Band 31 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b31BelowRange	DynEQ Band 31 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b31BelowRatio	DynEQ Band 31 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b31Pan	DynEQ Band 31 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b32Type	DynEQ Band 32 Type	Grip	Choice	48	Bell	E High Bell	G LMF	G LP
+DynEQ	deq.b32Freq	DynEQ Band 32 Frequency	Knob(Mini)	Hz	0	20	10.0k	10.0k	20.0k
+DynEQ	deq.b32Gain	DynEQ Band 32 Gain	Knob(Mini)	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b32Q	DynEQ Band 32 Q	Knob(Mini)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b32Slope	DynEQ Band 32 Slope	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b32Thresh	DynEQ Band 32 Threshold	Knob(Mini)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+DynEQ	deq.b32Attack	DynEQ Band 32 Attack	Knob(Mini)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+DynEQ	deq.b32Release	DynEQ Band 32 Release	Knob(Mini)	Ms	0	1.0 ms	1.00 s	1.00 s	2.00 s
+DynEQ	deq.b32Knee	DynEQ Band 32 Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+DynEQ	deq.b32Transient	DynEQ Band 32 Transient	Knob(Mini)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b32AboveRange	DynEQ Band 32 Above Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b32AboveRatio	DynEQ Band 32 Above Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b32BelowRange	DynEQ Band 32 Below Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b32BelowRatio	DynEQ Band 32 Below Ratio	Value	Percent	0	0 %	100 %	100 %	200 %
+DynEQ	deq.b32Pan	DynEQ Band 32 Pan	Value	Percent	0	-100%	0%	0%	100%
+DynEQ	deq.b1DetFreq	DynEQ Band 1 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b1DetQ	DynEQ Band 1 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b1Lookahead	DynEQ Band 1 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b1Relative	DynEQ Band 1 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b1RelFreq	DynEQ Band 1 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b1RelQ	DynEQ Band 1 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b1Range	DynEQ Band 1 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b2DetFreq	DynEQ Band 2 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b2DetQ	DynEQ Band 2 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b2Lookahead	DynEQ Band 2 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b2Relative	DynEQ Band 2 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b2RelFreq	DynEQ Band 2 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b2RelQ	DynEQ Band 2 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b2Range	DynEQ Band 2 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b3DetFreq	DynEQ Band 3 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b3DetQ	DynEQ Band 3 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b3Lookahead	DynEQ Band 3 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b3Relative	DynEQ Band 3 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b3RelFreq	DynEQ Band 3 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b3RelQ	DynEQ Band 3 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b3Range	DynEQ Band 3 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b4DetFreq	DynEQ Band 4 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b4DetQ	DynEQ Band 4 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b4Lookahead	DynEQ Band 4 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b4Relative	DynEQ Band 4 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b4RelFreq	DynEQ Band 4 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b4RelQ	DynEQ Band 4 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b4Range	DynEQ Band 4 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b5DetFreq	DynEQ Band 5 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b5DetQ	DynEQ Band 5 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b5Lookahead	DynEQ Band 5 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b5Relative	DynEQ Band 5 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b5RelFreq	DynEQ Band 5 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b5RelQ	DynEQ Band 5 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b5Range	DynEQ Band 5 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b6DetFreq	DynEQ Band 6 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b6DetQ	DynEQ Band 6 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b6Lookahead	DynEQ Band 6 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b6Relative	DynEQ Band 6 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b6RelFreq	DynEQ Band 6 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b6RelQ	DynEQ Band 6 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b6Range	DynEQ Band 6 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b7DetFreq	DynEQ Band 7 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b7DetQ	DynEQ Band 7 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b7Lookahead	DynEQ Band 7 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b7Relative	DynEQ Band 7 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b7RelFreq	DynEQ Band 7 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b7RelQ	DynEQ Band 7 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b7Range	DynEQ Band 7 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b8DetFreq	DynEQ Band 8 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b8DetQ	DynEQ Band 8 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b8Lookahead	DynEQ Band 8 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b8Relative	DynEQ Band 8 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b8RelFreq	DynEQ Band 8 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b8RelQ	DynEQ Band 8 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b8Range	DynEQ Band 8 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b9DetFreq	DynEQ Band 9 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b9DetQ	DynEQ Band 9 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b9Lookahead	DynEQ Band 9 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b9Relative	DynEQ Band 9 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b9RelFreq	DynEQ Band 9 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b9RelQ	DynEQ Band 9 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b9Range	DynEQ Band 9 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b10DetFreq	DynEQ Band 10 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b10DetQ	DynEQ Band 10 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b10Lookahead	DynEQ Band 10 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b10Relative	DynEQ Band 10 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b10RelFreq	DynEQ Band 10 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b10RelQ	DynEQ Band 10 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b10Range	DynEQ Band 10 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b11DetFreq	DynEQ Band 11 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b11DetQ	DynEQ Band 11 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b11Lookahead	DynEQ Band 11 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b11Relative	DynEQ Band 11 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b11RelFreq	DynEQ Band 11 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b11RelQ	DynEQ Band 11 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b11Range	DynEQ Band 11 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b12DetFreq	DynEQ Band 12 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b12DetQ	DynEQ Band 12 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b12Lookahead	DynEQ Band 12 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b12Relative	DynEQ Band 12 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b12RelFreq	DynEQ Band 12 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b12RelQ	DynEQ Band 12 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b12Range	DynEQ Band 12 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b13DetFreq	DynEQ Band 13 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b13DetQ	DynEQ Band 13 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b13Lookahead	DynEQ Band 13 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b13Relative	DynEQ Band 13 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b13RelFreq	DynEQ Band 13 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b13RelQ	DynEQ Band 13 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b13Range	DynEQ Band 13 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b14DetFreq	DynEQ Band 14 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b14DetQ	DynEQ Band 14 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b14Lookahead	DynEQ Band 14 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b14Relative	DynEQ Band 14 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b14RelFreq	DynEQ Band 14 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b14RelQ	DynEQ Band 14 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b14Range	DynEQ Band 14 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b15DetFreq	DynEQ Band 15 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b15DetQ	DynEQ Band 15 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b15Lookahead	DynEQ Band 15 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b15Relative	DynEQ Band 15 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b15RelFreq	DynEQ Band 15 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b15RelQ	DynEQ Band 15 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b15Range	DynEQ Band 15 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b16DetFreq	DynEQ Band 16 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b16DetQ	DynEQ Band 16 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b16Lookahead	DynEQ Band 16 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b16Relative	DynEQ Band 16 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b16RelFreq	DynEQ Band 16 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b16RelQ	DynEQ Band 16 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b16Range	DynEQ Band 16 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b17DetFreq	DynEQ Band 17 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b17DetQ	DynEQ Band 17 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b17Lookahead	DynEQ Band 17 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b17Relative	DynEQ Band 17 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b17RelFreq	DynEQ Band 17 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b17RelQ	DynEQ Band 17 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b17Range	DynEQ Band 17 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b18DetFreq	DynEQ Band 18 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b18DetQ	DynEQ Band 18 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b18Lookahead	DynEQ Band 18 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b18Relative	DynEQ Band 18 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b18RelFreq	DynEQ Band 18 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b18RelQ	DynEQ Band 18 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b18Range	DynEQ Band 18 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b19DetFreq	DynEQ Band 19 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b19DetQ	DynEQ Band 19 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b19Lookahead	DynEQ Band 19 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b19Relative	DynEQ Band 19 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b19RelFreq	DynEQ Band 19 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b19RelQ	DynEQ Band 19 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b19Range	DynEQ Band 19 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b20DetFreq	DynEQ Band 20 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b20DetQ	DynEQ Band 20 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b20Lookahead	DynEQ Band 20 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b20Relative	DynEQ Band 20 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b20RelFreq	DynEQ Band 20 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b20RelQ	DynEQ Band 20 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b20Range	DynEQ Band 20 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b21DetFreq	DynEQ Band 21 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b21DetQ	DynEQ Band 21 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b21Lookahead	DynEQ Band 21 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b21Relative	DynEQ Band 21 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b21RelFreq	DynEQ Band 21 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b21RelQ	DynEQ Band 21 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b21Range	DynEQ Band 21 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b22DetFreq	DynEQ Band 22 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b22DetQ	DynEQ Band 22 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b22Lookahead	DynEQ Band 22 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b22Relative	DynEQ Band 22 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b22RelFreq	DynEQ Band 22 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b22RelQ	DynEQ Band 22 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b22Range	DynEQ Band 22 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b23DetFreq	DynEQ Band 23 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b23DetQ	DynEQ Band 23 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b23Lookahead	DynEQ Band 23 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b23Relative	DynEQ Band 23 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b23RelFreq	DynEQ Band 23 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b23RelQ	DynEQ Band 23 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b23Range	DynEQ Band 23 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b24DetFreq	DynEQ Band 24 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b24DetQ	DynEQ Band 24 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b24Lookahead	DynEQ Band 24 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b24Relative	DynEQ Band 24 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b24RelFreq	DynEQ Band 24 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b24RelQ	DynEQ Band 24 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b24Range	DynEQ Band 24 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b25DetFreq	DynEQ Band 25 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b25DetQ	DynEQ Band 25 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b25Lookahead	DynEQ Band 25 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b25Relative	DynEQ Band 25 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b25RelFreq	DynEQ Band 25 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b25RelQ	DynEQ Band 25 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b25Range	DynEQ Band 25 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b26DetFreq	DynEQ Band 26 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b26DetQ	DynEQ Band 26 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b26Lookahead	DynEQ Band 26 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b26Relative	DynEQ Band 26 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b26RelFreq	DynEQ Band 26 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b26RelQ	DynEQ Band 26 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b26Range	DynEQ Band 26 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b27DetFreq	DynEQ Band 27 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b27DetQ	DynEQ Band 27 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b27Lookahead	DynEQ Band 27 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b27Relative	DynEQ Band 27 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b27RelFreq	DynEQ Band 27 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b27RelQ	DynEQ Band 27 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b27Range	DynEQ Band 27 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b28DetFreq	DynEQ Band 28 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b28DetQ	DynEQ Band 28 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b28Lookahead	DynEQ Band 28 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b28Relative	DynEQ Band 28 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b28RelFreq	DynEQ Band 28 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b28RelQ	DynEQ Band 28 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b28Range	DynEQ Band 28 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b29DetFreq	DynEQ Band 29 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b29DetQ	DynEQ Band 29 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b29Lookahead	DynEQ Band 29 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b29Relative	DynEQ Band 29 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b29RelFreq	DynEQ Band 29 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b29RelQ	DynEQ Band 29 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b29Range	DynEQ Band 29 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b30DetFreq	DynEQ Band 30 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b30DetQ	DynEQ Band 30 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b30Lookahead	DynEQ Band 30 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b30Relative	DynEQ Band 30 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b30RelFreq	DynEQ Band 30 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b30RelQ	DynEQ Band 30 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b30Range	DynEQ Band 30 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b31DetFreq	DynEQ Band 31 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b31DetQ	DynEQ Band 31 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b31Lookahead	DynEQ Band 31 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b31Relative	DynEQ Band 31 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b31RelFreq	DynEQ Band 31 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b31RelQ	DynEQ Band 31 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b31Range	DynEQ Band 31 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+DynEQ	deq.b32DetFreq	DynEQ Band 32 Detector Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b32DetQ	DynEQ Band 32 Detector Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b32Lookahead	DynEQ Band 32 Lookahead	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+DynEQ	deq.b32Relative	DynEQ Band 32 Relative	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+DynEQ	deq.b32RelFreq	DynEQ Band 32 Relative Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+DynEQ	deq.b32RelQ	DynEQ Band 32 Relative Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+DynEQ	deq.b32Range	DynEQ Band 32 Range	Value	Db	0	-30.0 dB	+0.0 dB	+0.1 dB	+30.0 dB
+Suppressor	sup.depth	Suppressor Depth	Knob(Big)	Percent	0	0 %	50 %	50 %	100 %
+Suppressor	sup.sharpness	Suppressor Sharpness	Knob(Big)	Percent	0	0 %	50 %	50 %	100 %
+Suppressor	sup.selectivity	Suppressor Selectivity	Knob(Big)	Percent	0	0 %	50 %	50 %	100 %
+Suppressor	sup.floor	Suppressor Floor	Knob(Small)	Db	0	-100.0 dB	-50.0 dB	-49.9 dB	0.0 dB
+Suppressor	sup.attack	Suppressor Attack	Knob(Small)	Ms	0	1.0 ms	250 ms	251 ms	500 ms
+Suppressor	sup.release	Suppressor Release	Knob(Small)	Ms	0	20.0 ms	1.01 s	1.01 s	2.00 s
+Suppressor	sup.link	Suppressor Stereo Link	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+Suppressor	sup.mix	Suppressor Mix	Knob(Small)	Percent	0	0 %	50 %	50 %	100 %
+Suppressor	sup.centre	Suppressor Region Centre	Value	Hz	0	20	10.0k	10.0k	20.0k
+Suppressor	sup.width	Suppressor Region Width (octaves)	Value	None	0	0.1 oct	5.0 oct	5.1 oct	ALL
+Suppressor	sup.focus1Amount	Suppressor Focus 1 Amount	Knob(Small)	Percent	0	-100 %	0 %	0 %	100 %
+Suppressor	sup.focus1Freq	Suppressor Focus 1 Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+Suppressor	sup.focus1Q	Suppressor Focus 1 Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+Suppressor	sup.focus2Amount	Suppressor Focus 2 Amount	Knob(Small)	Percent	0	-100 %	0 %	0 %	100 %
+Suppressor	sup.focus2Freq	Suppressor Focus 2 Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+Suppressor	sup.focus2Q	Suppressor Focus 2 Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+Suppressor	sup.focus3Amount	Suppressor Focus 3 Amount	Knob(Small)	Percent	0	-100 %	0 %	0 %	100 %
+Suppressor	sup.focus3Freq	Suppressor Focus 3 Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+Suppressor	sup.focus3Q	Suppressor Focus 3 Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+Suppressor	sup.focus4Amount	Suppressor Focus 4 Amount	Knob(Small)	Percent	0	-100 %	0 %	0 %	100 %
+Suppressor	sup.focus4Freq	Suppressor Focus 4 Frequency	Knob(Small)	Hz	0	20 Hz	10.0 kHz	10.0 kHz	20.0 kHz
+Suppressor	sup.focus4Q	Suppressor Focus 4 Q	Knob(Small)	None	0	0.03	20.0	20.1	40.0
+Harmonic Compressor	hcomp.harmonic2	Harmonic Compressor 2nd Harmonic	Grip	Percent	1001	0%	50%	50%	100%
+Harmonic Compressor	hcomp.harmonic3	Harmonic Compressor 3rd Harmonic	Grip	Percent	1001	0%	50%	50%	100%
+Harmonic Compressor	hcomp.harmonic4	Harmonic Compressor 4th Harmonic	Grip	Percent	1001	0%	50%	50%	100%
+Harmonic Compressor	hcomp.harmonic5	Harmonic Compressor 5th Harmonic	Grip	Percent	1001	0%	50%	50%	100%
+Harmonic Compressor	hcomp.threshold	Harmonic Compressor Threshold	Knob(Big)	Db	601	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+Harmonic Compressor	hcomp.ratio	Harmonic Compressor Ratio	Grip	Ratio	1021	-2.0:1	49.0:1	49.1:1	100.0:1
+Harmonic Compressor	hcomp.attack	Harmonic Compressor Attack	Knob(Big)	Ms	3000	100 µs	150 ms	150 ms	300 ms
+Harmonic Compressor	hcomp.release	Harmonic Compressor Release	Knob(Big)	Ms	2996	5.00 ms	1.50 s	1.50 s	3.00 s
+Harmonic Compressor	hcomp.makeupGain	Harmonic Compressor Makeup Gain	Knob(Big)	Db	361	-12.0 dB	+6.0 dB	+6.1 dB	+24.0 dB
+Harmonic Compressor	hcomp.knee	Harmonic Compressor Knee	Knob(Mini)	Db	241	0.0 dB	12.0 dB	12.1 dB	24.0 dB
+Harmonic Compressor	hcomp.inputGain	Harmonic Compressor Input Gain	Knob(Mini)	Db	481	-24.0 dB	+0.0 dB	+0.1 dB	+24.0 dB
+Harmonic Compressor	hcomp.mix	Harmonic Compressor Mix	Knob(Mini)	Percent	101	0%	50%	51%	100%
+Harmonic Compressor	hcomp.scHPFreq	Harmonic Compressor Sidechain HP Freq	Value	Hz	481	20 Hz	260 Hz	261 Hz	500 Hz
+Harmonic Compressor	hcomp.transientAttack	Harmonic Compressor Transient Attack	Knob(Mini)	Percent	2001	-100%	0%	0%	100%
+Harmonic Compressor	hcomp.transientSustain	Harmonic Compressor Transient Sustain	Knob(Mini)	Percent	2001	-100%	0%	0%	100%
+Harmonic Compressor	hcomp.transientSpeed	Harmonic Compressor Transient Speed	Knob(Mini)	Ms	496	500 µs	25.3 ms	25.4 ms	50.0 ms
+Harmonic Compressor	hcomp.outputGain	Harmonic Compressor Output Gain	Knob(Small)	Db	481	-24.0 dB	+0.0 dB	+0.1 dB	+24.0 dB
+Dynamics Restore	decomp.matchTarget	Dynamics Restore Match Target Crest	Value	Db	0	to 6 dB	to 15 dB	to 15 dB	to 24 dB
+Dynamics Restore	decomp.threshold	Dynamics Restore Threshold	Knob(Big)	Db	0	-60.0 dB	-30.0 dB	-29.9 dB	0.0 dB
+Dynamics Restore	decomp.ratio	Dynamics Restore Ratio	Grip	Ratio	0	0.2:1	0.6:1	0.6:1	1.0:1
+Dynamics Restore	decomp.range	Dynamics Restore Range	Knob(Big)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+Dynamics Restore	decomp.attack	Dynamics Restore Attack	Knob(Big)	Ms	0	10 µs	50.0 ms	50.1 ms	100 ms
+Dynamics Restore	decomp.release	Dynamics Restore Release	Knob(Big)	Ms	0	1.00 ms	1.00 s	1.00 s	2.00 s
+Dynamics Restore	decomp.ceiling	Dynamics Restore Ceiling Level	Knob(Mini)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Dynamics Restore	decomp.knee	Dynamics Restore Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+Dynamics Restore	decomp.lookahead	Dynamics Restore Look-Ahead	Knob(Mini)	Ms	0	0.0 ms	5.0 ms	5.0 ms	10.0 ms
+Dynamics Restore	decomp.mix	Dynamics Restore Mix	Knob(Mini)	Percent	0	0%	50%	50%	100%
+Dynamics Restore	decomp.detectorWindow	Dynamics Restore RMS Window	Knob(Mini)	Ms	0	1.00 ms	250 ms	251 ms	500 ms
+Dynamics Restore	decomp.transientCrest	Dynamics Restore Transient Crest	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+Dynamics Restore	decomp.stereoLink	Dynamics Restore Stereo Link	Knob(Small)	Percent	0	0%	50%	50%	100%
+Dynamics Restore	decomp.keyHighPass	Dynamics Restore Key High-Pass	Knob(Small)	Hz	0	OFF	1.0 kHz	1.0 kHz	2.0 kHz
+Dynamics Restore	decomp.keyLowPass	Dynamics Restore Key Low-Pass	Knob(Small)	Hz	0	500 Hz	11.2 kHz	11.3 kHz	OFF
+Dynamics Restore	decomp.trim	Dynamics Restore Output Trim	Knob(Small)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	0.0 dB
+Floor Lifter	deexp.threshold	Floor Lifter Threshold	Knob(Big)	Db	0	-80.0 dB	-40.0 dB	-39.9 dB	0.0 dB
+Floor Lifter	deexp.ratio	Floor Lifter Ratio	Knob(Big)	Ratio	0	OFF	4.5:1	4.5:1	8.0:1
+Floor Lifter	deexp.range	Floor Lifter Range	Knob(Big)	Db	0	0.0 dB	18.0 dB	18.0 dB	36.0 dB
+Floor Lifter	deexp.floor	Floor Lifter Floor	Knob(Big)	Db	0	-inf dB	-70.0 dB	-69.9 dB	-20.0 dB
+Floor Lifter	deexp.release	Floor Lifter Release	Knob(Big)	Ms	0	1.00 ms	2.50 s	2.51 s	5.00 s
+Floor Lifter	deexp.attack	Floor Lifter Attack	Knob(Mini)	Ms	0	10 µs	50.0 ms	50.1 ms	100 ms
+Floor Lifter	deexp.hold	Floor Lifter Hold	Knob(Mini)	Ms	0	0 µs	250 ms	250 ms	500 ms
+Floor Lifter	deexp.lookahead	Floor Lifter Look-Ahead	Knob(Mini)	Ms	0	0.0 ms	5.0 ms	5.0 ms	10.0 ms
+Floor Lifter	deexp.knee	Floor Lifter Knee	Knob(Mini)	Db	0	0.0 dB	12.0 dB	12.0 dB	24.0 dB
+Floor Lifter	deexp.detectorWindow	Floor Lifter RMS Window	Knob(Mini)	Ms	0	1.00 ms	250 ms	251 ms	500 ms
+Floor Lifter	deexp.mix	Floor Lifter Mix	Knob(Mini)	Percent	0	0%	50%	50%	100%
+Floor Lifter	deexp.stereoLink	Floor Lifter Stereo Link	Knob(Small)	Percent	0	0%	50%	50%	100%
+Floor Lifter	deexp.keyHighPass	Floor Lifter Key High-Pass	Knob(Small)	Hz	0	OFF	1.0 kHz	1.0 kHz	2.0 kHz
+Floor Lifter	deexp.keyLowPass	Floor Lifter Key Low-Pass	Knob(Small)	Hz	0	500 Hz	11.2 kHz	11.3 kHz	OFF
+Overtone Generator	harm.h2	Overtone Generator 2nd harmonic	Grip	Db	0	-80.0 dB	-46.0 dB	-45.9 dB	-12.0 dB
+Overtone Generator	harm.h3	Overtone Generator 3rd harmonic	Grip	Db	0	-80.0 dB	-46.0 dB	-45.9 dB	-12.0 dB
+Overtone Generator	harm.h4	Overtone Generator 4th harmonic	Grip	Db	0	-80.0 dB	-46.0 dB	-45.9 dB	-12.0 dB
+Overtone Generator	harm.h5	Overtone Generator 5th harmonic	Grip	Db	0	-80.0 dB	-46.0 dB	-45.9 dB	-12.0 dB
+Overtone Generator	harm.drive	Overtone Generator Drive	Knob(Big)	Db	0	-24.0 dB	+0.0 dB	+0.0 dB	+24.0 dB
+Overtone Generator	harm.bias	Overtone Generator Bias	Knob(Mini)	Percent	0	-100%	0%	0%	100%
+Overtone Generator	harm.mix	Overtone Generator Mix	Knob(Mini)	Percent	0	0%	50%	50%	100%
+Overtone Generator	harm.srcLow	Overtone Generator Source low cut	Knob(Mini)	Hz	0	OFF	2.5 kHz	2.5 kHz	5.0 kHz
+Overtone Generator	harm.srcHigh	Overtone Generator Source high cut	Knob(Mini)	Hz	0	500 Hz	12.2 kHz	12.3 kHz	OFF
+Overtone Generator	harm.harmLow	Overtone Generator Harmonics low cut	Knob(Mini)	Hz	0	OFF	2.5 kHz	2.5 kHz	5.0 kHz
+Overtone Generator	harm.harmHigh	Overtone Generator Harmonics high cut	Knob(Mini)	Hz	0	500 Hz	12.2 kHz	12.3 kHz	OFF
+Overtone Generator	harm.trim	Overtone Generator Output trim	Knob(Small)	Db	0	-24.0 dB	-12.0 dB	-12.0 dB	+0.0 dB
+Smart Limiter	smart.engine	Smart Limiter Engine	Grip	Choice	6	Pure	Punch	Multiband	Glide
+Smart Limiter	smart.drive	Smart Limiter Drive	Knob(Big)	Db	0	+0.0 dB	+12.0 dB	+12.0 dB	+24.0 dB
+Smart Limiter	smart.ceiling	Smart Limiter Ceiling	Knob(Big)	Db	0	-20.0 dB	-10.0 dB	-10.0 dB	0.0 dB
+Smart Limiter	smart.release	Smart Limiter Release	Knob(Big)	Ms	0	5.0 ms	1002.5 ms	1004.5 ms	2000.0 ms
+Smart Limiter	smart.lookahead	Smart Limiter Lookahead	Knob(Small)	Ms	0	0.5 ms	7.8 ms	7.8 ms	15.0 ms
+Smart Limiter	smart.knee	Smart Limiter Knee	Knob(Small)	Db	0	0.0 dB	5.0 dB	5.0 dB	10.0 dB
+Smart Limiter	smart.transientLink	Smart Limiter Transient Link	Value	Percent	0	0%	50%	50%	100%
+Smart Limiter	smart.releaseLink	Smart Limiter Release Link	Value	Percent	0	0%	50%	50%	100%
+Smart Limiter	smart.delta	Smart Limiter Delta	Grip	Toggle	2	Off	On	On	On
+Smart Limiter	smart.bodyShare	Smart Limiter Body Share	Knob(Small)	Percent	0	0%	50%	50%	100%
+Smart Limiter	smart.joinWidth	Smart Limiter Join Width	Knob(Small)	Db	0	0.0 dB	6.0 dB	6.0 dB	12.0 dB
+Smart Limiter	smart.clipHeadroom	Smart Limiter Clip Headroom	Knob(Small)	Db	0	0.0 dB	1.5 dB	1.5 dB	3.0 dB
+Smart Limiter	smart.bandFocus	Smart Limiter Band Focus	Knob(Small)	Percent	0	0%	50%	50%	100%
+Smart Limiter	smart.crestHeadroom	Smart Limiter Crest Headroom	Knob(Small)	Db	0	4.0 dB	11.0 dB	11.0 dB	18.0 dB
+Smart Limiter	smart.bassHoldMax	Smart Limiter Bass Hold Max	Knob(Small)	Ms	0	0.0 ms	10.0 ms	10.0 ms	20.0 ms
+Smart Limiter	smart.clipKnee	Smart Limiter Clip Knee	Knob(Small)	None	0	0.10	0.55	0.55	1.00
+Smart Limiter	smart.split1	Smart Limiter Split 1	Value	Hz	0	40.0 Hz	220.0 Hz	220.4 Hz	400.0 Hz
+Smart Limiter	smart.split2	Smart Limiter Split 2	Value	Hz	0	250.0 Hz	1.12 kHz	1.13 kHz	2.00 kHz
+Smart Limiter	smart.split3	Smart Limiter Split 3	Value	Hz	0	1.50 kHz	5.75 kHz	5.76 kHz	10.00 kHz
+Requantise	dither.ditherAmount	Requantise Dither Amount	Knob(Big)	Percent	0	0%	62%	63%	125%
+Requantise	dither.shapingDepth	Requantise Shaping Depth	Knob(Big)	Percent	0	0%	50%	50%	100%
+Requantise	dither.peakLimit	Requantise Noise Peak Limit (steps, 0 = off)	Knob(Big)	None	33	Off	±16 steps	±17 steps	±32 steps
+Setup	delayL	Delay L	FaderH	Ms	0	0.0 ms	150.0 ms	150.3 ms	300.0 ms
+Setup	delayR	Delay R	FaderH	Ms	0	0.0 ms	150.0 ms	150.3 ms	300.0 ms
+Setup	delayFineL	Delay Fine L	FaderH	None	101	0.00	50.00	51.00	100.00
+Setup	delayFineR	Delay Fine R	FaderH	None	101	0.00	50.00	51.00	100.00

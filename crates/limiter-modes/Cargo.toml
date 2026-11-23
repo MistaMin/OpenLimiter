@@ -1,0 +1,10 @@
+[package]
+name = "limiter-modes"
+version = "0.1.0"
+edition = "2021"
+description = "Table-driven maximizer modes and character limiter types for OpenLimiter"
+
+[workspace]
+
+[dependencies]
+olm-api = { path = "../api" }

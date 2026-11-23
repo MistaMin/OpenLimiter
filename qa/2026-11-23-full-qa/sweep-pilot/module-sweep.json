@@ -1,0 +1,91 @@
+{
+ "fx": "VST3: OpenLimiter (OpenGrid)",
+ "seconds": 2.0,
+ "workers": 2,
+ "minutes": 0.4,
+ "hostParams": 1985,
+ "params": [
+  {
+   "group": "shaper",
+   "index": 22,
+   "id": "shaper.curve",
+   "diffDb": -25.6,
+   "audio": "ok"
+  },
+  {
+   "group": "shaper",
+   "index": 23,
+   "id": "shaper.threshold",
+   "diffDb": -6.4,
+   "audio": "CONDITIONAL",
+   "state": 2
+  },
+  {
+   "group": "shaper",
+   "index": 24,
+   "id": "shaper.drive",
+   "diffDb": -0.6,
+   "audio": "ok"
+  },
+  {
+   "group": "shaper",
+   "index": 25,
+   "id": "shaper.mix",
+   "diffDb": -5.6,
+   "audio": "CONDITIONAL",
+   "state": 2
+  },
+  {
+   "group": "shaper",
+   "index": 26,
+   "id": "shaper.oversample",
+   "diffDb": -6.3,
+   "audio": "CONDITIONAL",
+   "state": 2
+  },
+  {
+   "group": "shaper",
+   "index": 27,
+   "id": "shaper.upward",
+   "diffDb": -3.4,
+   "audio": "ok"
+  },
+  {
+   "group": "shaper",
+   "index": 28,
+   "id": "shaper.upwardThreshold",
+   "diffDb": -14.0,
+   "audio": "CONDITIONAL",
+   "state": 1
+  },
+  {
+   "group": "shaper",
+   "index": 29,
+   "id": "shaper.transient",
+   "diffDb": -11.2,
+   "audio": "ok"
+  },
+  {
+   "group": "shaper",
+   "index": 30,
+   "id": "shaper.on",
+   "diffDb": -12.9,
+   "audio": "CONDITIONAL",
+   "state": 1
+  },
+  {
+   "group": "monitor",
+   "index": 1979,
+   "id": "autogain",
+   "diffDb": -49.6,
+   "audio": "ok"
+  },
+  {
+   "group": "monitor",
+   "index": 1980,
+   "id": "delta",
+   "diffDb": -3.8,
+   "audio": "ok"
+  }
+ ]
+}

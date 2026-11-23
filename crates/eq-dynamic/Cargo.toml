@@ -1,0 +1,11 @@
+[package]
+name = "eq-dynamic"
+version = "0.1.0"
+edition = "2021"
+description = "32-band dynamic EQ (port of OpenEQ 1.0.1 dynamics) for OpenLimiter"
+
+[dependencies]
+olm-api = { path = "../api" }
+eq-core = { path = "../eq-core" }
+
+[workspace]

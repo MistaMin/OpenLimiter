@@ -1,0 +1,257 @@
+{
+ "fx": "VST3: OpenLimiter (OpenGrid)",
+ "checks": [
+  {
+   "check": "loads",
+   "status": "PASS",
+   "detail": "VST3: OpenLimiter (OpenGrid), 1983 parameters"
+  },
+  {
+   "check": "finite output",
+   "status": "PASS",
+   "detail": "peak -3.8 dBFS"
+  },
+  {
+   "check": "not silent",
+   "status": "PASS",
+   "detail": "rms -14.9 dBFS"
+  },
+  {
+   "check": "deterministic render",
+   "status": "PASS",
+   "detail": "repeat differs by -240.0 dB"
+  },
+  {
+   "check": "editor opens",
+   "status": "PASS",
+   "detail": "1080x913, 0.0% animates by itself"
+  },
+  {
+   "check": "every parameter changes the sound",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "every parameter is shown in the GUI",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "state survives save and reopen",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "editor reopens",
+   "status": "PASS",
+   "detail": "5 close/open cycles"
+  }
+ ],
+ "params": [
+  {
+   "index": 1898,
+   "name": "Floor Lifter Threshold",
+   "ident": "1898:1898",
+   "default": 0.5,
+   "context": "Floor Lifter On=1",
+   "audioDiffDb": -3.9,
+   "audio": "ok",
+   "visualChange": 6.415,
+   "visual": "ok"
+  },
+  {
+   "index": 1899,
+   "name": "Floor Lifter Ratio",
+   "ident": "1899:1899",
+   "default": 0.3333333433,
+   "context": "Floor Lifter On=1random state 5",
+   "audioDiffDb": -49.4,
+   "audio": "CONDITIONAL",
+   "visualChange": 5.773,
+   "visual": "ok"
+  },
+  {
+   "index": 1900,
+   "name": "Floor Lifter Range",
+   "ident": "1900:1900",
+   "default": 0.3333333433,
+   "context": "Floor Lifter On=1random state 5",
+   "audioDiffDb": -49.4,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.523,
+   "visual": "ok"
+  },
+  {
+   "index": 1901,
+   "name": "Floor Lifter Knee",
+   "ident": "1901:1901",
+   "default": 0.25,
+   "context": "Floor Lifter On=1",
+   "audioDiffDb": -6.0,
+   "audio": "ok",
+   "visualChange": 6.585,
+   "visual": "ok"
+  },
+  {
+   "index": 1902,
+   "name": "Floor Lifter Floor",
+   "ident": "1902:1902",
+   "default": 0.4799999893,
+   "context": "Floor Lifter On=1random state 3",
+   "audioDiffDb": -7.6,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.365,
+   "visual": "ok"
+  },
+  {
+   "index": 1903,
+   "name": "Floor Lifter Attack",
+   "ident": "1903:1903",
+   "default": 0.4247424901,
+   "context": "Floor Lifter On=1",
+   "audioDiffDb": -5.4,
+   "audio": "ok",
+   "visualChange": 6.505,
+   "visual": "ok"
+  },
+  {
+   "index": 1904,
+   "name": "Floor Lifter Hold",
+   "ident": "1904:1904",
+   "default": 0.03999999911,
+   "context": "Floor Lifter On=1random state 3",
+   "audioDiffDb": -3.8,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.446,
+   "visual": "ok"
+  },
+  {
+   "index": 1905,
+   "name": "Floor Lifter Release",
+   "ident": "1905:1905",
+   "default": 0.5882965922,
+   "context": "Floor Lifter On=1random state 4",
+   "audioDiffDb": -2.5,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.524,
+   "visual": "ok"
+  },
+  {
+   "index": 1906,
+   "name": "Floor Lifter Detector",
+   "ident": "1906:1906",
+   "default": 1,
+   "context": "Floor Lifter On=1random state 3",
+   "audioDiffDb": -7.6,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.596,
+   "visual": "ok"
+  },
+  {
+   "index": 1907,
+   "name": "Floor Lifter RMS Window",
+   "ident": "1907:1907",
+   "default": 0.3705117106,
+   "context": "Floor Lifter On=1random state 5",
+   "audioDiffDb": -54.6,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.671,
+   "visual": "ok"
+  },
+  {
+   "index": 1908,
+   "name": "Floor Lifter Look-Ahead",
+   "ident": "1908:1908",
+   "default": 0.200000003,
+   "context": "Floor Lifter On=1",
+   "audioDiffDb": -4.3,
+   "audio": "ok",
+   "visualChange": 6.74,
+   "visual": "ok"
+  },
+  {
+   "index": 1909,
+   "name": "Floor Lifter Stereo Link",
+   "ident": "1909:1909",
+   "default": 1,
+   "context": "Floor Lifter On=1random state 5",
+   "audioDiffDb": -69.5,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.651,
+   "visual": "ok"
+  },
+  {
+   "index": 1910,
+   "name": "Floor Lifter Key Source",
+   "ident": "1910:1910",
+   "default": 0,
+   "context": "Floor Lifter On=1random state 3",
+   "audioDiffDb": -88.4,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.443,
+   "visual": "ok"
+  },
+  {
+   "index": 1911,
+   "name": "Floor Lifter Key High-Pass",
+   "ident": "1911:1911",
+   "default": 0,
+   "context": "Floor Lifter On=1",
+   "audioDiffDb": -14.9,
+   "audio": "ok",
+   "visualChange": 6.595,
+   "visual": "ok"
+  },
+  {
+   "index": 1912,
+   "name": "Floor Lifter Key Low-Pass",
+   "ident": "1912:1912",
+   "default": 1,
+   "context": "Floor Lifter On=1",
+   "audioDiffDb": -17.1,
+   "audio": "ok",
+   "visualChange": 6.456,
+   "visual": "ok"
+  },
+  {
+   "index": 1913,
+   "name": "Floor Lifter Mix",
+   "ident": "1913:1913",
+   "default": 1,
+   "context": "Floor Lifter On=1random state 5",
+   "audioDiffDb": -49.4,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.701,
+   "visual": "ok"
+  },
+  {
+   "index": 1914,
+   "name": "Floor Lifter On",
+   "ident": "1914:1914",
+   "default": 0,
+   "context": "random state 1",
+   "audioDiffDb": -78.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 6.416,
+   "visual": "ok"
+  },
+  {
+   "index": 1915,
+   "name": "Floor Lifter Position",
+   "ident": "1915:1915",
+   "default": 0.875,
+   "context": "",
+   "audioDiffDb": -240.0,
+   "audio": "excused",
+   "visualChange": 5.875,
+   "visual": "ok"
+  }
+ ],
+ "info": {
+  "fx": 0,
+  "numParams": 1983,
+  "latency": "0",
+  "name": "VST3: OpenLimiter (OpenGrid)"
+ },
+ "failed": []
+}

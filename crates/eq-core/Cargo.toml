@@ -1,0 +1,9 @@
+[package]
+name = "eq-core"
+version = "0.1.0"
+edition = "2021"
+description = "Shared filter design, band model, placement and response model for the OpenEQ port (OpenLimiter)"
+
+[dependencies]
+
+[workspace]

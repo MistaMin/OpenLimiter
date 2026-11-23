@@ -1,0 +1,13 @@
+[package]
+name = "comp-bands"
+version = "0.1.0"
+edition = "2021"
+description = "Five-band compressor with an optional per-band peak limiter (OpenLimiter module)"
+
+[workspace]
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[profile.release]
+opt-level = 3

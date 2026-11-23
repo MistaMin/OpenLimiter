@@ -1,0 +1,109 @@
+# Windows and Linux builds of OpenLimiter. macOS is built, signed and notarized
+# on the owner's Mac (scripts/build.sh). Each job builds the same commit, runs
+# the tests, packages the formats and keeps the installer as an artifact.
+name: Windows and Linux builds
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+env:
+  # The OpenPluginSDK revision this release is built and tested with (as in scripts/build.sh).
+  OPENPLUGIN_SDK_REF: 0f50066680fd7b1390f120fa57535495831037f0
+  VST3_SDK_REF: v3.8.1_build_84
+  CARGO_TERM_COLOR: always
+
+jobs:
+  windows:
+    name: Windows x64 (VST3, CLAP)
+    runs-on: windows-latest
+    env:
+      # The C runtime is linked statically, as the SDK's shells do (cargo reads no
+      # .cargo/config.toml here, since it runs outside the repository folder).
+      CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS: -C target-feature=+crt-static
+    steps:
+      # Cargo.toml finds the SDK at ../../Dependencies/OpenPluginSDK.
+      - uses: actions/checkout@v4
+        with:
+          path: w/openlimiter
+      - uses: actions/checkout@v4
+        with:
+          repository: MistaMin/OpenPluginSDK
+          ref: ${{ env.OPENPLUGIN_SDK_REF }}
+          path: Dependencies/OpenPluginSDK
+      - uses: actions/checkout@v4
+        with:
+          repository: steinbergmedia/vst3sdk
+          ref: ${{ env.VST3_SDK_REF }}
+          submodules: recursive
+          path: Dependencies/vst3sdk
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Tests
+        working-directory: w/openlimiter
+        run: cargo test --release --locked
+      - name: Build VST3 and CLAP
+        shell: pwsh
+        run: |
+          $root = "$env:GITHUB_WORKSPACE"
+          $version = (Select-String -Path w\openlimiter\Cargo.toml -Pattern '^version = "(.*)"').Matches[0].Groups[1].Value
+          powershell -NoProfile -ExecutionPolicy Bypass -File Dependencies\OpenPluginSDK\scripts\windows\build_plugin.ps1 `
+            -ManifestPath w\openlimiter\Cargo.toml -Name OpenLimiter -Version $version -Manufacturer OpenGrid `
+            -BundleId com.opengrid.openlimiter -Editor -Formats clap,vst3 -Vst3Sdk "$root\Dependencies\vst3sdk" `
+            -Out "$root\dist-windows" -WorkDir "$root\build-windows"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Installer
+        shell: pwsh
+        run: |
+          $v = (Select-String -Path w\openlimiter\Cargo.toml -Pattern '^version = "(.*)"').Matches[0].Groups[1].Value
+          $v = $v -replace '-beta$','-Beta'
+          if (-not (Get-Command iscc -ErrorAction SilentlyContinue)) { choco install innosetup -y --no-progress; $env:Path += ";${env:ProgramFiles(x86)}\Inno Setup 6" }
+          iscc /DVersion=$v /DDist="$env:GITHUB_WORKSPACE\dist-windows" /DRoot="$env:GITHUB_WORKSPACE\w\openlimiter" w\openlimiter\installer\windows.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Get-FileHash -Algorithm SHA256 OpenLimiter-*-setup.exe | ForEach-Object { "$($_.Hash.ToLower())  $(Split-Path $_.Path -Leaf)" | Out-File -Encoding ascii "$(Split-Path $_.Path -Leaf).sha256" }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: |
+            OpenLimiter-*-windows-x64-setup.exe
+            OpenLimiter-*-windows-x64-setup.exe.sha256
+
+  linux:
+    name: Linux x86_64 (CLAP, LV2)
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: w/openlimiter
+      - uses: actions/checkout@v4
+        with:
+          repository: MistaMin/OpenPluginSDK
+          ref: ${{ env.OPENPLUGIN_SDK_REF }}
+          path: Dependencies/OpenPluginSDK
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Tests
+        working-directory: w/openlimiter
+        run: cargo test --release --locked
+      - name: Build CLAP and LV2
+        run: |
+          version=$(sed -n 's/^version = "\(.*\)"/\1/p' w/openlimiter/Cargo.toml | head -1)
+          Dependencies/OpenPluginSDK/scripts/build_plugin_linux.sh --manifest-path w/openlimiter/Cargo.toml \
+            --name OpenLimiter --version "$version" --ttl-bin lv2_ttl --formats clap,lv2 --strip \
+            --out "$GITHUB_WORKSPACE/dist-linux" --work-dir "$GITHUB_WORKSPACE/build-linux"
+      - name: Archive
+        run: |
+          v=$(sed -n 's/^version = "\(.*\)"/\1/p' w/openlimiter/Cargo.toml | head -1 | sed 's/-beta$/-Beta/')
+          name="OpenLimiter-$v-linux-x86_64"
+          mkdir -p "pkg/usr/lib/clap" "pkg/usr/lib/lv2" "pkg/usr/share/doc/openlimiter"
+          cp dist-linux/OpenLimiter.clap pkg/usr/lib/clap/
+          cp -R dist-linux/OpenLimiter.lv2 pkg/usr/lib/lv2/
+          cp w/openlimiter/LICENSE w/openlimiter/BINARY_LICENSE.txt w/openlimiter/THIRD_PARTY_LICENSES.md w/openlimiter/Licenses/* pkg/usr/share/doc/openlimiter/
+          tar -C pkg --owner=0 --group=0 -czf "$name.tar.gz" usr
+          sha256sum "$name.tar.gz" > "$name.tar.gz.sha256"
+          tar -tzf "$name.tar.gz"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-x86_64
+          path: |
+            OpenLimiter-*-linux-x86_64.tar.gz
+            OpenLimiter-*-linux-x86_64.tar.gz.sha256

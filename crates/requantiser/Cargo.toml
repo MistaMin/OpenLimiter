@@ -1,0 +1,10 @@
+[package]
+name = "requantiser"
+version = "0.1.0"
+edition = "2021"
+description = "Dither, noise shaping and word-length reduction module for OpenLimiter"
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[workspace]

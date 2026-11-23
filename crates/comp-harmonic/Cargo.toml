@@ -1,0 +1,10 @@
+[package]
+name = "comp-harmonic"
+version = "0.1.0"
+edition = "2021"
+description = "Harmonic Compressor (seven compression modes, ADAA harmonics, oversampling) ported to an OpenLimiter module"
+
+[workspace]
+
+[dependencies]
+olm-api = { path = "../api" }

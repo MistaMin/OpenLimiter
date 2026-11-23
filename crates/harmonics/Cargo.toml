@@ -1,0 +1,10 @@
+[package]
+name = "harmonics"
+version = "0.1.0"
+edition = "2021"
+description = "Controlled harmonic coloration (H2-H5, saturator and tape-knee families) with residual ADAA or oversampling"
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[workspace]

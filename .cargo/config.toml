@@ -1,0 +1,4 @@
+# Windows (MSVC): link the C runtime statically, as the SDK's shells do, so the
+# plug-in needs no Visual C++ Redistributable.
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

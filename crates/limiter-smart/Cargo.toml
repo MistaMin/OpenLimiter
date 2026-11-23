@@ -1,0 +1,13 @@
+[package]
+name = "limiter-smart"
+version = "0.1.0"
+edition = "2021"
+description = "Smart Limiter: six switchable look-ahead limiter engines in one OpenLimiter module"
+
+[workspace]
+
+[dependencies]
+olm-api = { path = "../api" }
+
+[profile.test]
+opt-level = 3
