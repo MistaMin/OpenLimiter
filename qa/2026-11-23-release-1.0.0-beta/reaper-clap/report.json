@@ -1,0 +1,261 @@
+{
+ "fx": "CLAP: OpenLimiter (OpenGrid)",
+ "checks": [
+  {
+   "check": "loads",
+   "status": "PASS",
+   "detail": "CLAP: OpenLimiter (OpenGrid), 1984 parameters"
+  },
+  {
+   "check": "finite output",
+   "status": "PASS",
+   "detail": "peak -3.8 dBFS"
+  },
+  {
+   "check": "not silent",
+   "status": "PASS",
+   "detail": "rms -16.7 dBFS"
+  },
+  {
+   "check": "deterministic render",
+   "status": "FAIL",
+   "detail": "repeat differs by -6.0 dB"
+  },
+  {
+   "check": "editor opens",
+   "status": "PASS",
+   "detail": "1080x913, 0.4% animates by itself"
+  },
+  {
+   "check": "every parameter changes the sound",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "every parameter is shown in the GUI",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "state survives save and reopen",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "editor reopens",
+   "status": "PASS",
+   "detail": "5 close/open cycles"
+  }
+ ],
+ "params": [
+  {
+   "index": 0,
+   "name": "Gain L",
+   "ident": "0:0",
+   "default": 0.5,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.012,
+   "visual": "ok"
+  },
+  {
+   "index": 1,
+   "name": "Gain R",
+   "ident": "1:1",
+   "default": 0.5,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 2,
+   "name": "Threshold",
+   "ident": "2:2",
+   "default": 0.9960160122,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 3,
+   "name": "Soft Clip",
+   "ident": "3:3",
+   "default": 0.3333333333,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 4,
+   "name": "Release A",
+   "ident": "4:4",
+   "default": 0.5,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 5,
+   "name": "Release M",
+   "ident": "5:5",
+   "default": 0.04011461318,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 6,
+   "name": "Auto Release",
+   "ident": "6:6",
+   "default": 1,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 7,
+   "name": "Output",
+   "ident": "7:7",
+   "default": 1,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 8,
+   "name": "Delay L",
+   "ident": "8:8",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 9,
+   "name": "Delay R",
+   "ident": "9:9",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 10,
+   "name": "Delay Fine L",
+   "ident": "10:10",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 11,
+   "name": "Delay Fine R",
+   "ident": "11:11",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 12,
+   "name": "Phase Inv L",
+   "ident": "12:12",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 13,
+   "name": "Phase Inv R",
+   "ident": "13:13",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 14,
+   "name": "Delay Unit",
+   "ident": "14:14",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 15,
+   "name": "Upsample",
+   "ident": "15:15",
+   "default": 1,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 16,
+   "name": "Link",
+   "ident": "16:16",
+   "default": 1,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 17,
+   "name": "Headroom",
+   "ident": "17:17",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 18,
+   "name": "Dither",
+   "ident": "18:18",
+   "default": 0.9444444444,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  },
+  {
+   "index": 19,
+   "name": "No Latency",
+   "ident": "19:19",
+   "default": 0,
+   "context": "",
+   "audio": "skipped (render not deterministic)",
+   "visualChange": 0.024,
+   "visual": "ok"
+  }
+ ],
+ "info": {
+  "latency": "39",
+  "fx": 0,
+  "name": "CLAP: OpenLimiter (OpenGrid)",
+  "numParams": 1984
+ },
+ "failed": [
+  "deterministic render"
+ ]
+}

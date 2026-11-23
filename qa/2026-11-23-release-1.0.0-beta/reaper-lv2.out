@@ -1,0 +1,26 @@
+note: REAPER already running for another session (pids 43840, 74280). It is left alone; this session starts its own instance and closes only that one.
+{"pid": 43848}
+PASS     loads LV2: OpenLimiter (OpenGrid) (4->2ch) | , 3 parameters
+PASS     finite output peak -240.0 dBFS
+FAIL     not silent rms -240.0 dBFS
+PASS     deterministic render repeat differs by -240.0 dB
+SKIPPED  editor opens no editor window found (no Screen Recording permission, or no editor)
+  Bypass                           audio=SILENT (no sound at either end)
+  Bypass                           audio=SILENT   visual=-
+  Wet                              audio=SILENT (no sound at either end)
+  Wet                              audio=SILENT   visual=-
+  Delta                            audio=SILENT (no sound at either end)
+  Delta                            audio=SILENT   visual=-
+FAIL     every parameter changes the sound no sound at either end of the sweep, so these were never heard (the audio went silent mid-run, or the parameter mutes at both ends and needs an audio: exception): Bypass, Wet, Delta
+Traceback (most recent call last):
+  File "<daw-test>/scripts/reaper_qa.py", line 853, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "<daw-test>/scripts/reaper_qa.py", line 849, in main
+    return suite(args)
+  File "<daw-test>/scripts/reaper_qa.py", line 653, in suite
+    b.call("open_project", path=project)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<daw-test>/scripts/reaper_qa.py", line 102, in call
+    raise TimeoutError("REAPER did not answer '%s' within %ds (modal dialog open? crashed?)" % (cmd, timeout))
+TimeoutError: REAPER did not answer 'open_project' within 120s (modal dialog open? crashed?)

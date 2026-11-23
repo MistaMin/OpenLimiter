@@ -1,0 +1,5 @@
+auval exit=0
+clap-validator exit=1
+pluginval vst3 exit=9
+pluginval au exit=0
+pluginval vst3 gui exit=9

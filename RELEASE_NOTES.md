@@ -36,7 +36,14 @@ printed. This is a beta.
 
 ## Checks
 
-See `qa/2026-11-23-release-1.0.0-beta/ledger.md` in the repository.
+- macOS: auval passes; pluginval at strictness 10 passes for VST3 (three runs, and once with
+  the editor) and Audio Unit; clap-validator 34 passed, 0 failed; Avid's AAX Validator 13
+  passed, 0 failed (the DSP cycle count needs HDX hardware and was skipped).
+- REAPER (macOS): VST3, CLAP and LV2 load, render, open the editor and keep their state
+  through save and reopen.
+- Windows and Linux: the plugin's 73 tests pass on each in GitHub Actions; the binaries
+  import only system libraries and export their format's entry points.
+- Details: `qa/2026-11-23-release-1.0.0-beta/ledger.md` in the repository.
 
 ## Known limits
 

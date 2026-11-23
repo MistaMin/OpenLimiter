@@ -1,0 +1,32 @@
+note: REAPER already running for another session (pids 43839, 74280). It is left alone; this session starts its own instance and closes only that one.
+{"pid": 43847}
+PASS     loads CLAP: OpenLimiter (OpenGrid), 1984 parameters
+PASS     finite output peak -3.8 dBFS
+PASS     not silent rms -16.7 dBFS
+FAIL     deterministic render repeat differs by -6.0 dB
+PASS     editor opens 1080x913, 0.4% animates by itself
+  Gain L                           audio=skipped (render not deterministic) visual=ok
+  Gain R                           audio=skipped (render not deterministic) visual=ok
+  Threshold                        audio=skipped (render not deterministic) visual=ok
+  Soft Clip                        audio=skipped (render not deterministic) visual=ok
+  Release A                        audio=skipped (render not deterministic) visual=ok
+  Release M                        audio=skipped (render not deterministic) visual=ok
+  Auto Release                     audio=skipped (render not deterministic) visual=ok
+  Output                           audio=skipped (render not deterministic) visual=ok
+  Delay L                          audio=skipped (render not deterministic) visual=ok
+  Delay R                          audio=skipped (render not deterministic) visual=ok
+  Delay Fine L                     audio=skipped (render not deterministic) visual=ok
+  Delay Fine R                     audio=skipped (render not deterministic) visual=ok
+  Phase Inv L                      audio=skipped (render not deterministic) visual=ok
+  Phase Inv R                      audio=skipped (render not deterministic) visual=ok
+  Delay Unit                       audio=skipped (render not deterministic) visual=ok
+  Upsample                         audio=skipped (render not deterministic) visual=ok
+  Link                             audio=skipped (render not deterministic) visual=ok
+  Headroom                         audio=skipped (render not deterministic) visual=ok
+  Dither                           audio=skipped (render not deterministic) visual=ok
+  No Latency                       audio=skipped (render not deterministic) visual=ok
+PASS     every parameter changes the sound 
+PASS     every parameter is shown in the GUI 
+PASS     state survives save and reopen 
+PASS     editor reopens 5 close/open cycles
+report: /Volumes/Developer 2/DeadProjects/openlimiter/qa/2026-11-23-release-1.0.0-beta/reaper-clap/report.md

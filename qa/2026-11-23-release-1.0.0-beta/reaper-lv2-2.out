@@ -1,0 +1,40 @@
+note: REAPER already running for another session (pids 74280). It is left alone; this session starts its own instance and closes only that one.
+{"pid": 46441}
+PASS     loads LV2: OpenLimiter (OpenGrid) (4->2ch), 1985 parameters
+PASS     finite output peak -3.8 dBFS
+PASS     not silent rms -16.7 dBFS
+PASS     deterministic render repeat differs by -240.0 dB
+PASS     editor opens 1080x913, 0.0% animates by itself
+  Gain L                           audio=ok       visual=ok
+  Gain R                           audio=ok       visual=ok
+  Threshold                        audio=ok       visual=ok
+  Soft Clip                        audio=ok       visual=ok
+  Release A                        audio=DEAD     visual=ok
+  Release M                        audio=DEAD     visual=ok
+  Auto Release                     audio=DEAD     visual=ok
+  Output                           audio=ok       visual=ok
+  Delay L                          audio=ok       visual=ok
+  Delay R                          audio=ok       visual=ok
+  Delay Fine L                     audio=ok       visual=ok
+  Delay Fine R                     audio=ok       visual=ok
+  Phase Inv L                      audio=ok       visual=ok
+  Phase Inv R                      audio=ok       visual=ok
+  Delay Unit                       audio=DEAD     visual=ok
+  Upsample                         audio=DEAD     visual=ok
+  Link                             audio=DEAD     visual=ok
+  Headroom                         audio=DEAD     visual=ok
+  Dither                           audio=ok       visual=ok
+  No Latency                       audio=DEAD     visual=ok
+  Release A                        audio=CONDITIONAL (acts in random state 1)
+  Release M                        audio=CONDITIONAL (acts in random state 1)
+  Auto Release                     audio=CONDITIONAL (acts in random state 1)
+  Delay Unit                       audio=CONDITIONAL (acts in random state 1)
+  Upsample                         audio=CONDITIONAL (acts in random state 1)
+  Link                             audio=CONDITIONAL (acts in random state 1)
+  Headroom                         audio=CONDITIONAL (acts in random state 1)
+  No Latency                       audio=CONDITIONAL (acts in random state 1)
+PASS     every parameter changes the sound 
+PASS     every parameter is shown in the GUI 
+PASS     state survives save and reopen 
+PASS     editor reopens 5 close/open cycles
+report: /Volumes/Developer 2/DeadProjects/openlimiter/qa/2026-11-23-release-1.0.0-beta/reaper-lv2-2/report.md

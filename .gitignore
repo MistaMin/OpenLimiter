@@ -18,3 +18,12 @@ qa/**/montage*.png
 # Per-module session reports stay local
 crates/*/REPORT.md
 qa/**/*.rpp
+# REAPER bridge housekeeping and load experiments
+qa/**/cmd.txt
+qa/**/seq.txt
+qa/**/ready.txt
+qa/**/*.pid
+qa/**/hide_pid
+qa/**/reaper.log
+qa/**/load-repro/
+qa/**/reaper-clap-debug*/

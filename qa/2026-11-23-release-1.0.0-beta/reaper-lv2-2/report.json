@@ -1,0 +1,279 @@
+{
+ "fx": "LV2: OpenLimiter (OpenGrid)",
+ "checks": [
+  {
+   "check": "loads",
+   "status": "PASS",
+   "detail": "LV2: OpenLimiter (OpenGrid) (4->2ch), 1985 parameters"
+  },
+  {
+   "check": "finite output",
+   "status": "PASS",
+   "detail": "peak -3.8 dBFS"
+  },
+  {
+   "check": "not silent",
+   "status": "PASS",
+   "detail": "rms -16.7 dBFS"
+  },
+  {
+   "check": "deterministic render",
+   "status": "PASS",
+   "detail": "repeat differs by -240.0 dB"
+  },
+  {
+   "check": "editor opens",
+   "status": "PASS",
+   "detail": "1080x913, 0.0% animates by itself"
+  },
+  {
+   "check": "every parameter changes the sound",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "every parameter is shown in the GUI",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "state survives save and reopen",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "editor reopens",
+   "status": "PASS",
+   "detail": "5 close/open cycles"
+  }
+ ],
+ "params": [
+  {
+   "index": 0,
+   "name": "Gain L",
+   "ident": "0:_gainL",
+   "default": 0.5,
+   "context": "",
+   "audioDiffDb": -1.9,
+   "audio": "ok",
+   "visualChange": 0.114,
+   "visual": "ok"
+  },
+  {
+   "index": 1,
+   "name": "Gain R",
+   "ident": "1:_gainR",
+   "default": 0.5,
+   "context": "",
+   "audioDiffDb": -1.9,
+   "audio": "ok",
+   "visualChange": 0.049,
+   "visual": "ok"
+  },
+  {
+   "index": 2,
+   "name": "Threshold",
+   "ident": "2:_threshold",
+   "default": 0.9960160121,
+   "context": "",
+   "audioDiffDb": -4.5,
+   "audio": "ok",
+   "visualChange": 0.714,
+   "visual": "ok"
+  },
+  {
+   "index": 3,
+   "name": "Soft Clip",
+   "ident": "3:_softClip",
+   "default": 0.3333333333,
+   "context": "",
+   "audioDiffDb": -15.6,
+   "audio": "ok",
+   "visualChange": 0.106,
+   "visual": "ok"
+  },
+  {
+   "index": 4,
+   "name": "Release A",
+   "ident": "4:_releaseA",
+   "default": 0.5,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.111,
+   "visual": "ok"
+  },
+  {
+   "index": 5,
+   "name": "Release M",
+   "ident": "5:_releaseM",
+   "default": 0.04011461318,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.034,
+   "visual": "ok"
+  },
+  {
+   "index": 6,
+   "name": "Auto Release",
+   "ident": "6:_autoRelease",
+   "default": 1,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.277,
+   "visual": "ok"
+  },
+  {
+   "index": 7,
+   "name": "Output",
+   "ident": "7:_output",
+   "default": 1,
+   "context": "",
+   "audioDiffDb": -3.8,
+   "audio": "ok",
+   "visualChange": 0.077,
+   "visual": "ok"
+  },
+  {
+   "index": 8,
+   "name": "Delay L",
+   "ident": "8:_delayL",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": -2.0,
+   "audio": "ok",
+   "visualChange": 0.087,
+   "visual": "ok"
+  },
+  {
+   "index": 9,
+   "name": "Delay R",
+   "ident": "9:_delayR",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": -0.7,
+   "audio": "ok",
+   "visualChange": 0.087,
+   "visual": "ok"
+  },
+  {
+   "index": 10,
+   "name": "Delay Fine L",
+   "ident": "10:_delayFineL",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": -2.5,
+   "audio": "ok",
+   "visualChange": 0.087,
+   "visual": "ok"
+  },
+  {
+   "index": 11,
+   "name": "Delay Fine R",
+   "ident": "11:_delayFineR",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": -0.6,
+   "audio": "ok",
+   "visualChange": 0.087,
+   "visual": "ok"
+  },
+  {
+   "index": 12,
+   "name": "Phase Inv L",
+   "ident": "12:_phaseL",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": 2.3,
+   "audio": "ok",
+   "visualChange": 0.087,
+   "visual": "ok"
+  },
+  {
+   "index": 13,
+   "name": "Phase Inv R",
+   "ident": "13:_phaseR",
+   "default": 0,
+   "context": "",
+   "audioDiffDb": 1.0,
+   "audio": "ok",
+   "visualChange": 0.087,
+   "visual": "ok"
+  },
+  {
+   "index": 14,
+   "name": "Delay Unit",
+   "ident": "14:_delayUnit",
+   "default": 0,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.034,
+   "visual": "ok"
+  },
+  {
+   "index": 15,
+   "name": "Upsample",
+   "ident": "15:_upsample",
+   "default": 1,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.203,
+   "visual": "ok"
+  },
+  {
+   "index": 16,
+   "name": "Link",
+   "ident": "16:_link",
+   "default": 1,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.203,
+   "visual": "ok"
+  },
+  {
+   "index": 17,
+   "name": "Headroom",
+   "ident": "17:_headroom",
+   "default": 0,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.087,
+   "visual": "ok"
+  },
+  {
+   "index": 18,
+   "name": "Dither",
+   "ident": "18:_dither",
+   "default": 0.9444444444,
+   "context": "",
+   "audioDiffDb": -38.7,
+   "audio": "ok",
+   "visualChange": 0.034,
+   "visual": "ok"
+  },
+  {
+   "index": 19,
+   "name": "No Latency",
+   "ident": "19:_noLatency",
+   "default": 0,
+   "context": "random state 1",
+   "audioDiffDb": -3.1,
+   "audio": "CONDITIONAL",
+   "visualChange": 0.187,
+   "visual": "ok"
+  }
+ ],
+ "info": {
+  "numParams": 1985,
+  "name": "LV2: OpenLimiter (OpenGrid) (4->2ch)",
+  "fx": 0,
+  "latency": "39"
+ },
+ "failed": []
+}
