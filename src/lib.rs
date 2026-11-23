@@ -647,6 +647,11 @@ impl Plugin for OpenLimiter {
     fn preset_values(&self, index: usize) -> Option<&'static [f32]> {
         PRESET_VALUES.get(index).map(|v| &v[..])
     }
+
+    /// AAX identity, fixed from the first release on: Pro Tools sessions find the plugin by it.
+    fn aax_ids(&self) -> Option<openplugin::core::AaxIds> {
+        Some(openplugin::core::AaxIds { manufacturer: *b"OpGd", product: *b"OLim", mono: *b"OLmM", stereo: *b"OLmS" })
+    }
 }
 
 openplugin::targets::export_clap!(OpenLimiter, editor = make_editor);

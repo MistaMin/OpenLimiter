@@ -10,7 +10,7 @@ on:
 
 env:
   # The OpenPluginSDK revision this release is built and tested with (as in scripts/build.sh).
-  OPENPLUGIN_SDK_REF: a519209081bf2e6f345b3d949d0efc769eb616eb
+  OPENPLUGIN_SDK_REF: 6f8172476bd99f18c206072adc08353e2e688c78
   VST3_SDK_REF: v3.8.1_build_84
   CARGO_TERM_COLOR: always
 
@@ -42,6 +42,8 @@ jobs:
       - name: Tests
         working-directory: w/openlimiter
         run: cargo test --release --locked
+      # UIAutomationCore.DLL is the Windows accessibility library the editor's window
+      # code uses; it is part of Windows, not a runtime to install.
       - name: Build VST3 and CLAP
         shell: pwsh
         run: |
@@ -49,7 +51,7 @@ jobs:
           $version = (Select-String -Path w\openlimiter\Cargo.toml -Pattern '^version = "(.*)"').Matches[0].Groups[1].Value
           powershell -NoProfile -ExecutionPolicy Bypass -File Dependencies\OpenPluginSDK\scripts\windows\build_plugin.ps1 `
             -ManifestPath w\openlimiter\Cargo.toml -Name OpenLimiter -Version $version -Manufacturer OpenGrid `
-            -BundleId com.opengrid.openlimiter -Editor -Formats clap,vst3 -Vst3Sdk "$root\Dependencies\vst3sdk" `
+            -BundleId com.opengrid.openlimiter -Editor -AllowLib UIAutomationCore.DLL -Formats clap,vst3 -Vst3Sdk "$root\Dependencies\vst3sdk" `
             -Out "$root\dist-windows" -WorkDir "$root\build-windows"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Installer

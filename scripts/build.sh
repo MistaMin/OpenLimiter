@@ -12,7 +12,7 @@ set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SDK="$(cd "$ROOT/../../Dependencies/OpenPluginSDK" && pwd)"
 # The OpenPluginSDK revision this release is built and tested with.
-SDK_REV=a519209081bf2e6f345b3d949d0efc769eb616eb
+SDK_REV=6f8172476bd99f18c206072adc08353e2e688c78
 
 find_sdk() { # env override, then folder names under nearby Dependencies or SDKs folders
   if [ -n "$1" ] && [ -d "$1" ]; then echo "$1"; return 0; fi
@@ -38,6 +38,6 @@ VERSION="${VERSION%%-*}"
 
 "$SDK/scripts/build_plugin.sh" --manifest-path "$ROOT/Cargo.toml" --name OpenLimiter --version "$VERSION" \
   --bundle-id com.opengrid.openlimiter --manufacturer OpenGrid --au-subtype OLim --au-manufacturer Ogrd \
-  --au-version release --ttl-bin lv2_ttl --editor --formats "$FORMATS" --archs universal \
+  --au-version release --ttl-bin lv2_ttl --editor --aax-pages --formats "$FORMATS" --archs universal \
   --vst3-sdk "$VST3_SDK" --au-sdk "$AU_SDK" ${AAX_SDK:+--aax-sdk "$AAX_SDK"} \
   --out "$ROOT/dist" --work-dir "$ROOT/build"
