@@ -648,6 +648,11 @@ impl Plugin for OpenLimiter {
         PRESET_VALUES.get(index).map(|v| &v[..])
     }
 
+    /// The LV2 URI, fixed from the first release on: LV2 sessions find the plugin by it.
+    fn lv2_uri(&self) -> Option<&'static str> {
+        Some("https://opengrid.studio/plugins/openlimiter")
+    }
+
     /// AAX identity, fixed from the first release on: Pro Tools sessions find the plugin by it.
     fn aax_ids(&self) -> Option<openplugin::core::AaxIds> {
         Some(openplugin::core::AaxIds { manufacturer: *b"OpGd", product: *b"OLim", mono: *b"OLmM", stereo: *b"OLmS" })
