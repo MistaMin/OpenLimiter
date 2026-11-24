@@ -10,7 +10,7 @@ on:
 
 env:
   # The OpenPluginSDK revision this release is built and tested with (as in scripts/build.sh).
-  OPENPLUGIN_SDK_REF: dd9c1fdee5be5a53a5d5d8f94290749274a0053e
+  OPENPLUGIN_SDK_REF: dea89d1d271e56b0387f8622935c074d2674001b
   # GoodLookin DRI with the Semibold text standard; Cargo.toml patches the SDK's v0.2.1 to it.
   GOODLOOKINDRI_REF: 3fe04263a7e1eb21931717393d0f1d705417e884
   VST3_SDK_REF: v3.8.1_build_84
@@ -25,7 +25,7 @@ jobs:
       # .cargo/config.toml here, since it runs outside the repository folder).
       CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS: -C target-feature=+crt-static
     steps:
-      # Cargo.toml finds the SDK at ../../Dependencies/OpenPluginSDK.
+      # Cargo.toml finds the SDK and GoodLookin DRI in deps/ (links locally, checkouts here).
       - uses: actions/checkout@v4
         with:
           path: w/openlimiter
@@ -33,12 +33,12 @@ jobs:
         with:
           repository: MistaMin/OpenPluginSDK
           ref: ${{ env.OPENPLUGIN_SDK_REF }}
-          path: Dependencies/OpenPluginSDK
+          path: w/openlimiter/deps/OpenPluginSDK
       - uses: actions/checkout@v4
         with:
           repository: MistaMin/GoodLookinDri
           ref: ${{ env.GOODLOOKINDRI_REF }}
-          path: Dependencies/GoodLookinDri
+          path: w/openlimiter/deps/GoodLookinDri
       - uses: actions/checkout@v4
         with:
           repository: steinbergmedia/vst3sdk
@@ -56,7 +56,7 @@ jobs:
         run: |
           $root = "$env:GITHUB_WORKSPACE"
           $version = (Select-String -Path w\openlimiter\Cargo.toml -Pattern '^version = "(.*)"').Matches[0].Groups[1].Value
-          powershell -NoProfile -ExecutionPolicy Bypass -File Dependencies\OpenPluginSDK\scripts\windows\build_plugin.ps1 `
+          powershell -NoProfile -ExecutionPolicy Bypass -File w\openlimiter\deps\OpenPluginSDK\scripts\windows\build_plugin.ps1 `
             -ManifestPath w\openlimiter\Cargo.toml -Name OpenLimiter -Version $version -Manufacturer OpenGrid `
             -BundleId com.opengrid.openlimiter -Editor -AllowLib UIAutomationCore.DLL -Formats clap,vst3 -Vst3Sdk "$root\Dependencies\vst3sdk" `
             -Out "$root\dist-windows" -WorkDir "$root\build-windows"
@@ -89,12 +89,12 @@ jobs:
         with:
           repository: MistaMin/OpenPluginSDK
           ref: ${{ env.OPENPLUGIN_SDK_REF }}
-          path: Dependencies/OpenPluginSDK
+          path: w/openlimiter/deps/OpenPluginSDK
       - uses: actions/checkout@v4
         with:
           repository: MistaMin/GoodLookinDri
           ref: ${{ env.GOODLOOKINDRI_REF }}
-          path: Dependencies/GoodLookinDri
+          path: w/openlimiter/deps/GoodLookinDri
       - uses: dtolnay/rust-toolchain@stable
       - name: Tests
         working-directory: w/openlimiter
@@ -102,7 +102,7 @@ jobs:
       - name: Build CLAP and LV2
         run: |
           version=$(sed -n 's/^version = "\(.*\)"/\1/p' w/openlimiter/Cargo.toml | head -1)
-          Dependencies/OpenPluginSDK/scripts/build_plugin_linux.sh --manifest-path w/openlimiter/Cargo.toml \
+          w/openlimiter/deps/OpenPluginSDK/scripts/build_plugin_linux.sh --manifest-path w/openlimiter/Cargo.toml \
             --name OpenLimiter --version "$version" --ttl-bin lv2_ttl --formats clap,lv2 --strip \
             --out "$GITHUB_WORKSPACE/dist-linux" --work-dir "$GITHUB_WORKSPACE/build-linux"
       - name: Archive

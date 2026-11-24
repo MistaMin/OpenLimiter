@@ -29,3 +29,5 @@ qa/**/load-repro/
 qa/**/reaper-clap-debug*/
 qa/**/*.reapeaks
 qa/**/Backups/
+# The SDK and GoodLookin DRI: links to the one checkout locally, checked out by CI
+/deps/
