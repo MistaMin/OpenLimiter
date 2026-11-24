@@ -124,18 +124,7 @@ static TABLE: LazyLock<(Vec<ParamInfo>, Layout)> = LazyLock::new(|| {
 pub static LAYOUT: LazyLock<&'static Layout> = LazyLock::new(|| &TABLE.1);
 
 /// The plugin's description.
-pub static INFO: LazyLock<PluginInfo> = LazyLock::new(|| PluginInfo {
-    id: "com.opengrid.openlimiter",
-    name: "OpenLimiter",
-    vendor: "OpenGrid",
-    url: "",
-    email: "",
-    version: env!("CARGO_PKG_VERSION"),
-    category: Category::Dynamics,
-    params: &TABLE.0,
-    is_instrument: false,
-    has_editor: true,
-});
+pub static INFO: LazyLock<PluginInfo> = LazyLock::new(|| PluginInfo::new("com.opengrid.openlimiter", "OpenLimiter", "OpenGrid", env!("CARGO_PKG_VERSION"), Category::Dynamics, &TABLE.0).with_editor(true));
 
 /// The movable modules, one slot each. Append only: the order fixes the host parameter indices.
 fn modules(shared: Option<Arc<Shared>>) -> Vec<(&'static str, &'static str, Box<dyn Module>)> {
@@ -407,7 +396,7 @@ impl Default for OpenLimiter {
 }
 
 impl OpenLimiter {
-    fn run(&mut self, io: &mut [Vec<f32>], sidechain: Option<&[Vec<f32>]>, frames: usize) {
+    fn run(&mut self, io: &mut [&mut [f32]], sidechain: Option<&[&[f32]]>, frames: usize) {
         let Some(mut taps) = self.taps.take() else { return };
         let Some(mut monitor) = self.monitor.take() else {
             self.taps = Some(taps);
@@ -624,11 +613,11 @@ impl Plugin for OpenLimiter {
         LAYOUTS
     }
 
-    fn process(&mut self, io: &mut [Vec<f32>], frames: usize) {
+    fn process(&mut self, io: &mut [&mut [f32]], frames: usize) {
         self.run(io, None, frames);
     }
 
-    fn process_buses(&mut self, io: &mut [Vec<f32>], sidechain: Option<&[Vec<f32>]>, frames: usize) {
+    fn process_buses(&mut self, io: &mut [&mut [f32]], sidechain: Option<&[&[f32]]>, frames: usize) {
         self.run(io, sidechain, frames);
     }
 
@@ -674,6 +663,18 @@ openplugin::targets::export_shell!(OpenLimiter, editor = make_editor);
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// `Plugin::process` on owned buffers: the SDK takes the channels as slices.
+    fn process(p: &mut OpenLimiter, io: &mut [Vec<f32>], frames: usize) {
+        let mut chans: Vec<&mut [f32]> = io.iter_mut().map(|c| c.as_mut_slice()).collect();
+        Plugin::process(p, &mut chans, frames);
+    }
+
+    fn process_buses(p: &mut OpenLimiter, io: &mut [Vec<f32>], key: &[Vec<f32>], frames: usize) {
+        let mut chans: Vec<&mut [f32]> = io.iter_mut().map(|c| c.as_mut_slice()).collect();
+        let key: Vec<&[f32]> = key.iter().map(|c| c.as_slice()).collect();
+        Plugin::process_buses(p, &mut chans, Some(&key), frames);
+    }
     use crate::limiter::{db_to_lin, lookahead_samples};
 
     const SR: f32 = 48_000.0;
@@ -909,7 +910,7 @@ mod tests {
         for block in 0..400 {
             let level = if block % 100 < 50 { 0.05 } else { 0.9 };
             let mut io = vec![(0..256).map(|_| noise() * level).collect::<Vec<f32>>(), (0..256).map(|_| noise() * level).collect()];
-            plugin.process(&mut io, 256);
+            process(&mut plugin, &mut io, 256);
             assert!(io.iter().flatten().all(|s| s.is_finite()), "block {block}");
             peak = peak.max(io.iter().flatten().fold(0.0f32, |m, s| m.max(s.abs())));
         }
@@ -934,7 +935,7 @@ mod tests {
         // Nothing on, word length off: bit for bit.
         let tone: Vec<f32> = (0..4800).map(|i| 0.3 * (i as f32 * 0.05).sin()).collect();
         let mut io = vec![tone.clone(), tone.clone()];
-        plugin.process(&mut io, 4800);
+        process(&mut plugin, &mut io, 4800);
         assert_eq!(io[0], tone);
         // +6 dB of input gain, once it has glided there.
         plugin.set_param("inputGainL", 6.0);
@@ -942,16 +943,16 @@ mod tests {
         let g = 10f32.powf(6.0 / 20.0);
         for _ in 0..4 {
             let mut io = vec![tone.clone(), tone.clone()];
-            plugin.process(&mut io, 4800);
+            process(&mut plugin, &mut io, 4800);
         }
         let mut io = vec![tone.clone(), tone.clone()];
-        plugin.process(&mut io, 4800);
+        process(&mut plugin, &mut io, 4800);
         let worst = io[0].iter().zip(&tone).map(|(o, i)| (o - g * i).abs()).fold(0.0f32, f32::max);
         assert!(worst < 1e-6, "worst {worst}, first {:?} vs {:?}", &io[0][..3], &tone[..3]);
         // 16-bit word length: every sample lands on the 16-bit grid.
         plugin.set_param_index(LAYOUT.dither_base, 5.0);
         let mut io = vec![tone.clone(), tone.clone()];
-        plugin.process(&mut io, 4800);
+        process(&mut plugin, &mut io, 4800);
         assert!(io[0].iter().all(|s| (s * 32768.0 - (s * 32768.0).round()).abs() < 1e-3));
         assert!(plugin.shared.take_peaks().1[0] > 0.5, "output meter after the dither");
     }
@@ -967,7 +968,7 @@ mod tests {
         let key: Vec<f32> = (0..4800).map(|i| 0.25 * (i as f32 * 0.011).cos()).collect();
         for _ in 0..3 {
             let mut io = vec![tone.clone(), tone.clone()];
-            plugin.process_buses(&mut io, Some(&[key.clone()][..]), 4800);
+            process_buses(&mut plugin, &mut io, &[key.clone()], 4800);
         }
         assert!(plugin.shared.take_key().0, "key bus seen");
         let mut pre = vec![0.0; 1024];
@@ -982,7 +983,7 @@ mod tests {
         // Unwatched: no more taps.
         plugin.shared.watch(None);
         let mut io = vec![vec![0.0; 4800], vec![0.0; 4800]];
-        plugin.process(&mut io, 4800);
+        process(&mut plugin, &mut io, 4800);
         plugin.shared.read_tap(0, &mut pre);
         assert!(pre.iter().any(|&x| x.abs() > 1.0), "old taps kept, nothing new written");
         assert!(!plugin.shared.take_key().0);
@@ -992,7 +993,7 @@ mod tests {
         let mut last = Vec::new();
         for _ in 0..blocks {
             let mut io = vec![tone.to_vec(), tone.to_vec()];
-            plugin.process(&mut io, tone.len());
+            process(plugin, &mut io, tone.len());
             last = io.swap_remove(0);
         }
         last
@@ -1130,7 +1131,7 @@ mod tests {
             for k in (0..n).step_by(512) {
                 let e = (k + 512).min(n);
                 let mut io = vec![l[k..e].to_vec(), r[k..e].to_vec()];
-                p.process(&mut io, e - k);
+                process(&mut p, &mut io, e - k);
                 l[k..e].copy_from_slice(&io[0]);
                 r[k..e].copy_from_slice(&io[1]);
             }
@@ -1222,7 +1223,7 @@ mod tests {
             }
             p.prepare(SR, 512, 2);
             let mut io = vec![tone.clone(), tone.clone()];
-            p.process(&mut io, tone.len());
+            process(&mut p, &mut io, tone.len());
             let lat = p.latency();
             io.iter().flat_map(|c| c[lat.min(4800)..lat.min(4800) + 4800].to_vec()).collect()
         };

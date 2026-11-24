@@ -21,7 +21,7 @@ use olm_api::Module;
 use openplugin::core::editor::Tooltip;
 use openplugin::dri::goodlookindri::color::Color as C;
 use openplugin::dri::goodlookindri::scene::{Point, Rect, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 
 use limiter_smart::{idx, view, SmartLimiter};
 

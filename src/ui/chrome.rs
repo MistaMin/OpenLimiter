@@ -1,7 +1,7 @@
 //! The shell's drawing in the canvas: the cached layer and what follows the parameters.
 
 use openplugin::dri::goodlookindri::scene::{Point, Rect, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 use openplugin::dri::DrawList;
 
 use super::kit::{self, button, caption, inset, panel, rect, text_right};

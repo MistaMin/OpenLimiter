@@ -37,7 +37,7 @@ use std::sync::Arc;
 
 use openplugin::core::editor::{AccessAction, AccessNode, AccessRange, DamageRect, DamageTracker, Key, Modifiers, ParamMenu, ParamMenuAction, SizeRange, TextEdit, Tooltip};
 use openplugin::core::{Editor, EditorHost, EditorState, Frame};
-use openplugin::dri::goodlookindri_shell::text::GlyphCache;
+use goodlookindri_shell::text::GlyphCache;
 use openplugin::dri::{Control, ControlSet, SceneCanvas};
 
 use crate::shared::{Entry, Loud, Shared, HIST, LOUD_FLOOR, LOUD_HIST};
@@ -1645,7 +1645,7 @@ impl Editor for OpenLimiterEditor {
         }
         self.live_dirty = false;
         self.damage.clear();
-        Frame { pixels: &self.out, width: w, height: h }
+        Frame::new(&self.out, w, h)
     }
 
     fn modifiers_changed(&mut self, modifiers: Modifiers) {

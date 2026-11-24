@@ -835,7 +835,7 @@ fn frame_cost() {
 fn column_fill_matches_the_polygon() {
     use openplugin::dri::goodlookindri::hardware;
     use openplugin::dri::goodlookindri::scene::{Point, Scene};
-    use openplugin::dri::goodlookindri_shell::raster::Framebuffer;
+    use goodlookindri_shell::raster::Framebuffer;
     let paint = |s: &Scene| {
         let mut fb = Framebuffer::new(400, 200);
         fb.clear(openplugin::dri::goodlookindri::color::Color(0xff10_1010));
@@ -870,7 +870,7 @@ fn column_fill_matches_the_polygon() {
 fn text_is_whole_apart_and_readable() {
     let mut bad = Vec::new();
     use openplugin::dri::goodlookindri::scene::Cmd;
-    use openplugin::dri::goodlookindri_shell::text;
+    use goodlookindri_shell::text;
     for tall in [false, true] {
         for page in 0..=dither_page() {
             let key = LAYOUT.slots.get(page).map_or("dither", |s| if s.key.is_empty() { "limiter" } else { s.key });
@@ -901,7 +901,7 @@ fn text_is_whole_apart_and_readable() {
             let mut texts: Vec<(f32, f32, f32, f32, String, f32)> = vec![];
             // (centre, radius, half width, from, to) of every ring (knob tracks, gauges)
             let mut rings: Vec<(f32, f32, f32, f32, f32, f32)> = vec![];
-            for c in &dl.scene.cmds {
+            for c in &dl.scene().cmds {
                 match c {
                     Cmd::StrokeArc { center, radius, from, to, width, .. } => {
                         let (x0, y0, x1, y1) = (center.x - radius - width * 0.5, center.y - radius - width * 0.5, center.x + radius + width * 0.5, center.y + radius + width * 0.5);

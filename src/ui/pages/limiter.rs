@@ -10,7 +10,7 @@ use olm_api::Module;
 use openplugin::core::editor::{DamageRect, Tooltip};
 use openplugin::dri::goodlookindri::color::Color as C;
 use openplugin::dri::goodlookindri::scene::{Point, Rect, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 
 use crate::ui::kit::{self, Cell, Size};
 use crate::ui::page::{Ctx, Io, Live, Page, Pointer, Response};

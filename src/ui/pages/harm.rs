@@ -317,7 +317,7 @@ fn backed(s: &mut Scene, cx: &Ctx, x: f32, y: f32, label: &str, c: openplugin::d
 }
 
 fn kit_width(label: &str) -> f32 {
-    openplugin::dri::goodlookindri_shell::text::width(label, 8.0)
+    goodlookindri_shell::text::width(label, 8.0)
 }
 
 impl Page for Harm {

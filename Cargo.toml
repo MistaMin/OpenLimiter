@@ -28,6 +28,8 @@ dyn-deexpand = { path = "crates/dyn-deexpand" }
 harmonics = { path = "crates/harmonics" }
 limiter-smart = { path = "crates/limiter-smart" }
 openplugin = { path = "../../Dependencies/OpenPluginSDK/crates/openplugin" }
+# The shell's text and raster, which the SDK no longer re-exports (OpenPluginSDK 6c688d4).
+goodlookindri-shell = { path = "../../Dependencies/GoodLookinDri/shell" }
 
 # Linux pop-out windows: a top-level X11 window to hold the SDK's view (the SDK already uses it).
 [target.'cfg(target_os = "linux")'.dependencies]

@@ -4,7 +4,7 @@
 use olm_api::Module;
 use openplugin::core::editor::Tooltip;
 use openplugin::dri::goodlookindri::scene::{Point, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 
 use super::limiter::{self as frame, Common, CurveExtras, Probe, BIG_Y, CEILING_X, COL, DRIVE_X, RELEASE_X, ROW1, ROW2};
 use crate::ui::kit::{self, Cell, Size};

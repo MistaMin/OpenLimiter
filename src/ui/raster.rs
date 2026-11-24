@@ -1,7 +1,7 @@
 //! Pixels straight into the frame, for what moves on every tick.
 
 use openplugin::dri::goodlookindri::color::Color as C;
-use openplugin::dri::goodlookindri_shell::text::{self, GlyphCache};
+use goodlookindri_shell::text::{self, GlyphCache};
 
 pub type R = (f32, f32, f32, f32);
 

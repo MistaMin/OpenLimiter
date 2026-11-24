@@ -9,7 +9,7 @@
 use olm_api::Module;
 use openplugin::core::editor::Tooltip;
 use openplugin::dri::goodlookindri::scene::{Point, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 
 use limiter_modes::tables::STYLE_LABELS;
 use limiter_modes::{learned_drive, LEARN_IDLE};

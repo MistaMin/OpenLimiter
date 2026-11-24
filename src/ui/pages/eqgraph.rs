@@ -9,7 +9,7 @@
 use openplugin::core::editor::{DamageRect, Tooltip};
 use openplugin::dri::goodlookindri::color::Color as C;
 use openplugin::dri::goodlookindri::scene::{Point, Rect, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 
 use crate::ui::analyser::{Spectrum, SPECTRUM_FLOOR};
 use crate::ui::kit;

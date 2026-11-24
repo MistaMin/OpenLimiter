@@ -2,7 +2,7 @@
 //! shared rings (never the `take_*` values the main editor consumes), so both can run at once,
 //! and it keeps running with the main editor closed.
 
-use openplugin::dri::goodlookindri_shell::text::{self as text, GlyphCache};
+use goodlookindri_shell::text::{self as text, GlyphCache};
 
 use super::live::{paint_plot, paint_radar, plot_y, radar_lut};
 use super::raster::{rgb, Align, Target, R};
@@ -270,7 +270,7 @@ impl Editor for Detached {
         self.pending = false;
         self.since = 0.0;
         self.cost = start.elapsed().as_secs_f32();
-        Frame { pixels: &self.out, width: w, height: h }
+        Frame::new(&self.out, w, h)
     }
 }
 

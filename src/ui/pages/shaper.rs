@@ -383,7 +383,7 @@ impl Page for ShaperPage {
             let (x, y, w, _) = r;
             let mid = x + w * 0.5;
             let half = kit::rect(r).h * 0.5;
-            let tw = openplugin::dri::goodlookindri_shell::text::width(label, 9.0) * 0.5 + 6.0;
+            let tw = goodlookindri_shell::text::width(label, 9.0) * 0.5 + 6.0;
             s.line(Point::new(x + 8.0, y + half), Point::new(mid - tw, y + half), t.border, 1.0);
             s.line(Point::new(mid + tw, y + half), Point::new(x + w - 8.0, y + half), t.border, 1.0);
             s.line(Point::new(x + 8.0, y + half - 4.0), Point::new(x + 8.0, y + half), t.border, 1.0);
@@ -420,9 +420,9 @@ impl Page for ShaperPage {
         let mut x = r.0;
         for (label, value, colour) in words {
             s.text(Point::new(x, y), label, t.dim, 10.0, false);
-            let lx = x + openplugin::dri::goodlookindri_shell::text::width(label, 10.0) + 6.0;
+            let lx = x + goodlookindri_shell::text::width(label, 10.0) + 6.0;
             s.text(Point::new(lx, y), value.clone(), colour, 12.0, false);
-            x = lx + openplugin::dri::goodlookindri_shell::text::width(&value, 12.0) + 22.0;
+            x = lx + goodlookindri_shell::text::width(&value, 12.0) + 22.0;
         }
         // Curve tiles.
         let chosen = cx.choice(P_CURVE);

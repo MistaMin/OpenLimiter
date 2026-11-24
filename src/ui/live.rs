@@ -2,7 +2,7 @@
 //! readouts, the top band (history and radar, or their strips) and the loudness numbers.
 
 use openplugin::dri::goodlookindri::color::Color as C;
-use openplugin::dri::goodlookindri_shell::text::GlyphCache;
+use goodlookindri_shell::text::GlyphCache;
 
 use super::raster::{blend, rgb, Align, Target, R};
 use super::theme::{loud_colour, pref_file, theme, Theme};
@@ -178,7 +178,7 @@ fn paint_band_marks(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme,
         if y > PLOT.1 + 12.0 && y < PLOT.1 + PLOT.3 - 4.0 {
             let colour = if ui.clipping() { t.over } else { t.dim };
             // On a plate: the level fill runs right under it.
-            let w = openplugin::dri::goodlookindri_shell::text::width("SOFT CLIP", 8.5) + 8.0;
+            let w = goodlookindri_shell::text::width("SOFT CLIP", 8.5) + 8.0;
             f.round(((PLOT.0 + 4.0) * k, (y - 14.5) * k, w * k, 13.0 * k), 3.0 * k, 0.0, t.plot_bg, 0.85);
             f.text(glyphs, (PLOT.0 + 8.0) * k, (y - 8.0) * k, "SOFT CLIP", 8.5 * k, colour, Align::Left);
         }
@@ -443,7 +443,7 @@ pub(super) fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &
         let y = centre.1 - (RADAR_BELOW + lu) / RADAR_SPAN * radius + 7.0;
         let label = format!("{:.0}", target + lu);
         // A plate under the number, so it reads over the coloured fill.
-        let w = openplugin::dri::goodlookindri_shell::text::width(&label, 9.0) + 6.0;
+        let w = goodlookindri_shell::text::width(&label, 9.0) + 6.0;
         f.round(((centre.0 + 1.0) * k, (y - 6.5) * k, w * k, 13.0 * k), 3.0 * k, 0.0, t.plot_bg, 0.85);
         f.text(glyphs, (centre.0 + 4.0) * k, y * k, &label, 9.0 * k, colour, Align::Left);
     }
@@ -477,7 +477,7 @@ fn paint_loud_bar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k
             let s = format!("in {:.0}", whole(v));
             // Right-aligned under the unit, clear of the output value.
             let right = x + LOUD_CELL_PITCH - 14.0;
-            let left = (right - openplugin::dri::goodlookindri_shell::text::width(&s, 10.0)).max(x + 8.0 + openplugin::dri::goodlookindri_shell::text::width(label, 18.0) + 6.0);
+            let left = (right - goodlookindri_shell::text::width(&s, 10.0)).max(x + 8.0 + goodlookindri_shell::text::width(label, 18.0) + 6.0);
             f.text(glyphs, left * k, (y + 33.0) * k, &s, 10.0 * k, t.dim, Align::Left);
         }
         let level = [l.momentary_out, l.short_out, l.integrated].get(i).copied().filter(|v| heard(*v));

@@ -17,7 +17,7 @@ use std::collections::VecDeque;
 use openplugin::core::editor::{DamageRect, Tooltip};
 use openplugin::dri::goodlookindri::color::Color as C;
 use openplugin::dri::goodlookindri::scene::{Point, Rect, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 
 use dyn_decompress::{index as ix, static_gain_db, view as vw};
 

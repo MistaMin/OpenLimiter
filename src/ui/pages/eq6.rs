@@ -11,7 +11,7 @@ use std::cell::{Cell as Once, RefCell};
 use openplugin::core::editor::{DamageRect, Tooltip};
 use openplugin::dri::goodlookindri::color::Color as C;
 use openplugin::dri::goodlookindri::scene::{Point, Rect, Scene};
-use openplugin::dri::goodlookindri_shell::text;
+use goodlookindri_shell::text;
 
 use tone_six::design::{self, Shape};
 use tone_six::{band_param, BANDS, F_DEPTH, F_FREQ, F_GAIN, F_ON, F_TYPE, F_WIDTH, P_EQ_ON, P_LINK, P_LOW_CUT_FREQ, P_LOW_CUT_ON, P_MATRIX};
