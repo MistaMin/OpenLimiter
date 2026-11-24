@@ -135,3 +135,9 @@ Proposed, not done (behavioural, needs the owner): skip the dry alignment chain 
 fifth of Harmonic Compressor's cost at 8x; the chain would restart from stale state when the mix is lowered.
 Not tried: stereo lockstep of the oversampling filters (exact, more code; the module is already cheap at
 its default 2x).
+- Done on the owner's OK ("do all 3", 2026-11-24), behavioural class: Harmonic Compressor runs its dry
+  alignment chain only while the dry signal is heard (mix below 100 %, or Delta on or fading). Fixed
+  settings: 80 of 80 null renders still bit-identical. At a 100 % -> 60 % mix change the chain restarts
+  from silence: the output differs from the old code for 1.7 to 3.3 ms, at most -29 to -34 dBFS on a
+  full-scale sine (no difference at 1x). Matched benchmark at 8x linear, 100 % mix (load average 48 to 90,
+  noisy): old 9.09 / 10.53 %, new 7.79 / 9.16 % of one core. Fixture: `mix_switch_render`.

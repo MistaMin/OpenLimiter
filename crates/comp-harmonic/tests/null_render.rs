@@ -63,3 +63,40 @@ fn null_render() {
         }
     }
 }
+
+/// The mix drops from 100 % to 60 % half way through: where the skipped dry chain restarts.
+#[test]
+#[ignore]
+fn mix_switch_render() {
+    let Ok(dir) = std::env::var("NULL_DIR") else { return };
+    std::fs::create_dir_all(&dir).unwrap();
+    let sr = 48_000.0;
+    let (mut l, mut r) = fixture(sr);
+    for os in 0..4 {
+        for filter in 0..2 {
+            let mut m = HarmonicCompressor::default();
+            m.prepare(sr, 512);
+            let params = m.params();
+            let idx = |id: &str| params.iter().position(|p| p.id == id).unwrap();
+            let (o, f, mix) = (idx("oversampleMode"), idx("oversampleFilter"), idx("mix"));
+            m.set_param(o, os as f32);
+            m.set_param(f, filter as f32);
+            let (fl, fr) = fixture(sr);
+            l.copy_from_slice(&fl);
+            r.copy_from_slice(&fr);
+            for start in (0..l.len()).step_by(64) {
+                if start == 72_000 {
+                    m.set_param(mix, 60.0);
+                }
+                let end = (start + 64).min(l.len());
+                m.process(&mut l[start..end], &mut r[start..end]);
+            }
+            let mut bytes = Vec::new();
+            for (a, b) in l.iter().zip(&r) {
+                bytes.extend_from_slice(&a.to_le_bytes());
+                bytes.extend_from_slice(&b.to_le_bytes());
+            }
+            std::fs::write(format!("{dir}/switch-os{os}-f{filter}.f32"), bytes).unwrap();
+        }
+    }
+}

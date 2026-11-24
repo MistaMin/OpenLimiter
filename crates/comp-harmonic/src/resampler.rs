@@ -572,6 +572,10 @@ impl Multirate {
         self.reference.reset();
     }
 
+    pub fn reset_dry(&mut self) {
+        self.dry.reset();
+    }
+
     /// Returns true (and clears every chain) when the configuration changed.
     pub fn set_config(&mut self, mode: OsMode, filter: OsFilter) -> bool {
         if mode == self.mode && filter == self.filter {
@@ -666,10 +670,12 @@ impl Multirate {
         r[..n].copy_from_slice(&aux.a[1][..n]);
     }
 
-    /// Runs the dry block, and the reference block when asked, through their matched chains.
-    pub fn align_dry(&mut self, dry: (&mut [f32], &mut [f32]), reference: (&mut [f32], &mut [f32]), with_reference: bool) {
+    /// Runs the dry block and the reference block, each when asked, through their matched chains.
+    pub fn align_dry(&mut self, dry: (&mut [f32], &mut [f32]), reference: (&mut [f32], &mut [f32]), with_dry: bool, with_reference: bool) {
         let (mode, filter) = (self.mode, self.filter);
-        Self::align(&mut self.dry, &mut self.aux, mode, filter, dry.0, dry.1);
+        if with_dry {
+            Self::align(&mut self.dry, &mut self.aux, mode, filter, dry.0, dry.1);
+        }
         if with_reference {
             Self::align(&mut self.reference, &mut self.aux, mode, filter, reference.0, reference.1);
         }

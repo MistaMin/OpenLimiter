@@ -177,6 +177,8 @@ pub struct HarmonicCompressor {
 
     key_seen: bool,
     reference_running: bool,
+    /// The dry chain runs only while the dry signal is heard (mix below 100 %, Delta).
+    dry_running: bool,
 
     // Read-outs of the last block.
     block_reduction_db: f32,
@@ -215,6 +217,7 @@ impl Default for HarmonicCompressor {
             loud_in: [Vec::new(), Vec::new()],
             key_seen: false,
             reference_running: false,
+            dry_running: false,
             block_reduction_db: 0.0,
             detector_peak_db: -120.0,
             auto_gain_db: 0.0,
@@ -363,13 +366,20 @@ impl HarmonicCompressor {
             self.multirate.reset_reference();
         }
         self.reference_running = ref_needed;
+        // Owner, 2026-11-24: at 100 % mix with Delta off nobody hears the dry signal, so its
+        // oversampling chain is skipped; it restarts from silence when it is needed again.
+        let dry_needed = (!listen && mix < 1.0) || (delta_on && !listen) || self.delta.current() > 0.0;
+        if dry_needed && !self.dry_running {
+            self.multirate.reset_dry();
+        }
+        self.dry_running = dry_needed;
 
         self.dry[0][..n].copy_from_slice(l);
         self.dry[1][..n].copy_from_slice(r);
         {
             let (d0, d1) = self.dry.split_at_mut(1);
             let (r0, r1) = self.reference.split_at_mut(1);
-            self.multirate.align_dry((&mut d0[0][..n], &mut d1[0][..n]), (&mut r0[0][..n], &mut r1[0][..n]), ref_needed);
+            self.multirate.align_dry((&mut d0[0][..n], &mut d1[0][..n]), (&mut r0[0][..n], &mut r1[0][..n]), dry_needed, ref_needed);
         }
 
         let mut in_peak = 0.0f32;
@@ -498,6 +508,7 @@ impl Module for HarmonicCompressor {
         self.max_block = max_block;
         self.key_seen = false;
         self.reference_running = false;
+        self.dry_running = false;
 
         self.multirate = Multirate::new(max_block);
         let (m, f) = self.os_config();
@@ -534,6 +545,7 @@ impl Module for HarmonicCompressor {
     fn reset(&mut self) {
         self.multirate.reset();
         self.reference_running = false;
+        self.dry_running = false;
         self.transient.reset();
         self.loudness.reset();
         self.auto_gain.set_current_and_target(1.0);
