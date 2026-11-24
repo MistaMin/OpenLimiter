@@ -1,0 +1,145 @@
+warning: constant `P_RELEASE_A` is never used
+  --> src/ui/mod.rs:50:18
+   |
+50 | pub(crate) const P_RELEASE_A: usize = 4;
+   |                  ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `P_RELEASE_M` is never used
+  --> src/ui/mod.rs:51:18
+   |
+51 | pub(crate) const P_RELEASE_M: usize = 5;
+   |                  ^^^^^^^^^^^
+
+warning: function `value_text` is never used
+   --> src/ui/mod.rs:224:8
+    |
+224 | pub fn value_text(index: usize, v: f32, unit: usize) -> String {
+    |        ^^^^^^^^^^
+
+warning: method `unit` is never used
+   --> src/ui/mod.rs:553:8
+    |
+446 | impl Ui {
+    | ------- method in this implementation
+...
+553 |     fn unit(&self) -> usize {
+    |        ^^^^
+
+warning: `openlimiter` (lib) generated 4 warnings
+warning: `openlimiter` (lib test) generated 4 warnings (4 duplicates)
+    Finished `release` profile [optimized] target(s) in 0.21s
+     Running unittests src/lib.rs (target/release/deps/openlimiter-3b85cba3c34b4b3a)
+
+running 94 tests
+test chain::tests::only_switched_on_modules_run_and_count_towards_latency ... ok
+test chain::tests::parameters_are_laid_out_per_slot_and_named ... ok
+test chain::tests::a_mono_stream_runs_and_long_blocks_are_split ... ok
+test chain::tests::position_decides_the_order_and_any_values_are_valid ... ok
+test chain::tests::the_key_reaches_each_module_aligned_with_the_main_signal ... ok
+test loudness::tests::k_weighting_at_other_rates_matches_the_48k_table_where_both_exist ... ok
+test loudness::tests::true_peak_matches_ebu_3341_cases_15_to_19 ... ok
+test loudness::tests::mono_is_a_single_channel_and_reset_clears ... ok
+test tests::auto_release_forgets_one_peak_faster_than_sustained_limiting ... ok
+test loudness::tests::ebu_3341_case_12_momentary_of_alternating_tones ... ok
+test loudness::tests::ebu_3341_case_9_short_term_of_alternating_tones ... ok
+test tests::autogain_and_delta_are_off_and_leave_the_audio_alone ... ok
+test loudness::tests::the_sliding_window_follows_its_length ... ok
+test tests::ceiling_holds_with_and_without_upsample ... ok
+test tests::channel_delay_and_reported_latency ... ok
+test tests::delta_is_the_output_minus_the_aligned_input ... ok
+test tests::impulse_appears_at_reported_latency ... ok
+test loudness::tests::ebu_3341_case_1_to_2_calibration_tone ... ok
+test tests::latency_is_the_manuals_look_ahead_at_every_rate ... ok
+test tests::no_latency_clamps_at_once ... ok
+test tests::passthrough_is_bit_exact_below_threshold ... ok
+test tests::recheck_dead_parameters ... ignored
+test tests::soft_clip_works_before_the_limiter_and_the_ceiling_still_holds ... ok
+test tests::input_gain_and_dither_frame_the_chain ... ok
+test tests::threshold_off_does_not_limit ... ok
+test tests::the_watched_slot_publishes_its_audio_key_and_meters ... ok
+test ui::analyser::tests::a_full_scale_sine_reads_near_zero_at_its_frequency ... ok
+test ui::pages::bands::dump::dump_bands ... ignored
+test ui::pages::decomp::dump::dump_decomp ... ignored
+test ui::pages::deexp::dump::dump_deexp ... ignored
+test ui::pages::deq::tests::keyed_bands_light_the_chip ... ok
+test ui::pages::dither::tests::a_weighting_is_zero_at_1k_and_low_at_50_hz ... ok
+test ui::pages::dual::dump::dump_dual ... ignored
+test ui::pages::eq6::tests::dump_tone_pages ... ignored
+test ui::pages::eq6::tests::short_labels_cover_every_shape ... ok
+test ui::pages::eq6::tests::the_axis_maps_both_ways ... ok
+test ui::pages::eqgraph::tests::dump_eq_pages ... ignored
+test ui::pages::eqgraph::tests::the_axis_maps_both_ways ... ok
+test ui::pages::eqgraph::tests::the_picker_lists_every_type_once ... ok
+test ui::pages::harm::dump::dump_harm ... ignored
+test ui::pages::hcomp::dump::dump_hcomp ... ignored
+test ui::pages::limiter::tests::dump_limiter_pages ... ignored
+test loudness::tests::ebu_3341_case_10_and_13_the_maximum_over_bursts ... ok
+test ui::pages::limiter::tests::the_classic_probe_runs ... ok
+test ui::pages::limiter::tests::the_probe_draws_a_limit_and_a_recovery ... ok
+test tests::conditional_parameters_act_once_their_condition_holds ... ok
+test ui::pages::modes::tests::a_trim_above_zero_warns_the_rack ... ok
+test ui::pages::limiter::tests::the_probe_scans_latency_per_style ... ok
+test ui::pages::peq::tests::the_page_constants_are_the_crate_ids ... ok
+test ui::pages::shaper::tests::the_static_curve_bends_at_the_threshold ... ok
+test ui::pages::shaper::tests::tiles_show_every_curve_once ... ok
+test ui::pages::smart::tests::dump_smart_pages ... ignored
+test loudness::tests::other_sample_rates_read_the_same_level ... ok
+test ui::pages::sone::dump::dump_sone ... ignored
+test ui::pages::sup::tests::the_chip_reads_the_key_switch_and_delta ... ok
+test ui::pages::smart::tests::the_probes_and_the_bridge_run_for_every_engine ... ok
+test ui::tests::a_dimmed_cell_ignores_the_wheel_and_a_gui_range_bounds_edits ... ok
+test ui::tests::a_dropdown_lists_its_choices_and_sets_one ... ok
+test ui::tests::a_new_editor_starts_from_the_engine_values ... ok
+test ui::tests::ab_switches_between_two_settings ... ok
+test ui::pages::modes::tests::learn_measures_the_input_and_writes_loudness_and_drive ... ok
+test ui::tests::cells_stay_inside_their_zone_and_the_window ... ok
+test ui::tests::column_fill_matches_the_polygon ... ok
+test ui::tests::dump_editor ... ignored
+test ui::tests::dump_layout ... ignored
+test ui::tests::dump_manual_params ... ignored
+test ui::tests::dump_monitor ... ignored
+test ui::tests::dump_shell ... ignored
+test ui::tests::dump_value_texts ... ignored
+test ui::tests::an_idle_editor_draws_nothing_and_audio_redraws_only_live_parts ... ok
+test ui::tests::every_page_shows_its_whole_description ... ok
+test ui::tests::every_parameter_can_be_reached ... ok
+test ui::tests::frame_cost ... ignored
+test ui::tests::link_gangs_the_input_gains ... ok
+test ui::tests::loudness_reaches_the_bar_and_reset_asks_the_engine ... ok
+test ui::tests::numbers_fit_three_digits ... ok
+test tests::autogain_matches_the_heard_loudness_to_the_input ... ok
+test ui::tests::every_module_fits_in_the_rack_at_once ... ok
+test tests::every_module_runs_in_one_chain ... ok
+test tests::autogain_holds_through_silence ... ok
+test ui::tests::the_rack_adds_opens_switches_reorders_and_removes_modules ... ok
+test ui::tests::the_header_shows_the_gain_autogain_applies ... ok
+test ui::tests::the_setup_sheet_holds_the_alignment ... ok
+test ui::tests::the_threshold_grip_follows_the_pointer_while_the_first_limiter_is_on ... ok
+test ui::tests::the_numbers_change_four_times_a_second_not_every_frame ... ok
+test tests::upsample_removes_inter_sample_peaks ... ok
+test ui::tests::the_rms_meter_reads_the_output_on_the_chosen_scale_and_window ... ok
+test loudness::tests::ebu_3341_case_3_and_4_the_relative_gate ... ok
+test ui::pages::limiter::tests::the_wall_probe_runs ... ok
+test ui::tests::the_window_scales_and_keeps_its_shape ... ok
+test loudness::tests::ebu_3342_loudness_range_cases_1_to_4 ... ok
+test ui::tests::a_damaged_frame_equals_a_full_repaint ... ok
+test ui::tests::text_is_whole_apart_and_readable ... ok
+test ui::tests::renders_every_page_in_both_themes_and_modes ... ok
+
+test result: ok. 75 passed; 0 failed; 19 ignored; 0 measured; 0 filtered out; finished in 7.87s
+
+     Running unittests src/bin/lv2_ttl.rs (target/release/deps/lv2_ttl-9c74f1f85c4df206)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests openlimiter
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit 
