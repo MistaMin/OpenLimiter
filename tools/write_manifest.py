@@ -17,8 +17,8 @@ NAME = "OpenLimiter"
 HIGHLIGHTS = [
     "Seventeen mastering modules in one movable chain",
     "Requantise with dither and noise shaping, pinned last",
-    "True peak, RMS and BS.1770 loudness with history and radar",
-    "Autogain and Delta to judge the processing at matched loudness",
+    "True peak, RMS and BS.1770 loudness; history with spectrogram and waterfall views",
+    "History and loudness radar in their own resizable windows",
     "macOS universal (VST3, AU, CLAP, LV2, AAX), Windows and Linux",
 ]
 

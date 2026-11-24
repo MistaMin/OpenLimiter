@@ -65,9 +65,11 @@ See the [user manual](docs/USER_MANUAL.md) and the generated
 ## Build from source
 
 OpenLimiter is written in Rust on OpenPluginSDK, with a GoodLookinDri editor.
-Check out [OpenPluginSDK](https://github.com/MistaMin/OpenPluginSDK) at the
-revision named in `scripts/build.sh` so that it sits at
-`../../Dependencies/OpenPluginSDK` relative to this folder, then:
+Put [OpenPluginSDK](https://github.com/MistaMin/OpenPluginSDK) and
+[GoodLookinDri](https://github.com/MistaMin/GoodLookinDri), at the revisions
+named in `scripts/build.sh`, in `deps/OpenPluginSDK` and `deps/GoodLookinDri`
+(checkouts or links; `deps/` is git-ignored). Set `VST3_SDK` and `AU_SDK` to the
+VST3 and Audio Unit SDKs (and `AAX_SDK` for AAX), then:
 
     cargo test --release
     scripts/build.sh            # macOS: VST3, AU, CLAP, LV2 (and AAX with an AAX SDK) into dist/
@@ -80,7 +82,8 @@ The Windows and Linux builds are in `.github/workflows/build.yml`.
 | `crates/` | one crate per module, each with its own tests |
 | `docs/` | user manual, parameter reference, pictures |
 | `qa/` | test records |
-| `scripts/`, `tools/` | build and manual scripts |
+| `scripts/`, `tools/` | build, installer, manual and manifest scripts |
+| `installer/` | the Windows installer script |
 
 ## License
 

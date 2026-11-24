@@ -25,6 +25,11 @@ printed. This is a beta.
 
 ## What is in it
 
+New in this build: the History and the loudness radar open in their own
+resizable windows, the History has spectrogram and waterfall views, the gain
+reduction displays hold each peak and fall smoothly, and in the rack Alt-click
+removes a module and Cmd-click resets it. See `CHANGELOG.md`.
+
 - Classic Limiter, Punch & Energy, Loudness MAX, SimplEQ, DualSone, Clean
   Peak, Compressor / De-esser, Final Wall, Multiband, PrecisionEQ, DynEQ,
   Suppressor, Harmonic Compressor, Dynamics Restore, Floor Lifter, Overtone
@@ -38,7 +43,7 @@ printed. This is a beta.
 ## Checks
 
 - macOS: auval passes; pluginval at strictness 10 passes for VST3, with and without the editor
-  tests; clap-validator 34 passed, 0 failed; Avid's AAX Validator: AAX_RESULT.
+  tests; clap-validator 34 passed, 0 failed; Avid's AAX Validator 13 passed, 0 failed (the DSP cycle count needs HDX hardware and was skipped).
 - REAPER (macOS, VST3): loads, renders finite and repeatable audio, every tested parameter
   changes the sound and the editor, state survives save and reopen, the editor survives five
   close and open cycles; a sweep of all 1985 parameters found none dead.

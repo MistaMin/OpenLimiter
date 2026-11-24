@@ -39,8 +39,8 @@ Autogain and Delta change what leaves the plug-in. **Switch both off before you 
 - **History, LEVELS** (chosen in its header): input, output and gain reduction over the last seconds, with the threshold and the soft clip level of the page you are on. Gain reduction shows each peak, then falls at 60 dB/s.
 - **History, 2D**: a spectrogram of the chain's output; time runs left to right, frequency bottom to top, level in colour.
 - **History, 3D**: a waterfall of the output spectrum, one slice per 0.2 s, smoothed to third octaves; older slices move back and fade.
-- **Loudness radar**: short-term loudness, 30 seconds per turn, output in colour and input as a line.
-- **Pop-out windows**: the pop-out button in the History and the Loudness radar headers opens that display in its own window, which you can move to another screen and resize. It stays open when you close the plug-in window, reopens where you left it, and closes with the plug-in. Click the button again (it is lit while the window is open) to close it.
+- **Loudness radar**: short-term loudness (3 s window), 30 seconds per turn, output in colour and input as a line.
+- **Pop-out windows**: the pop-out button in the History and the Loudness radar headers opens that display in its own window, which you can move to another screen and resize. It stays open when you close the plug-in window, reopens where you left it, and closes with the plug-in. Click the button again (it is lit while the window is open) to close it. A pop-out window follows the theme and the loudness target set in the plug-in, and it keeps running while the plug-in window is closed.
 - **Right rail**: output level and gain reduction, true peak, RMS, the Requantise settings and the total latency.
 - **Bottom bar**: momentary, short-term and integrated loudness (LUFS) with the input value beside each, loudness range, loudness gain, peak to loudness ratio, and a target with its reset. Loudness and RMS read in whole numbers; true peak to a tenth.
 
@@ -80,6 +80,8 @@ Each module's page has its on switch, its name, a short description, its own lat
 | Compressor / De-esser | Two-set compressor, wide band or one band. |
 | Multiband | Five bands, each with a compressor and an optional band limiter. |
 | Harmonic Compressor | Compressor with seven styles. |
+
+On the Multiband page, the part of each band's level above its threshold is drawn in the accent colour. The band readouts rise in 50 ms and fall at 20 dB/s, so they can be followed by eye.
 
 ### Expanders
 

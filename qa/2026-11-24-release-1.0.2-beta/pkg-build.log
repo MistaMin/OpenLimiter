@@ -1,0 +1,117 @@
+== Developer ID signatures
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.vst3: replacing existing signature
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.component: replacing existing signature
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.clap: replacing existing signature
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.lv2/OpenLimiter.dylib: replacing existing signature
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.vst3: valid on disk
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.vst3: satisfies its Designated Requirement
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.component: valid on disk
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.component: satisfies its Designated Requirement
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.clap: valid on disk
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.clap: satisfies its Designated Requirement
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.lv2/OpenLimiter.dylib: valid on disk
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.lv2/OpenLimiter.dylib: satisfies its Designated Requirement
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.aaxplugin: valid on disk
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/signed/OpenLimiter.aaxplugin: satisfies its Designated Requirement
+== component packages
+pkgbuild: Inferring bundle components from contents of /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/stage/vst3
+pkgbuild: Writing new component property list to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/vst3.plist
+pkgbuild: Reading components from /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/vst3.plist
+pkgbuild: Adding component at OpenLimiter.vst3
+pkgbuild: Using timestamp authority for signature
+pkgbuild: Signing package with identity "Developer ID Installer: Marcos Deida (ZQYU67JUBH)" from keychain ~/Library/Keychains/login.keychain-db
+pkgbuild: Adding certificate "Developer ID Certification Authority"
+pkgbuild: Adding certificate "Apple Root CA"
+pkgbuild: Wrote package to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/components/OpenLimiter-vst3.pkg
+pkgbuild: Inferring bundle components from contents of /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/stage/au
+pkgbuild: Writing new component property list to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/au.plist
+pkgbuild: Reading components from /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/au.plist
+pkgbuild: Adding component at OpenLimiter.component
+pkgbuild: Using timestamp authority for signature
+pkgbuild: Signing package with identity "Developer ID Installer: Marcos Deida (ZQYU67JUBH)" from keychain ~/Library/Keychains/login.keychain-db
+pkgbuild: Adding certificate "Developer ID Certification Authority"
+pkgbuild: Adding certificate "Apple Root CA"
+pkgbuild: Wrote package to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/components/OpenLimiter-au.pkg
+pkgbuild: Inferring bundle components from contents of /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/stage/clap
+pkgbuild: Writing new component property list to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/clap.plist
+pkgbuild: Reading components from /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/clap.plist
+pkgbuild: Adding component at OpenLimiter.clap
+pkgbuild: Using timestamp authority for signature
+pkgbuild: Signing package with identity "Developer ID Installer: Marcos Deida (ZQYU67JUBH)" from keychain ~/Library/Keychains/login.keychain-db
+pkgbuild: Adding certificate "Developer ID Certification Authority"
+pkgbuild: Adding certificate "Apple Root CA"
+pkgbuild: Wrote package to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/components/OpenLimiter-clap.pkg
+pkgbuild: Inferring bundle components from contents of /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/stage/lv2
+pkgbuild: Writing new component property list to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/lv2.plist
+pkgbuild: Reading components from /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/lv2.plist
+pkgbuild: Using timestamp authority for signature
+pkgbuild: Signing package with identity "Developer ID Installer: Marcos Deida (ZQYU67JUBH)" from keychain ~/Library/Keychains/login.keychain-db
+pkgbuild: Adding certificate "Developer ID Certification Authority"
+pkgbuild: Adding certificate "Apple Root CA"
+pkgbuild: Wrote package to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/components/OpenLimiter-lv2.pkg
+pkgbuild: Inferring bundle components from contents of /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/stage/aax
+pkgbuild: Writing new component property list to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/aax.plist
+pkgbuild: Reading components from /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/plists/aax.plist
+pkgbuild: Adding component at OpenLimiter.aaxplugin
+pkgbuild: Adding component at OpenLimiter.aaxplugin/Contents/__Pace_Eden.bundle
+pkgbuild: Using timestamp authority for signature
+pkgbuild: Signing package with identity "Developer ID Installer: Marcos Deida (ZQYU67JUBH)" from keychain ~/Library/Keychains/login.keychain-db
+pkgbuild: Adding certificate "Developer ID Certification Authority"
+pkgbuild: Adding certificate "Apple Root CA"
+pkgbuild: Wrote package to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/components/OpenLimiter-aax.pkg
+pkgbuild: Inferring bundle components from contents of /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/stage/docs
+pkgbuild: Using timestamp authority for signature
+pkgbuild: Signing package with identity "Developer ID Installer: Marcos Deida (ZQYU67JUBH)" from keychain ~/Library/Keychains/login.keychain-db
+pkgbuild: Adding certificate "Developer ID Certification Authority"
+pkgbuild: Adding certificate "Apple Root CA"
+pkgbuild: Wrote package to /Volumes/Developer/OpenGrid/OpenLimiter/build/installer/components/OpenLimiter-docs.pkg
+== distribution
+productbuild: Using timestamp authority for signature
+productbuild: Signing product with identity "Developer ID Installer: Marcos Deida (ZQYU67JUBH)" from keychain ~/Library/Keychains/login.keychain-db
+productbuild: Adding certificate "Developer ID Certification Authority"
+productbuild: Adding certificate "Apple Root CA"
+productbuild: Wrote product to /Volumes/Developer/OpenGrid/OpenLimiter/dist/OpenLimiter-1.0.2-Beta-macos.pkg
+== notarization
+Conducting pre-submission checks for OpenLimiter-1.0.2-Beta-macos.pkg and initiating connection to the Apple notary service...
+Submission ID received
+  id: 86c5dc83-f597-4e14-95c4-a06644d72954
+Successfully uploaded file
+  id: 86c5dc83-f597-4e14-95c4-a06644d72954
+  path: /Volumes/Developer/OpenGrid/OpenLimiter/dist/OpenLimiter-1.0.2-Beta-macos.pkg
+Waiting for processing to complete.
+Current status: In Progress...Current status: In Progress....Current status: In Progress.....Current status: In Progress......Current status: In Progress.......Current status: Accepted........Processing complete
+  id: 86c5dc83-f597-4e14-95c4-a06644d72954
+  status: Accepted
+
+Processing: /Volumes/Developer/OpenGrid/OpenLimiter/dist/OpenLimiter-1.0.2-Beta-macos.pkg
+Processing: /Volumes/Developer/OpenGrid/OpenLimiter/dist/OpenLimiter-1.0.2-Beta-macos.pkg
+The staple and validate action worked!
+Processing: /Volumes/Developer/OpenGrid/OpenLimiter/dist/OpenLimiter-1.0.2-Beta-macos.pkg
+The validate action worked!
+/Volumes/Developer/OpenGrid/OpenLimiter/dist/OpenLimiter-1.0.2-Beta-macos.pkg: accepted
+source=Notarized Developer ID
+origin=Developer ID Installer: Marcos Deida (ZQYU67JUBH)
+Package "OpenLimiter-1.0.2-Beta-macos.pkg":
+   Status: signed by a developer certificate issued by Apple for distribution
+   Notarization: trusted by the Apple notary service
+   Signed with a trusted timestamp on: 2026-11-24 20:04:48 +0000
+   Certificate Chain:
+    1. Developer ID Installer: Marcos Deida (ZQYU67JUBH)
+       Expires: 2027-02-01 22:12:15 +0000
+       SHA256 Fingerprint:
+           AA 66 2C 8E 32 2B 7C 09 D3 29 D8 21 BC 3F 94 F6 F8 2D D7 9D CB 8A 
+           23 19 6E 0D 8E B7 81 FE 40 F0
+       ------------------------------------------------------------------------
+    2. Developer ID Certification Authority
+       Expires: 2027-02-01 22:12:15 +0000
+       SHA256 Fingerprint:
+           7A FC 9D 01 A6 2F 03 A2 DE 96 37 93 6D 4A FE 68 09 0D 2D E1 8D 03 
+           F2 9C 88 CF B0 B1 BA 63 58 7F
+       ------------------------------------------------------------------------
+    3. Apple Root CA
+       Expires: 2035-02-09 21:40:36 +0000
+       SHA256 Fingerprint:
+           B0 B1 73 0E CB C7 FF 45 05 14 2C 49 F1 29 5E 6E DA 6B CA ED 7E 2C 
+           68 C5 BE 91 B5 A1 10 01 F0 24
+
+ac34c514d5ac1010813735d705d404d8eb6e6e68a4cacf1378f4bacf96295b5e  OpenLimiter-1.0.2-Beta-macos.pkg
