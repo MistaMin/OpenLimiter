@@ -325,28 +325,31 @@ impl IirStage {
     }
 }
 
-/// A delay line read backwards from the newest sample, power-of-two sized.
+/// A delay line read backwards from the newest sample. Each sample is stored twice, `size` apart,
+/// so the last `size` samples are always one contiguous slice ([`Ring::recent`]): the filters walk
+/// it with iterators instead of masking an index per tap.
 #[derive(Clone, Debug)]
 struct Ring {
     buf: Vec<f32>,
-    mask: usize,
+    size: usize,
     pos: usize,
 }
 
 impl Ring {
     fn new(len: usize) -> Self {
-        let size = len.next_power_of_two().max(2);
-        Self { buf: vec![0.0; size], mask: size - 1, pos: 0 }
+        let size = len.max(1);
+        Self { buf: vec![0.0; 2 * size], size, pos: 0 }
     }
     #[inline]
     fn push(&mut self, x: f32) {
-        self.pos = (self.pos + 1) & self.mask;
+        self.pos = if self.pos + 1 == self.size { 0 } else { self.pos + 1 };
         self.buf[self.pos] = x;
+        self.buf[self.pos + self.size] = x;
     }
-    /// The sample `k` steps before the newest.
+    /// The last `size` samples, oldest first: `recent()[size - 1 - k]` is `k` steps before the newest.
     #[inline]
-    fn back(&self, k: usize) -> f32 {
-        self.buf[(self.pos.wrapping_sub(k)) & self.mask]
+    fn recent(&self) -> &[f32] {
+        &self.buf[self.pos + 1..self.pos + 1 + self.size]
     }
     fn clear(&mut self) {
         self.buf.fill(0.0);
@@ -395,12 +398,14 @@ impl FirStage {
         let hist = &mut self.up_hist[ch];
         for (i, &x) in input.iter().enumerate() {
             hist.push(x);
+            let recent = hist.recent();
+            // Same taps in the same order as before (newest first): the sum is bit-identical.
             let mut acc = 0.0f32;
-            for (k, &h) in self.up_even.iter().enumerate() {
-                acc += h * hist.back(k);
+            for (&h, &v) in self.up_even.iter().zip(recent.iter().rev()) {
+                acc += h * v;
             }
             out[2 * i] = acc;
-            out[2 * i + 1] = hist.back(self.up_centre);
+            out[2 * i + 1] = recent[recent.len() - 1 - self.up_centre];
         }
     }
 
@@ -408,9 +413,11 @@ impl FirStage {
         let hist = &mut self.dn_hist[ch];
         for (i, y) in out.iter_mut().enumerate() {
             hist.push(input[2 * i]);
+            let recent = hist.recent();
+            let last = recent.len() - 1;
             let mut acc = 0.0f32;
             for &(j, h) in &self.down_taps {
-                acc += h * hist.back(j);
+                acc += h * recent[last - j];
             }
             *y = acc;
             hist.push(input[2 * i + 1]);

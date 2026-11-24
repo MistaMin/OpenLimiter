@@ -989,6 +989,72 @@ mod tests {
         assert!(!plugin.shared.take_key().0);
     }
 
+/// Audio-thread cost of each module alone in the whole plug-in (taps, loudness, requantiser
+    /// included), and of the shell with every module off. 48 kHz stereo, 512-sample blocks, 20 s
+    /// of programme-like audio after a 1 s warm-up. `cargo test --release --lib dsp_cost -- --ignored --nocapture`
+    #[test]
+    #[ignore]
+    fn dsp_cost() {
+        let (sr, block) = (48_000.0f32, 512usize);
+        let secs: usize = std::env::var("SECS").ok().and_then(|v| v.parse().ok()).unwrap_or(20);
+        let mut seed = 0x2545_f491u32;
+        let n = sr as usize * (secs + 1);
+        let sig: Vec<f32> = (0..n)
+            .map(|i| {
+                seed ^= seed << 13;
+                seed ^= seed >> 17;
+                seed ^= seed << 5;
+                let t = i as f32 / sr;
+                let env = if (t * 2.0).fract() < 0.1 { 1.0 } else { 0.35 };
+                env * (0.5 * (t * 55.0 * 6.283).sin() + 0.25 * (t * 1234.0 * 6.283).sin() + 0.3 * (seed as f32 / u32::MAX as f32 - 0.5))
+            })
+            .collect();
+        let slots: Vec<(usize, &str)> = OpenLimiter::default().chain.slots().iter().map(|s| (s.on_index(), s.label)).collect();
+        let mut runs: Vec<(String, Option<usize>)> = vec![("shell only".into(), None)];
+        runs.extend(slots.iter().map(|(on, label)| (label.to_string(), Some(*on))));
+        let only = std::env::var("MODULE").ok();
+        for (label, on) in runs {
+            if only.as_deref().is_some_and(|m| !label.to_lowercase().contains(&m.to_lowercase())) {
+                continue;
+            }
+            let mut plugin = OpenLimiter::default();
+            plugin.prepare(sr, block, 2);
+            for (o, _) in &slots {
+                plugin.set_param_index(*o, 0.0);
+            }
+            if let Some(on) = on {
+                plugin.set_param_index(on, 1.0);
+            }
+            // HEAVY=1: every oversampling, upsampling and true-peak switch at its maximum.
+            let mut heavy = Vec::new();
+            if std::env::var("HEAVY").is_ok() {
+                for (i, p) in INFO.params.iter().enumerate() {
+                    let tail = p.id.rsplit_once('.').map_or(p.id, |(_, t)| t).to_ascii_lowercase();
+                    if ["oversampl", "upsampl", "truepeak", "oversample"].iter().any(|k| tail.starts_with(k) || tail.contains(k)) && !tail.contains("offline") {
+                        plugin.set_param_index(i, p.max);
+                        heavy.push(format!("{}={}", p.id, p.max));
+                    }
+                }
+            }
+            if !heavy.is_empty() && on.is_none() {
+                println!("heavy: {}", heavy.join(", "));
+            }
+            let mut io = vec![vec![0.0f32; block], vec![0.0f32; block]];
+            let mut time = std::time::Duration::ZERO;
+            for (k, start) in (0..n - block).step_by(block).enumerate() {
+                io[0].copy_from_slice(&sig[start..start + block]);
+                io[1].copy_from_slice(&sig[start..start + block]);
+                let t0 = std::time::Instant::now();
+                process(&mut plugin, &mut io, block);
+                if k as f32 * block as f32 >= sr {
+                    time += t0.elapsed();
+                }
+            }
+            let rt = 100.0 * time.as_secs_f64() / secs as f64;
+            println!("{label:14} {:7.2} % of one core in realtime ({:.3} ms per 512-sample block)", rt, rt / 100.0 * 1000.0 * block as f64 / sr as f64);
+        }
+    }
+
     fn render(plugin: &mut OpenLimiter, tone: &[f32], blocks: usize) -> Vec<f32> {
         let mut last = Vec::new();
         for _ in 0..blocks {

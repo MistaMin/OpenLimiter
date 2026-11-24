@@ -113,3 +113,25 @@ Pop-out views (`detached_views_paint_at_any_size`, 2x), before -> after:
 Over the tick: only a radar window far larger than the editor. It redraws at most every 3x its own render
 time (a quarter of the main thread). Not done: redrawing only the swept wedge.
 SKIPPED: on-screen measurement in a host (another session's REAPER on screen); 1x displays.
+
+## DSP optimisation pass (plugin-dsp-engineering phase 7, optimisation gate), 2026-11-24
+
+Profile (`dsp_cost`, new ignored test: each module alone in the whole plug-in, 48 kHz stereo, 512-sample
+blocks, 20 s programme-like audio after 1 s warm-up, M1 Max, release):
+- Shell only (taps, loudness, requantiser): 0.8 % of one core. Every module at default: 0.8 to 2.6 %
+  including the shell; all 17 together about 15 %.
+- `HEAVY=1` (every oversampling / upsampling / true-peak switch at maximum): all modules 0.8 to 2.6 %
+  except Harmonic Compressor at 8x linear-phase oversampling, 10.0 %. `sample` of that: the oversampling
+  filters (wet path and the dry/reference alignment chains) and the oversampled harmonics stage.
+
+Kept (exact class): Harmonic Compressor FIR delay lines store each sample twice so the filters read one
+contiguous slice in the same tap order (no per-tap mask or bounds check). Null test
+(`crates/comp-harmonic/tests/null_render.rs`: os 1x/2x/4x/8x x min/linear filter x wet / mix 60 % with
+harmonics and Auto Gain x blocks 1, 17, 64, 129, 512; silence, quiet and full-scale sines, bursts, sweep;
+L and R differ): 80 of 80 renders bit-identical. Matched benchmark (old, new, new, old; load 6.4):
+old 9.73 / 9.82 %, new 8.95 / 9.29 % of one core (about 6 % less).
+
+Proposed, not done (behavioural, needs the owner): skip the dry alignment chain at 100 % mix, about a
+fifth of Harmonic Compressor's cost at 8x; the chain would restart from stale state when the mix is lowered.
+Not tried: stereo lockstep of the oversampling filters (exact, more code; the module is already cheap at
+its default 2x).
