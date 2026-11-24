@@ -89,3 +89,27 @@ Owner: "the gain reduction is a bit jagged, it might be difficult to understand 
   Windows/Linux) resets its settings, keeping it on and in place. Tooltip says so. Test PASS.
 - 3D colours: own scale from the theme's cool colour up (no fade into the background), fills 80% opaque,
   back slices fade to 65% (owner: needs stronger saturation). Seen in a 2x render.
+
+## Optimisation pass against the wiki (GUI Performance & Readability, plugin-gui-performance), 2026-11-24
+
+Frame benchmark, 2x, dark theme, M1 Max, load average 5.6 (`frame_cost`, now also `HIST=1|2` for the
+History spectrum and the tick time, which carries the FFT):
+
+| Page | LEVELS ms/frame | 2D | 3D | tick ms |
+|---|---|---|---|---|
+| Classic limiter | 16.4 | 16.1 | 16.6 | 0.9 to 1.1 |
+| SimplEQ | 14.1 | 14.5 | 14.1 | 0.3 |
+| Multiband | 22.0 | 21.8 | 21.7 | 0.0 |
+| PrecisionEQ | 16.7 | 16.7 | 16.5 | 0.3 |
+All 18 pages LEVELS: 3.6 to 22.0 ms, as at 1.0.1. The main editor is inside the 33 ms tick in every mode.
+
+Pop-out views (`detached_views_paint_at_any_size`, 2x), before -> after:
+| View | 420x300 | 1600x1000 |
+|---|---|---|
+| History levels | 3.7 | 11.1 -> 9.5 |
+| History 2D | 0.9 | 13.4 -> 13.6 |
+| History 3D | 3.1 -> 1.0 | 47.0 / 36.2 -> 13.4 (front-to-back with a per-column cover line: no overdraw, same picture) |
+| Radar | 4.1 | 67.1 -> 65.9 (traces skipped beyond the furthest trace; the test signal reaches the rim) |
+Over the tick: only a radar window far larger than the editor. It redraws at most every 3x its own render
+time (a quarter of the main thread). Not done: redrawing only the swept wedge.
+SKIPPED: on-screen measurement in a host (another session's REAPER on screen); 1x displays.

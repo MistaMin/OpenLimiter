@@ -395,6 +395,8 @@ pub(super) fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &
     let bg = rgb(t.plot_bg);
     // Half a line width in device pixels: at least a full pixel, so no line is a hairline.
     let line = 0.6 * k + 0.6;
+    // Beyond the furthest trace only the rings, the target and the hand show: skip the traces there.
+    let reach = slots.iter().filter(|s| s.2 != u32::MAX).fold(0.0f32, |m, s| m.max(s.0).max(s.1)) + line + 2.0;
     for y in 0..side {
         for x in 0..side {
             let (a, d) = lut[y * side + x];
@@ -406,18 +408,22 @@ pub(super) fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &
             for ring in rings {
                 c = blend(c, t.grid_strong, (line - (d - ring * rk).abs()).clamp(0.0, 1.0));
             }
-            let e = a * n as f32 - 0.5;
-            let s0 = (e.floor() as isize).rem_euclid(n as isize) as usize;
-            let (p, q) = (slots[s0], slots[(s0 + 1) % n]);
-            let m = e - e.floor();
-            // Distance to a trace across its slope, not along the radius: a steep step between slots
-            // otherwise thins the stroke into broken dashes.
-            let across = |dr: f32| (1.0 + (dr * n as f32 / (std::f32::consts::TAU * d.max(1.0))).powi(2)).sqrt().recip();
-            let value = if p.2 != u32::MAX && q.2 != u32::MAX && p.2.abs_diff(q.2) == 1 {
-                Some((p.0 + (q.0 - p.0) * m, p.1 + (q.1 - p.1) * m, p.2, across(q.0 - p.0), across(q.1 - p.1)))
+            let value = if d > reach {
+                None
             } else {
-                let near = if m < 0.5 { p } else { q };
-                (near.2 != u32::MAX).then_some((near.0, near.1, near.2, 1.0, 1.0))
+                let e = a * n as f32 - 0.5;
+                let s0 = (e.floor() as isize).rem_euclid(n as isize) as usize;
+                let (p, q) = (slots[s0], slots[(s0 + 1) % n]);
+                let m = e - e.floor();
+                // Distance to a trace across its slope, not along the radius: a steep step between slots
+                // otherwise thins the stroke into broken dashes.
+                let across = |dr: f32| (1.0 + (dr * n as f32 / (std::f32::consts::TAU * d.max(1.0))).powi(2)).sqrt().recip();
+                if p.2 != u32::MAX && q.2 != u32::MAX && p.2.abs_diff(q.2) == 1 {
+                    Some((p.0 + (q.0 - p.0) * m, p.1 + (q.1 - p.1) * m, p.2, across(q.0 - p.0), across(q.1 - p.1)))
+                } else {
+                    let near = if m < 0.5 { p } else { q };
+                    (near.2 != u32::MAX).then_some((near.0, near.1, near.2, 1.0, 1.0))
+                }
             };
             if let Some((r_in, r_out, age, k_in, k_out)) = value {
                 let fade = 1.0 - 0.4 * age as f32 / n as f32;

@@ -802,8 +802,11 @@ fn frame_cost() {
             e.param_changed(s.on, 1.0);
         }
         e.open_page(page);
+        // HIST=1 or 2: the history shows the 2D or 3D spectrum.
+        e.ui.hist_mode = std::env::var("HIST").ok().and_then(|v| v.parse().ok()).unwrap_or(0);
+        shared.set_timing(39, 48_000.0);
         let _ = e.render(2.0);
-        let (mut area, mut time, frames) = (0.0f64, std::time::Duration::ZERO, 30);
+        let (mut area, mut time, mut tick, frames) = (0.0f64, std::time::Duration::ZERO, std::time::Duration::ZERO, 30);
         let mut seed = 1u32;
         for f in 0..frames {
             // 1600 samples per 30 Hz tick at 48 kHz.
@@ -812,8 +815,11 @@ fn frame_cost() {
                 0.3 * ((f * 1600 + i) as f32 * 0.05).sin() + 0.2 * (seed as f32 / u32::MAX as f32 - 0.5)
             }).collect();
             shared.push_taps([&block, &block], [&block, &block], None);
+            shared.push_out(&block, &block);
             feed(&shared, 7);
+            let t0 = std::time::Instant::now();
             e.tick(1.0 / 30.0);
+            tick += t0.elapsed();
             if let Some(r) = e.damage() {
                 area += r.iter().map(|d| (d.w.min(w * 2.0) * d.h.min(h * 2.0)) as f64).sum::<f64>();
             } else {
@@ -824,7 +830,7 @@ fn frame_cost() {
             time += t0.elapsed();
         }
         let zoom = e.zoom() as f64;
-        println!("{key:8} dirty {:5.1}% of window per frame, render {:6.2} ms per frame", 100.0 * area / frames as f64 / (w as f64 * h as f64 * zoom * zoom), time.as_secs_f64() * 1000.0 / frames as f64);
+        println!("{key:8} dirty {:5.1}% of window per frame, render {:6.2} ms per frame, tick {:5.2} ms", 100.0 * area / frames as f64 / (w as f64 * h as f64 * zoom * zoom), time.as_secs_f64() * 1000.0 / frames as f64, tick.as_secs_f64() * 1000.0 / frames as f64);
     }
 }
 

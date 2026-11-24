@@ -181,7 +181,10 @@ pub fn paint_3d(sh: &SpecHist, f: &mut Target, t: &Theme, k: f32, plot: R) {
     if let Some(v) = &front {
         rows.push((0.0, v.as_slice()));
     }
-    for (depth, col) in rows {
+    // Front to back: each screen column remembers how far up it is already covered, so an older
+    // slice paints only what still shows above the newer ones (no overdraw, the same picture).
+    let mut covered = vec![f32::INFINITY; w];
+    for &(depth, col) in rows.iter().rev() {
         let (ox, base) = (x0 as f32 + depth * dx, y0 as f32 + h as f32 - depth * dy);
         let fade = 1.0 - 0.35 * depth;
         let mut prev: Option<f32> = None;
@@ -191,13 +194,21 @@ pub fn paint_3d(sh: &SpecHist, f: &mut Target, t: &Theme, k: f32, plot: R) {
             let m = band - i as f32;
             let v = norm(col[i] + (col[i + 1] - col[i]) * m);
             let top = base - v * fh;
-            let c = C(0xff00_0000 | lut[(v * 64.0) as usize]);
             let column = ox.round() as usize + x;
-            // Opaque under the line, so a newer slice hides the older ones behind it.
-            f.vspan(column, top, base, y0, y0 + h, C(0xff00_0000 | blend(rgb(t.plot_bg), c, 0.8 * fade)), 1.0);
+            let Some(cover) = covered.get_mut(column - x0) else { break };
             let p = prev.unwrap_or(top);
-            f.vspan(column, p.min(top) - line, p.max(top) + line, y0, y0 + h, c, fade);
             prev = Some(top);
+            let (hi, lo) = (p.min(top) - line, p.max(top) + line);
+            if hi >= *cover {
+                continue;
+            }
+            let c = C(0xff00_0000 | lut[(v * 64.0) as usize]);
+            let bottom = (*cover).min((y0 + h) as f32);
+            if top < bottom.min(base) {
+                f.vspan(column, top, bottom.min(base), y0, y0 + h, C(0xff00_0000 | blend(rgb(t.plot_bg), c, 0.8 * fade)), 1.0);
+            }
+            f.vspan(column, hi, lo.min(bottom), y0, bottom.ceil() as usize, c, fade);
+            *cover = cover.min(hi);
         }
     }
 }
