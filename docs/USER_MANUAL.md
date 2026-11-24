@@ -2,7 +2,7 @@
 
 OpenLimiter is a modular mastering chain by OpenGrid: seventeen processing modules that you switch on, order and set in one plug-in, followed by a word-length stage (Requantise). It is built to be the last plug-in before the master is printed, so it has no output gain after its limiters.
 
-Version 1.0.1 Beta. This is a beta: the processing has been measured and tested, but it has not yet had a full listening review. Report anything that sounds wrong.
+Version 1.0.2 Beta. This is a beta: the processing has been measured and tested, but it has not yet had a full listening review. Report anything that sounds wrong.
 
 ![OpenLimiter, Classic Limiter page](images/limiter.png)
 
@@ -36,8 +36,11 @@ Autogain and Delta change what leaves the plug-in. **Switch both off before you 
 ### Meters and displays
 
 - **Left rail**: input level per channel, input gain faders with their link.
-- **History**: input, output and gain reduction over the last seconds, with the threshold and the soft clip level of the page you are on.
+- **History, LEVELS** (chosen in its header): input, output and gain reduction over the last seconds, with the threshold and the soft clip level of the page you are on. Gain reduction shows each peak, then falls at 60 dB/s.
+- **History, 2D**: a spectrogram of the chain's output; time runs left to right, frequency bottom to top, level in colour.
+- **History, 3D**: a waterfall of the output spectrum, one slice per 0.2 s, smoothed to third octaves; older slices move back and fade.
 - **Loudness radar**: short-term loudness, 30 seconds per turn, output in colour and input as a line.
+- **Pop-out windows**: the pop-out button in the History and the Loudness radar headers opens that display in its own window, which you can move to another screen and resize. It stays open when you close the plug-in window, reopens where you left it, and closes with the plug-in. Click the button again (it is lit while the window is open) to close it.
 - **Right rail**: output level and gain reduction, true peak, RMS, the Requantise settings and the total latency.
 - **Bottom bar**: momentary, short-term and integrated loudness (LUFS) with the input value beside each, loudness range, loudness gain, peak to loudness ratio, and a target with its reset. Loudness and RMS read in whole numbers; true peak to a tenth.
 
@@ -50,7 +53,9 @@ The rack shows the modules in the chain, in signal order.
 - Click a module's dot to switch it on or off.
 - Click its name to open its page.
 - Drag a module to move it in the chain.
-- **+** adds a module that is not shown yet; a module can also be removed from the rack.
+- **+** adds a module that is not shown yet.
+- **Alt-click** (Option-click on macOS) a module to remove it from the rack.
+- **Cmd-click** (Ctrl-click on Windows and Linux) a module to reset its controls to their defaults; its on switch and its place in the chain stay.
 - **REQUANTISE** is fixed at the end of the chain.
 
 Each module's page has its on switch, its name, a short description, its own latency, and the **MORE** button where a module has further controls.
@@ -134,10 +139,10 @@ Default, Ceiling 0 dBFS, Ceiling -6 dBFS, Broadcast EU, Broadcast US, Soft Clip 
 ## Known limits of this beta
 
 - No listening review has been done yet.
-- Some readouts can show "-0.0".
 - Linux has no editor; the host's generic controls are used.
 - Windows has no LV2 and no AAX.
 - The Windows and Linux builds are made by automated builds and have not been tested in a host.
+- The pop-out windows have been tried in a host on macOS only.
 
 ## License
 

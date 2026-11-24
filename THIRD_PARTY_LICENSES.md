@@ -7,13 +7,14 @@ carry copies of the licence texts in `Licenses/`.
 
 | Component | Used for | License |
 |---|---|---|
-| OpenPluginSDK | plugin framework; the CLAP and LV2 targets and the VST3, Audio Unit and AAX shells | MIT or Apache License 2.0 |
-| GoodLookinDri | the editor's drawing and window code (Rust, linked statically) | MIT |
+| OpenPluginSDK (openplugin-core, -dsp, -dri, -host, -targets) | plugin framework; the CLAP and LV2 targets and the VST3, Audio Unit and AAX shells | MIT or Apache License 2.0 |
+| GoodLookinDri (including goodlookindri-shell) | the editor's drawing and window code (Rust, linked statically) | MIT |
 | Source Sans Pro (Adobe) | the editor's lettering, embedded in GoodLookinDri | SIL Open Font License 1.1 (`Licenses/SourceSansPro-OFL.txt`) |
 | Rust standard library | all code | MIT or Apache License 2.0 |
 | fontdue, ttf-parser | lettering | MIT or Apache License 2.0 (fontdue also Zlib) |
 | rustfft, num-complex, num-integer, num-traits, primal-check, strength_reduce, transpose | FFTs for the linear-phase EQ and the displays | MIT or Apache License 2.0 |
-| hashbrown, ahash, allocator-api2, once_cell, cfg-if, log, memchr, itoa, serde, serde_json, zerocopy, zmij, raw-window-handle | support libraries | MIT or Apache License 2.0 (zerocopy also BSD 2-Clause, raw-window-handle also Zlib) |
+| hashbrown, ahash, allocator-api2, once_cell, cfg-if, log, memchr, itoa, serde, serde_core, serde_json, zerocopy, zmij, raw-window-handle | support libraries | MIT or Apache License 2.0 (zerocopy also BSD 2-Clause, raw-window-handle also Zlib) |
+| serde_derive, syn, quote, proc-macro2, unicode-ident | code generation for serde at build time (not in the binaries) | MIT or Apache License 2.0 (unicode-ident also Unicode-3.0) |
 | libc, bitflags, windows-sys, windows-link | system interfaces (per platform) | MIT or Apache License 2.0 |
 | x11rb, rustix, errno, linux-raw-sys, gethostname | Linux system interfaces | MIT or Apache License 2.0 (linux-raw-sys also Apache-2.0 WITH LLVM-exception) |
 | CLAP | CLAP format | MIT |

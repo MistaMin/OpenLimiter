@@ -1,6 +1,19 @@
 # Changelog
 
-## 1.0.1 Beta (2026-11-24)
+## 1.0.2 Beta (2026-11-24)
+
+- History and Loudness Radar open in their own resizable windows (button in each header, lit while open). They stay open when the plug-in window closes, reopen where they were, and close with the plug-in.
+- History: LEVELS, 2D (spectrogram) and 3D (waterfall of 0.2 s, third-octave smoothed slices) views of the output.
+- Loudness radar draws short-term loudness with even strokes (it zig-zagged on drums).
+- Gain reduction trace and meter: each peak, then a 60 dB/s fall, without dropping to 0 between blocks.
+- Multiband: reduction over the threshold in the accent colour; readouts rise in 50 ms and fall at 20 dB/s.
+- Rack: Alt-click (Option-click) removes a module, Cmd-click (Ctrl-click on Windows and Linux) resets its controls.
+- Knob labels no longer collide with the knobs drawn by some pages (DRIVE, the Modes gain knobs).
+- VST3: every value survives save and reopen in hosts that edit parameters right after the plug-in starts (OpenGrid9 lost up to 148).
+- Harmonic Compressor: less CPU (one contiguous delay line read; the dry alignment runs only while the dry signal is heard).
+- Windows and Linux keep preferences in %APPDATA% and the XDG config folder.
+
+## 1.0.1 Beta (2026-11-24, not published)
 
 - Editor: the analyser pages draw 20 to 100 times faster (SimplEQ 1.2 s to 15 ms a frame at Retina size, PrecisionEQ 2 s to 18 ms); long curves, fills and hatching are drawn in short pieces, and a page's moving parts are repainted in one pass.
 - Loudness (LUFS, LU) and RMS readouts show whole numbers, so they no longer flicker; true peak keeps its tenth.
