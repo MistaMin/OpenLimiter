@@ -349,6 +349,13 @@ static LAYOUTS: &[IoConfig] = &[
     IoConfig { input: SpeakerLayout::Stereo, output: SpeakerLayout::Stereo, sidechain: Some(SpeakerLayout::Mono) },
 ];
 
+/// Pop-out windows of an instance read its shared state: they close before the instance goes.
+impl Drop for OpenLimiter {
+    fn drop(&mut self) {
+        ui::pops::close_all(&self.shared);
+    }
+}
+
 pub struct OpenLimiter {
     /// Plain values of every host parameter.
     values: Vec<f32>,
@@ -484,6 +491,7 @@ impl OpenLimiter {
             let reduction = self.chain.reduction_db();
             self.dither.process(l, r);
             let top_out = taps.measure(1, l, r, stereo);
+            self.shared.push_out(l, if stereo { &*r } else { &*l });
             monitor.process(l, r, latency);
 
             taps.hop = (taps.hop.0.max(top_in), taps.hop.1.max(top_out), taps.hop.2.max(reduction));

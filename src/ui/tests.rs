@@ -399,6 +399,33 @@ fn the_rack_adds_opens_switches_reorders_and_removes_modules() {
     e.mouse_up(r.0 + r.2 * 0.5, r.1 + 120.0);
     assert_eq!(shown(&e), vec![0]);
     assert!(!e.ui.on(LAYOUT.slots[bands].on));
+    // Alt-click removes a module, the open one included; the page moves to what is left.
+    let add = e.ui.rack().add.expect("+");
+    click(&mut e, add);
+    let PopFor::Add(slots) = e.ui.pop.as_ref().expect("list").what.clone() else { panic!("add list") };
+    e.choose(slots.iter().position(|&s| s == bands).unwrap());
+    assert_eq!(shown(&e), vec![0, bands]);
+    assert_eq!(e.ui.selected, bands);
+    let r = e.ui.rack().chips[1].1;
+    e.modifiers_changed(Modifiers { alt: true, ..Modifiers::NONE });
+    click(&mut e, (r.0 + 40.0, r.1 + 4.0, 4.0, 4.0));
+    e.modifiers_changed(Modifiers::NONE);
+    assert_eq!(shown(&e), vec![0]);
+    assert!(!e.ui.on(LAYOUT.slots[bands].on));
+    assert_eq!(e.ui.selected, 0);
+    // Cmd-click (Ctrl off macOS) resets a module and keeps it on and in its place.
+    let limiter = &LAYOUT.slots[0];
+    let p = (limiter.base..limiter.base + limiter.count).find(|&i| i != limiter.on && i != limiter.position && INFO.params[i].max > INFO.params[i].min).expect("a setting");
+    let moved = if INFO.params[p].default > INFO.params[p].min { INFO.params[p].min } else { INFO.params[p].max };
+    e.set_value(p, moved);
+    let r = e.ui.rack().chips[0].1;
+    let cmd = if cfg!(target_os = "macos") { Modifiers { command: true, ..Modifiers::NONE } } else { Modifiers { ctrl: true, ..Modifiers::NONE } };
+    e.modifiers_changed(cmd);
+    click(&mut e, (r.0 + 40.0, r.1 + 4.0, 4.0, 4.0));
+    e.modifiers_changed(Modifiers::NONE);
+    assert_eq!(e.ui.values[p], INFO.params[p].clamp(INFO.params[p].default));
+    assert!(e.ui.on(limiter.on));
+    assert_eq!(shown(&e), vec![0]);
 }
 
 #[test]
@@ -858,13 +885,33 @@ fn text_is_whole_apart_and_readable() {
                 feed(&shared, 7);
                 e.tick(1.0 / 30.0);
             }
+            for more in [false, true] {
+            if more && !e.ui.page.has_more() {
+                continue;
+            }
+            e.ui.more = more;
+            for state in 0..e.ui.page.states() {
+            e.ui.page.set_state(state);
+            e.rebuild();
+            let key = format!("{key} more={more} state={state}");
             let mut dl = openplugin::dri::DrawList::default();
             chrome::paint_static(&e.ui, &mut dl);
             chrome::paint_dynamic(&e.ui, &mut dl, &|_| true);
             let mut clips: Vec<(f32, f32, f32, f32)> = vec![];
             let mut texts: Vec<(f32, f32, f32, f32, String, f32)> = vec![];
+            // (centre, radius, half width, from, to) of every ring (knob tracks, gauges)
+            let mut rings: Vec<(f32, f32, f32, f32, f32, f32)> = vec![];
             for c in &dl.scene.cmds {
                 match c {
+                    Cmd::StrokeArc { center, radius, from, to, width, .. } => {
+                        let (x0, y0, x1, y1) = (center.x - radius - width * 0.5, center.y - radius - width * 0.5, center.x + radius + width * 0.5, center.y + radius + width * 0.5);
+                        if let Some(cl) = clips.iter().fold(None::<(f32, f32, f32, f32)>, |a, c| Some(a.map_or(*c, |a| (a.0.max(c.0), a.1.max(c.1), a.2.min(c.2), a.3.min(c.3))))) {
+                            if x0 < cl.0 - 0.5 || x1 > cl.2 + 0.5 || y0 < cl.1 - 0.5 || y1 > cl.3 + 0.5 {
+                                bad.push(format!("RING CLIPPED {key} tall={tall}: ring at ({:.0},{:.0}) r {radius:.0} clip {cl:?}", center.x, center.y));
+                            }
+                        }
+                        rings.push((center.x, center.y, *radius, width * 0.5, *from, *to));
+                    }
                     Cmd::ClipRound { rect, .. } => clips.push((rect.x, rect.y, rect.x + rect.w, rect.y + rect.h)),
                     Cmd::PopClip => { clips.pop(); }
                     Cmd::Text { at, text: s, size, center, .. } => {
@@ -879,9 +926,34 @@ fn text_is_whole_apart_and_readable() {
                         if *size < 8.0 {
                             bad.push(format!("SMALL {key} tall={tall}: {s:?} size {size}"));
                         }
+                        // "measuring…" is the Smart Limiter's own wording, not a cut label
+                        if s.contains('…') && s != "measuring…" {
+                            bad.push(format!("TRUNCATED {key} tall={tall}: {s:?} size {size} at ({:.0},{:.0})", at.x, at.y));
+                        }
                         texts.push((x0, y0, x0 + w, y1, s.clone(), *size));
                     }
                     _ => {}
+                }
+            }
+            // Text on a ring: any point of the text box within the ring's stroke (plus 1 pt) and
+            // inside the arc's sweep.
+            let tau = std::f32::consts::TAU;
+            for (x0, y0, x1, y1, s, size) in &texts {
+                if s.trim().is_empty() {
+                    continue;
+                }
+                let hit = rings.iter().any(|&(cx, cy, r, hw, from, to)| {
+                    (0..=8).any(|i| (0..=4).any(|j| {
+                        let (px, py) = (x0 + (x1 - x0) * i as f32 / 8.0, y0 + (y1 - y0) * j as f32 / 4.0);
+                        let d = ((px - cx).powi(2) + (py - cy).powi(2)).sqrt();
+                        let a = (py - cy).atan2(px - cx);
+                        let (lo, hi) = (from.min(to), from.max(to));
+                        let swept = hi - lo >= tau - 1e-3 || (0..3).any(|k| { let a = a + (k as f32 - 1.0) * tau; a >= lo && a <= hi });
+                        (d - r).abs() <= hw + 1.0 && swept
+                    }))
+                });
+                if hit {
+                    bad.push(format!("ON RING {key} tall={tall}: {s:?} size {size} at ({x0:.0},{y0:.0})"));
                 }
             }
             for i in 0..texts.len() {
@@ -892,7 +964,51 @@ fn text_is_whole_apart_and_readable() {
                     }
                 }
             }
+            }
+            }
+            e.ui.more = false;
         }
     }
     assert!(bad.is_empty(), "{}", bad.join("\n"));
+}
+
+/// The pop-out views fill at any size, follow the window, and stay fast enough to redraw;
+/// the history's spectrum modes draw from the output ring. Writes `build/pop-<view>.ppm` at 2x.
+#[test]
+fn detached_views_paint_at_any_size() {
+    use detached::{Detached, Kind};
+    let shared = Arc::new(Shared::default());
+    shared.set_timing(39, 48_000.0);
+    shared.set_look(0, 3);
+    feed(&shared, WINDOW);
+    for (kind, mode, name) in [(Kind::History, 0, "levels"), (Kind::History, 1, "2d"), (Kind::History, 2, "3d"), (Kind::Radar, 0, "radar")] {
+        let mut d = Detached::new(kind, shared.clone());
+        d.ui.hist_mode = mode;
+        // A rising sweep with a steady low tone, so every view has something to show.
+        for tick in 0..40 {
+            let hz = 100.0 * 1.12f32.powi(tick);
+            let block: Vec<f32> = (0..1600).map(|i| 0.3 * (i as f32 * hz * std::f32::consts::TAU / 48_000.0).sin() + 0.2 * (i as f32 * 60.0 * std::f32::consts::TAU / 48_000.0).sin()).collect();
+            shared.push_out(&block, &block);
+            d.tick(1.0 / 30.0);
+        }
+        for (w, h) in [(420, 300), (1600, 1000)] {
+            d.resize(w, h);
+            let start = std::time::Instant::now();
+            let f = d.render(2.0);
+            let ms = start.elapsed().as_secs_f32() * 1000.0;
+            assert_eq!((f.width, f.height), (w as usize * 2, h as usize * 2));
+            let bg = f.pixels[0];
+            let drawn = f.pixels.iter().filter(|p| **p != bg).count();
+            assert!(drawn > f.pixels.len() / 10, "{name} {w}x{h}: only {drawn} pixels drawn");
+            eprintln!("{name} {w}x{h} @2x: {ms:.1} ms");
+        }
+        d.resize(900, 600);
+        let f = d.render(2.0);
+        let mut out = format!("P6\n{} {}\n255\n", f.width, f.height).into_bytes();
+        for px in f.pixels {
+            out.extend_from_slice(&[(px >> 16) as u8, (px >> 8) as u8, *px as u8]);
+        }
+        let _ = std::fs::create_dir_all(format!("{}/build", env!("CARGO_MANIFEST_DIR")));
+        std::fs::write(format!("{}/build/pop-{name}.ppm", env!("CARGO_MANIFEST_DIR")), out).expect("write");
+    }
 }

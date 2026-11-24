@@ -95,6 +95,9 @@ pub struct Bands {
     drag: Option<Drag>,
     hold: [f32; BANDS],
     age: [f32; BANDS],
+    /// The read-out as drawn: rises in about 50 ms, falls at 20 dB/s, so it can be followed.
+    shown: [f32; vw::LEN],
+    fresh: bool,
     max: f32,
     /// The last frequency of each split before it was switched off.
     remembered: [f32; 4],
@@ -102,7 +105,7 @@ pub struct Bands {
 
 impl Default for Bands {
     fn default() -> Self {
-        Self { sel: 2, all: false, drag: None, hold: [0.0; BANDS], age: [0.0; BANDS], max: 0.0, remembered: [125.0, 500.0, 2000.0, 8000.0] }
+        Self { sel: 2, all: false, drag: None, hold: [0.0; BANDS], age: [0.0; BANDS], shown: [0.0; vw::LEN], fresh: true, max: 0.0, remembered: [125.0, 500.0, 2000.0, 8000.0] }
     }
 }
 
@@ -220,8 +223,8 @@ impl Bands {
         cx.v(cb::P_REFERENCE) + Self::bv(cx, b, cb::B_THRESHOLD)
     }
 
-    fn view(live: &Live, i: usize) -> Option<f32> {
-        (live.view.len() >= vw::LEN).then(|| live.view[i])
+    fn view(&self, live: &Live, i: usize) -> Option<f32> {
+        (live.view.len() >= vw::LEN).then(|| self.shown[i])
     }
 
     /// The selected band's steady-state output level for an input level, dBFS.
@@ -327,7 +330,7 @@ impl Bands {
         let e = Self::edges(cx);
         let mode = Self::mode(cx);
         let any_solo = (0..BANDS).any(|b| cx.on(band_param(b, cb::B_SOLO)));
-        let keyed = Self::view(live, vw::KEYED).is_some_and(|v| v >= 0.5);
+        let keyed = self.view(live, vw::KEYED).is_some_and(|v| v >= 0.5);
         let splits = Self::splits(cx);
         let plot_bottom = 590.0;
         // Band tints and hatching.
@@ -367,17 +370,18 @@ impl Bands {
             let thr = Self::thr_abs(cx, b);
             let ty = g.ly(thr);
             let (ca, cz) = (a + 4.0, z - 4.0);
-            if let Some(det) = Self::view(live, vw::DETECTOR + b) {
+            if let Some(det) = self.view(live, vw::DETECTOR + b) {
                 let dy = g.ly(det);
                 let fill = if keyed { t.warm } else { t.in_fill };
                 if dy < LV_BOT {
                     s.fill_rect(Rect::new(ca, dy, cz - ca, LV_BOT - dy), fill.with_alpha(t.in_fill_alpha * 0.8), fill.with_alpha(t.in_fill_alpha * 0.8), true);
                     if dy < ty {
-                        let solid = if keyed { t.warm } else { t.in_line };
+                        // The part over the threshold is what gets reduced: accent, not the pale input grey.
+                        let solid = if keyed { t.warm } else { t.accent };
                         s.fill_rect(Rect::new(ca, dy, cz - ca, ty - dy), solid, solid, true);
                     }
                 }
-                if let Some(out) = Self::view(live, vw::OUTPUT + b) {
+                if let Some(out) = self.view(live, vw::OUTPUT + b) {
                     let oy = g.ly(out);
                     if oy < LV_BOT {
                         s.line(Point::new(ca, oy), Point::new(cz, oy), t.out_line, 1.5);
@@ -423,7 +427,7 @@ impl Bands {
             }
             let (ba, bz) = (a + 6.0, z - 6.0);
             if lift {
-                let gain = Self::view(live, vw::GAIN + b).unwrap_or(0.0);
+                let gain = self.view(live, vw::GAIN + b).unwrap_or(0.0);
                 let h = (gain.abs() * bip_ppd).min((g.gr_bot - g.gr_top) * 0.5);
                 if h > 0.3 {
                     let y = if gain > 0.0 { mid_lane - h } else { mid_lane };
@@ -434,14 +438,14 @@ impl Bands {
                 }
                 continue;
             }
-            let gr = Self::view(live, vw::GR + b).unwrap_or(0.0);
-            let lim = Self::view(live, vw::LIMIT + b).unwrap_or(0.0);
+            let gr = self.view(live, vw::GR + b).unwrap_or(0.0);
+            let lim = self.view(live, vw::LIMIT + b).unwrap_or(0.0);
             let room = g.gr_bot - g.gr0;
             let depth = (gr * g.gr_ppd).min(room);
             if mode == 2 {
                 let half = (bz - ba) * 0.5;
                 for c in 0..2 {
-                    let d = (Self::view(live, vw::GR_CHANNEL + 2 * b + c).unwrap_or(0.0) * g.gr_ppd).min(room);
+                    let d = (self.view(live, vw::GR_CHANNEL + 2 * b + c).unwrap_or(0.0) * g.gr_ppd).min(room);
                     if d > 0.3 {
                         s.fill_rect(Rect::new(ba + half * c as f32 + 0.5, g.gr0, half - 1.0, d), t.accent, t.accent, true);
                     }
@@ -513,7 +517,7 @@ impl Bands {
         s.fill_ellipse_solid(Scene::ellipse_at(Point::new(kx, ky), 4.5), t.panel);
         s.stroke_ellipse(Scene::ellipse_at(Point::new(kx, ky), 4.5), t.accent, 1.5);
         // The operating dot.
-        if let (Some(det), Some(gain)) = (Self::view(live, vw::DETECTOR + b), Self::view(live, vw::GAIN + b)) {
+        if let (Some(det), Some(gain)) = (self.view(live, vw::DETECTOR + b), self.view(live, vw::GAIN + b)) {
             if det > -60.0 {
                 let out = det + Self::applied(cx, b, gain);
                 let (dx, dy) = (m.x(det.min(0.0)), m.y(out.clamp(-60.0, 0.0)));
@@ -521,7 +525,7 @@ impl Bands {
                 if (uy - dy).abs() > 1.0 {
                     s.line(Point::new(dx, uy), Point::new(dx, dy), t.accent.with_alpha(0.35), 3.0);
                 }
-                let colour = if Self::view(live, vw::KEYED).is_some_and(|v| v >= 0.5) { t.warm } else { t.accent };
+                let colour = if self.view(live, vw::KEYED).is_some_and(|v| v >= 0.5) { t.warm } else { t.accent };
                 s.fill_ellipse_solid(Scene::ellipse_at(Point::new(dx, dy), 4.0), colour);
             }
         }
@@ -537,13 +541,13 @@ impl Bands {
         };
         // Live values in whole dB: tenths changed on every frame and could not be read.
         let db_or = |v: Option<f32>| v.filter(|v| *v > -119.0).map_or("-".to_string(), |v| format!("{:.0} dB", v.round() + 0.0));
-        line(s, 469.0, "IN", db_or(Self::view(live, vw::DETECTOR + b)));
-        let gr = Self::view(live, vw::GR + b).unwrap_or(0.0);
-        let lim = Self::view(live, vw::LIMIT + b).unwrap_or(0.0);
+        line(s, 469.0, "IN", db_or(self.view(live, vw::DETECTOR + b)));
+        let gr = self.view(live, vw::GR + b).unwrap_or(0.0);
+        let lim = self.view(live, vw::LIMIT + b).unwrap_or(0.0);
         let whole = |v: f32| v.round() + 0.0;
         let gtext = if cx.on(cb::P_BAND_LIMITER) { format!("{:.0} dB (lim {:.0})", whole(-gr), whole(lim)) } else { format!("{:.0} dB", whole(-gr)) };
         line(s, 487.0, "GR", gtext);
-        line(s, 505.0, "OUT", db_or(Self::view(live, vw::OUTPUT + b)));
+        line(s, 505.0, "OUT", db_or(self.view(live, vw::OUTPUT + b)));
         let mb = g.max_box();
         max_box(s, t, mb, self.max);
         s.text(Point::new(mb.0 + 52.0, mb.1 + 9.0), "MAX, click to reset", t.dim, 8.5, false);
@@ -736,8 +740,22 @@ impl Page for Bands {
 
     fn tick(&mut self, _cx: &Ctx, live: &Live) -> bool {
         if live.view.len() >= vw::LEN {
+            let dt = live.dt.max(0.0);
+            let (rise, glide, fall) = (1.0 - (-dt / 0.05).exp(), 1.0 - (-dt / 0.1).exp(), 20.0 * dt);
+            for (i, (s, &v)) in self.shown.iter_mut().zip(&live.view[..vw::LEN]).enumerate() {
+                *s = if self.fresh || i == vw::KEYED {
+                    v
+                } else if (vw::GAIN..vw::GR_CHANNEL).contains(&i) {
+                    *s + (v - *s) * glide
+                } else if v > *s {
+                    *s + (v - *s) * rise
+                } else {
+                    (*s - fall).max(v)
+                };
+            }
+            self.fresh = false;
             for b in 0..BANDS {
-                let r = live.view[vw::GR + b] + live.view[vw::LIMIT + b];
+                let r = self.shown[vw::GR + b] + self.shown[vw::LIMIT + b];
                 if r >= self.hold[b] {
                     self.hold[b] = r;
                     self.age[b] = 0.0;

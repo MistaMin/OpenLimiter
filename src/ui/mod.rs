@@ -16,6 +16,15 @@
 
 pub mod analyser;
 mod chrome;
+mod detached;
+#[cfg(target_os = "macos")]
+mod popout;
+pub(crate) mod pops;
+#[cfg(target_os = "windows")]
+mod popwin;
+#[cfg(target_os = "linux")]
+mod popx11;
+mod spectro;
 pub mod kit;
 mod live;
 pub mod page;
@@ -110,6 +119,12 @@ const BAND_STRIP: R = (104.0, 56.0, 992.0, 72.0);
 const RIBBON: R = (112.0, 62.0, 640.0, 60.0);
 const LOUD_RIBBON: R = (764.0, 62.0, 296.0, 60.0);
 const CHEVRON: R = (1068.0, 60.0, 22.0, 18.0);
+/// Open the history or the radar in a window of its own (macOS).
+const HIST_POP: R = (752.0, 61.0, 22.0, 18.0);
+const RADAR_POP: R = (1042.0, 60.0, 22.0, 18.0);
+const CAN_POP: bool = pops::SUPPORTED;
+/// LEVELS | 2D | 3D in the history's header.
+const HIST_MODE: R = (476.0, 61.0, 150.0, 18.0);
 
 const RACK_FULL: R = (104.0, 308.0, 992.0, 52.0);
 const RACK_STRIP: R = (104.0, 136.0, 992.0, 52.0);
@@ -441,6 +456,11 @@ pub(crate) struct Ui {
     /// A and B: the parameter values of each, and which one is live.
     ab: [Option<Vec<f32>>; 2],
     ab_on: usize,
+    /// The history shows levels (0), the output spectrum as a spectrogram (1) or a waterfall (2).
+    hist_mode: u8,
+    spec: spectro::SpecHist,
+    /// The history and the radar are open in windows of their own.
+    popped: [bool; 2],
 }
 
 impl Ui {
@@ -574,6 +594,9 @@ impl Ui {
             | (self.more as u64) << 13
             | (self.band_pref as u64) << 14
             | (self.page_rev as u64) << 16
+            | (self.hist_mode as u64) << 48
+            | (self.popped[0] as u64) << 50
+            | (self.popped[1] as u64) << 51
     }
 
     fn page_cells(&self) -> &[Cell] {
@@ -617,7 +640,7 @@ fn shell_cells(ui: &Ui) -> Vec<Cell> {
         v.push(Cell::pill(P_PHASE_L, "PHASE L", (x0, 286.0, 120.0, 22.0)));
         v.push(Cell::pill(P_PHASE_R, "PHASE R", (x0 + 130.0, 286.0, 120.0, 22.0)));
         v.push(Cell::segmented(P_HEADROOM, "HEADROOM", (x0 + 70.0, 320.0, 310.0, 24.0)));
-    } else if !ui.tall && ui.first_on() {
+    } else if !ui.tall && ui.hist_mode == 0 && ui.first_on() {
         // The threshold is a grip on the plot while the first limiter is in the chain.
         let top = PLOT.1 + live::plot_y(PARAMS[P_THRESHOLD].max, PLOT);
         let bottom = PLOT.1 + live::plot_y(PARAMS[P_THRESHOLD].min, PLOT);
@@ -711,6 +734,9 @@ impl OpenLimiterEditor {
                 live_gr: 0.0,
                 ab: [None, None],
                 ab_on: 0,
+                hist_mode: detached::load_hist_mode("histmode"),
+                spec: spectro::SpecHist::default(),
+                popped: [false; 2],
             },
             host,
             shared: None,
@@ -961,6 +987,18 @@ impl OpenLimiterEditor {
         }
     }
 
+    /// Every setting of `slot` back to its default; it stays switched on and in its place.
+    fn reset_slot(&mut self, slot: usize) {
+        let s = &LAYOUT.slots[slot];
+        for i in (s.base..s.base + s.count).filter(|&i| i != s.on && i != s.position) {
+            let d = INFO.params[i].clamp(INFO.params[i].default);
+            if (self.ui.values[i] - d).abs() > 1e-7 {
+                self.set_value(i, d);
+            }
+        }
+        self.rebuild();
+    }
+
     fn reset_module(&mut self) {
         let (base, count) = self.ui.module_range();
         for i in base..base + count {
@@ -992,6 +1030,18 @@ impl OpenLimiterEditor {
             return;
         }
         let Some(&(slot, r)) = rack.chips.iter().find(|(_, r)| inside(*r, x, y)) else { return };
+        // Alt-click anywhere on a chip takes the module out of the chain.
+        if self.modifiers.alt {
+            self.remove_module(slot);
+            self.after_input();
+            return;
+        }
+        // Cmd-click (Ctrl-click off macOS, where it is not a right click) resets the module.
+        if self.modifiers.command || (!cfg!(target_os = "macos") && self.modifiers.ctrl) {
+            self.reset_slot(slot);
+            self.after_input();
+            return;
+        }
         if inside(chip_dot(r), x, y) {
             let on = LAYOUT.slots[slot].on;
             let v = if self.ui.values[on] >= 0.5 { 0.0 } else { 1.0 };
@@ -1227,7 +1277,7 @@ impl OpenLimiterEditor {
         self.gang(LAYOUT.input_gain, LAYOUT.input_link, false);
         // A module switched on is in the rack; the threshold grip follows the first limiter.
         let grip = self.ui.cells[..self.ui.shell_cells].iter().any(|c| c.kind == Kind::Grip);
-        if grip != (!self.ui.tall && !self.ui.setup_open && self.ui.first_on()) {
+        if grip != (!self.ui.tall && !self.ui.setup_open && self.ui.hist_mode == 0 && self.ui.first_on()) {
             self.rebuild();
         }
         self.rebuild_if_asked();
@@ -1395,11 +1445,14 @@ impl OpenLimiterEditor {
                 self.damage.add(dmg(self.ui.zones().header));
             }
             if Some(s) == self.ui.slot() {
-                self.ui.live_gr = gr;
+                // Peak, then a 60 dB/s fall like the levels: a frame with no audio block since the
+                // last read takes 0, which would otherwise notch the trace and the meter.
+                let last = self.ui.gr_hist.back().copied().unwrap_or(0.0);
+                self.ui.live_gr = gr.max(last - 60.0 * dt);
                 if self.ui.gr_hist.len() == GR_HIST {
                     self.ui.gr_hist.pop_front();
                 }
-                self.ui.gr_hist.push_back(gr);
+                self.ui.gr_hist.push_back(self.ui.live_gr);
             }
         }
         if rack_moved {
@@ -1516,6 +1569,16 @@ impl Editor for OpenLimiterEditor {
         self.ui.clip_age = (self.ui.clip_age + dt).min(1e6);
         self.tick_slots(&shared, dt);
         self.rebuild_if_asked();
+        let theme_i = ThemeId::ALL.iter().position(|t| *t == self.ui.theme).unwrap_or(0);
+        shared.set_look(theme_i, self.ui.target);
+        let popped = [pops::is_open(&shared, detached::Kind::History), pops::is_open(&shared, detached::Kind::Radar)];
+        if popped != self.ui.popped {
+            self.ui.popped = popped;
+            self.damage.add_all();
+        }
+        if self.ui.hist_mode != 0 && !self.ui.tall && self.ui.spec.tick(&shared, dt) {
+            self.live_dirty = true;
+        }
     }
 
     fn damage(&mut self) -> Option<Vec<DamageRect>> {
@@ -1646,6 +1709,21 @@ impl Editor for OpenLimiterEditor {
             self.set_theme(ThemeId::from_index(i.min(ThemeId::ALL.len() - 1)), true);
         } else if self.ui.setup_open && !inside(SETUP_SHEET, x, y) && inside((104.0, 56.0, 992.0, 788.0), x, y) {
             self.set_setup(false);
+        } else if CAN_POP && !self.ui.setup_open && !self.ui.tall && (inside(HIST_POP, x, y) || inside(RADAR_POP, x, y)) {
+            let kind = if inside(HIST_POP, x, y) { detached::Kind::History } else { detached::Kind::Radar };
+            if let Some(shared) = self.shared.clone() {
+                pops::toggle(&shared, kind);
+                self.ui.popped[kind as usize] = pops::is_open(&shared, kind);
+                self.damage.add_all();
+            }
+        } else if !self.ui.setup_open && !self.ui.tall && inside(HIST_MODE, x, y) {
+            let mode = (((x - HIST_MODE.0) / (HIST_MODE.2 / 3.0)) as u8).min(2);
+            if mode != self.ui.hist_mode {
+                self.ui.hist_mode = mode;
+                detached::store_hist_mode("histmode", mode);
+                self.damage.add_all();
+                self.live_dirty = true;
+            }
         } else if !self.ui.setup_open && inside(CHEVRON, x, y) {
             let tall = !self.ui.tall;
             self.set_tall(tall);
@@ -1842,7 +1920,7 @@ impl Editor for OpenLimiterEditor {
         let rack = self.ui.rack();
         for &(slot, r) in &rack.chips {
             tips.push(Tooltip { rect: dmg(chip_dot(r)), text: format!("Switch {} on or off", LAYOUT.slots[slot].label) });
-            tips.push(Tooltip { rect: dmg((r.0 + 24.0, r.1, r.2 - 24.0, r.3)), text: format!("{}: click to open, drag to move, right-click for more", LAYOUT.slots[slot].label) });
+            tips.push(Tooltip { rect: dmg((r.0 + 24.0, r.1, r.2 - 24.0, r.3)), text: format!("{}: click to open, drag to move, Alt-click to remove, {}-click to reset, right-click for more", LAYOUT.slots[slot].label, if cfg!(target_os = "macos") { "Cmd" } else { "Ctrl" }) });
         }
         if let Some(add) = rack.add {
             tips.push(Tooltip { rect: dmg(add), text: "Add a module to the chain".into() });
@@ -1853,6 +1931,11 @@ impl Editor for OpenLimiterEditor {
         tips.push(Tooltip { rect: dmg(THEME_BUTTON), text: "Next theme: light, dark, graphite, paper".into() });
         tips.push(Tooltip { rect: dmg(TARGET_CHIP), text: "Loudness target: click for the next one".into() });
         tips.push(Tooltip { rect: dmg(RESET_CHIP), text: "Start the integrated loudness, range and true peak again".into() });
+        if CAN_POP && !self.ui.tall {
+            tips.push(Tooltip { rect: dmg(HIST_POP), text: "Open or close the history in its own window".into() });
+            tips.push(Tooltip { rect: dmg(RADAR_POP), text: "Open or close the loudness radar in its own window".into() });
+            tips.push(Tooltip { rect: dmg(HIST_MODE), text: "Levels, or the output spectrum as a 2D spectrogram or a 3D waterfall".into() });
+        }
         tips.push(Tooltip { rect: dmg(CHEVRON), text: "Make the top band a strip, or full height".into() });
         tips.push(Tooltip { rect: dmg(RMS_BOX), text: "Output RMS after Requantise, louder channel. Scale and window are in SETUP".into() });
         tips.push(Tooltip { rect: dmg(KEY_LAMP), text: "Sidechain key: lit while the host feeds one".into() });

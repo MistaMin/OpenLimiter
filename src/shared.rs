@@ -66,8 +66,10 @@ pub struct Shared {
     loud_out: Box<[AtomicU32]>,
     loud_head: AtomicUsize,
     /// Short-term in, short-term out, integrated, range, true peak, integrated in.
-    loud_now: [AtomicU32; 6],
+    loud_now: [AtomicU32; 8],
     loud_reset: AtomicU32,
+    /// The editor's theme and loudness target, for pop-out windows that outlive it.
+    look: AtomicU32,
     /// Per chain slot: deepest reduction since the editor last looked (dB), and latency.
     slot_gr: Box<[AtomicU32]>,
     /// Per chain slot: largest added gain since the editor last looked (dB).
@@ -85,6 +87,9 @@ pub struct Shared {
     /// Audio around the watched slot: pre L, pre R, post L, post R, key L, key R.
     taps: Box<[AtomicU32]>,
     tap_head: AtomicUsize,
+    /// The chain's output, L and R averaged, for the history's spectrum: every reader reads it.
+    out: Box<[AtomicU32]>,
+    out_head: AtomicUsize,
     /// Every host parameter's plain value, so a new editor starts from the real state.
     values: Box<[AtomicU32]>,
 }
@@ -118,8 +123,9 @@ impl Default for Shared {
             loud_in: zeros(LOUD_HIST),
             loud_out: zeros(LOUD_HIST),
             loud_head: AtomicUsize::new(0),
-            loud_now: [Loud::SILENT.short_in, Loud::SILENT.short_out, Loud::SILENT.integrated, 0.0, Loud::SILENT.true_peak, Loud::SILENT.integrated_in].map(|v| AtomicU32::new(v.to_bits())),
+            loud_now: [Loud::SILENT.short_in, Loud::SILENT.short_out, Loud::SILENT.integrated, 0.0, Loud::SILENT.true_peak, Loud::SILENT.integrated_in, Loud::SILENT.momentary_in, Loud::SILENT.momentary_out].map(|v| AtomicU32::new(v.to_bits())),
             loud_reset: AtomicU32::new(0),
+            look: AtomicU32::new(u32::MAX),
             slot_gr: zeros(MAX_SLOTS),
             slot_lift: zeros(MAX_SLOTS),
             slot_latency: zeros(MAX_SLOTS),
@@ -131,6 +137,8 @@ impl Default for Shared {
             view_fresh: AtomicU32::new(1),
             taps: zeros(6 * TAP_LEN),
             tap_head: AtomicUsize::new(0),
+            out: zeros(OUT_LEN),
+            out_head: AtomicUsize::new(0),
             values: crate::INFO.params.iter().map(|p| AtomicU32::new(p.default.to_bits())).collect(),
         }
     }
@@ -142,6 +150,8 @@ pub const MAX_SLOTS: usize = 32;
 pub const VIEW_LEN: usize = 1024;
 /// Samples kept per tap channel, a power of two.
 pub const TAP_LEN: usize = 8192;
+/// Samples of the output ring, a power of two.
+pub const OUT_LEN: usize = 8192;
 
 impl Shared {
     // ---- audio thread ----
@@ -208,6 +218,40 @@ impl Shared {
         self.tap_head.store(head.wrapping_add(n), Ordering::Release);
     }
 
+    /// Appends one block of the chain's output.
+    pub fn push_out(&self, l: &[f32], r: &[f32]) {
+        let head = self.out_head.load(Ordering::Relaxed);
+        for (j, (a, b)) in l.iter().zip(r).enumerate() {
+            self.out[(head + j) & (OUT_LEN - 1)].store((0.5 * (a + b)).to_bits(), Ordering::Relaxed);
+        }
+        self.out_head.store(head.wrapping_add(l.len().min(r.len())), Ordering::Release);
+    }
+
+    /// Samples written to the output ring so far.
+    pub fn out_head(&self) -> usize {
+        self.out_head.load(Ordering::Acquire)
+    }
+
+    /// The newest `out.len()` output samples, oldest first.
+    pub fn out_latest(&self, out: &mut [f32]) {
+        let head = self.out_head();
+        let n = out.len().min(OUT_LEN);
+        for (j, v) in out[..n].iter_mut().enumerate() {
+            *v = f32::from_bits(self.out[(head.wrapping_sub(n) + j) & (OUT_LEN - 1)].load(Ordering::Relaxed));
+        }
+    }
+
+    /// Theme index and target index, as the editor last showed them.
+    pub fn set_look(&self, theme: usize, target: usize) {
+        self.look.store((theme as u32) << 16 | target as u32 & 0xffff, Ordering::Relaxed);
+    }
+
+    /// `None` before an editor set it.
+    pub fn look(&self) -> Option<(usize, usize)> {
+        let v = self.look.load(Ordering::Relaxed);
+        (v != u32::MAX).then_some(((v >> 16) as usize, (v & 0xffff) as usize))
+    }
+
     pub fn push(&self, e: Entry) {
         let head = self.head.load(Ordering::Relaxed);
         let i = head % HIST;
@@ -251,9 +295,10 @@ impl Shared {
     pub fn push_loud(&self, l: Loud) {
         let head = self.loud_head.load(Ordering::Relaxed);
         let i = head % LOUD_HIST;
-        self.loud_in[i].store(l.momentary_in.to_bits(), Ordering::Relaxed);
-        self.loud_out[i].store(l.momentary_out.to_bits(), Ordering::Relaxed);
-        for (slot, v) in self.loud_now.iter().zip([l.short_in, l.short_out, l.integrated, l.range, l.true_peak, l.integrated_in]) {
+        // The radar's history is short-term: momentary swings with every hit and draws a zig-zag.
+        self.loud_in[i].store(l.short_in.to_bits(), Ordering::Relaxed);
+        self.loud_out[i].store(l.short_out.to_bits(), Ordering::Relaxed);
+        for (slot, v) in self.loud_now.iter().zip([l.short_in, l.short_out, l.integrated, l.range, l.true_peak, l.integrated_in, l.momentary_in, l.momentary_out]) {
             slot.store(v.to_bits(), Ordering::Relaxed);
         }
         self.loud_head.store(head.wrapping_add(1), Ordering::Release);
@@ -289,9 +334,7 @@ impl Shared {
     /// The newest readings.
     pub fn loud(&self) -> Loud {
         let v = |i: usize| f32::from_bits(self.loud_now[i].load(Ordering::Relaxed));
-        let head = self.loud_head();
-        let (momentary_in, momentary_out) = if head == 0 { (Loud::SILENT.momentary_in, Loud::SILENT.momentary_out) } else { self.loud_entry(head - 1) };
-        Loud { momentary_in, momentary_out, short_in: v(0), short_out: v(1), integrated: v(2), integrated_in: v(5), range: v(3), true_peak: v(4) }
+        Loud { momentary_in: v(6), momentary_out: v(7), short_in: v(0), short_out: v(1), integrated: v(2), integrated_in: v(5), range: v(3), true_peak: v(4) }
     }
 
     pub fn request_loud_reset(&self) {

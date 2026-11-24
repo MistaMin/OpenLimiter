@@ -29,6 +29,10 @@ harmonics = { path = "crates/harmonics" }
 limiter-smart = { path = "crates/limiter-smart" }
 openplugin = { path = "../../Dependencies/OpenPluginSDK/crates/openplugin" }
 
+# Linux pop-out windows: a top-level X11 window to hold the SDK's view (the SDK already uses it).
+[target.'cfg(target_os = "linux")'.dependencies]
+x11rb = { version = "0.13", default-features = false }
+
 # GoodLookin DRI after v0.2.1: Source Sans Pro Semibold and lifted light-on-dark edges (3fe0426),
 # the toolkit's text standard. The SDK pins the tag; this takes the checkout beside it.
 [patch."https://github.com/MistaMin/GoodLookinDri"]

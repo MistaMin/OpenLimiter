@@ -23,6 +23,69 @@ Owner moved them (VST3, AU, CLAP, LV2) to `~/OpenLimiter-1.0.0-system-backup` on
 | 5 Validators | clap-validator 0.4.1 (dev build 127-g152b982), CLAP by path (1.0.1): 34 passed, 0 failed, 10 skipped (optional extensions not implemented: preset discovery, 64-bit audio, note-port and audio-port options) | PASS | clap-validator.log |
 | 5 Validators | auval, after the system copies were moved (component version 1.0.1 confirmed) | PASS (one warning: a recommended property not supported) | auval.log |
 | 5 Validators | AAX Validator | SKIPPED: 1.0.1 has no AAX build (not signed: release on hold) | |
-| 6 Host matrix | REAPER suite + `qa/tools/module_sweep.py` | pending the move (would load 1.0.0) | |
+| 6 Host matrix | `qa/tools/module_sweep.py`, 4 hidden REAPERs, VST3 1.0.1, 7.4 min: every module ok; CONDITIONAL only where a parameter acts under a condition (eq 38, peq 215, deq 481); no DEAD, no SILENT | PASS | sweep/module-sweep.md |
+| 6 Host matrix | first sweep run: one REAPER stopped mid-run, later chunks rendered silent; discarded (single-module rerun clean) | void | sweep-failed-run/ |
+| 6 Host matrix | REAPER suite, VST3 1.0.1, 24 parameters: loads, finite, not silent, deterministic, editor opens, parameters change sound and GUI, state round trip, 5 editor cycles | PASS | reaper/report.md |
 | 6 Host matrix | OpenGrid9 headless | pending the move | |
 | 7 Interactive | listening, Pro Tools, Studio One | owner | |
+
+## Fix after the owner's report (2026-11-24): labels on knob rings
+
+Owner: "you have clipping on some words and knobs again ... for example Drive in the classic limiter".
+- Cause: the page-drawn `Knob` (`src/ui/pages/limiter.rs`, used by Classic DRIVE and the Modes MORE gain
+  knobs) had its own geometry (big: centre y+54, r 36; small: y+36, r 20) instead of the cell knobs'
+  (y+59, r 33; y+37, r 17), so its ring ran into the label. Now the same geometry.
+- The text test missed it: it checked text against clips and other text only. `text_is_whole_apart_and_readable`
+  now also checks text on a ring (ON RING), rings cut by their clip (RING CLIPPED) and labels cut to "…"
+  (TRUNCATED; "measuring…" is wording), on every page, both heights, MORE closed and open, every page state.
+  Before the fix it reported DRIVE and the six Modes MORE knobs (INPUT, INPUT L/R, TRIM, TRIM L/R); after: none.
+- Every module page looked at again at 2x (light theme): no other cut text or knob.
+- Rebuilt and installed to the user folders; auval PASS (1.0.1). Not yet host-swept again (UI-only change).
+
+## Fix after the owner's report (2026-11-24): jagged gain reduction
+
+Owner: "the gain reduction is a bit jagged, it might be difficult to understand the real gain reduction".
+- Module pages (GR trace and bar, `src/ui/mod.rs` `tick_slots`): each frame swaps the slot's GR to 0, so a
+  frame with no audio block since the last one read 0 and notched the trace. Now peak, then 60 dB/s fall.
+- History plot (`src/ui/live.rs` `paint_plot`): GR was the raw per-column peak while the levels fell at
+  60 dB/s; GR now uses the same fall. Peaks stay exact; only the recovery shown is limited to 60 dB/s.
+- 75 lib tests PASS; rebuilt, installed to the user folders; auval PASS. Not looked at on screen yet.
+
+## Owner's requests (2026-11-24): radar lines, pop-out windows, multiband GR
+
+- Radar looked hand-drawn: it plotted momentary loudness (400 ms) 20 times a second, a zig-zag on
+  drums, and stroked it along the radius, so steep steps broke into dashes. Now short-term loudness
+  (3 s, the ring in `shared.rs`; momentary readout moved to `loud_now`) and strokes measured across
+  the slope (`live.rs` `paint_radar`). Seen in REAPER on a drum loop: solid lines.
+- Pop-out windows (macOS): buttons in the History and Radar headers open each in its own resizable
+  floating window (`ui/detached.rs`, `ui/popout.rs`). Seen in REAPER: open, live, resize, close, reopen;
+  closing the plug-in window closes them, REAPER kept running. Windows/Linux: buttons hidden (not built).
+  Radar render 66 ms at 1600x1000 @2x, so a big radar redraws at most every 3x its render time.
+- Multiband: the part of a band over its threshold was the pale input grey; now accent. The band
+  read-out (levels, reduction, hold) rises in about 50 ms and falls at 20 dB/s instead of jumping per
+  frame. Checked in a 2x render; not yet seen live in REAPER.
+- 76 lib tests PASS (new: `detached_views_paint_at_any_size`); auval PASS.
+
+## Owner's requests (2026-11-24): pop-outs everywhere, kept, remembered; spectrum in History
+
+- Pop-outs belong to the instance (`ui/pops.rs`), not the editor: they stay open when the plug-in
+  window closes (seen in REAPER) and close when the instance is destroyed (`impl Drop for OpenLimiter`;
+  REAPER quit with a radar open: exited in 1 s, no crash report). The header button toggles the window
+  and is lit while it is open (seen in REAPER).
+- Positions: saved per window in the preferences on close (`pops`), restored on open; seen in REAPER
+  (moved, closed, reopened at the same place). `pref_file` now uses %APPDATA% on Windows and
+  $XDG_CONFIG_HOME or ~/.config on Linux (it was a macOS path everywhere).
+- Windows (`ui/popwin.rs`, the SDK's TopWindow, owned by the host's main window) and Linux
+  (`ui/popx11.rs`, an X11 top level on its own thread holding the SDK view): type-checked with
+  `cargo check --target x86_64-pc-windows-gnu` / `x86_64-unknown-linux-gnu` only. NOT run on either.
+- History: LEVELS | 2D | 3D. The chain's output (after the requantiser, before the listening monitor)
+  goes to a ring every reader can read (`Shared::push_out`); 2D is a spectrogram over the 4 s window,
+  3D a waterfall of 0.2 s averaged, third-octave-smoothed slices that slide back smoothly (the first
+  version, one raw slice per tick, was too fast and jagged: owner). The threshold grip and tag are off
+  in the spectrum modes. Seen live in REAPER (2D and the first 3D); the smoothed 3D in a 2x render.
+- 77 lib tests PASS; auval PASS.
+
+- Rack chips: Alt-click removes the module (as "Remove from chain"); Cmd-click (Ctrl-click on
+  Windows/Linux) resets its settings, keeping it on and in place. Tooltip says so. Test PASS.
+- 3D colours: own scale from the theme's cool colour up (no fade into the background), fills 80% opaque,
+  back slices fade to 65% (owner: needs stronger saturation). Seen in a 2x render.

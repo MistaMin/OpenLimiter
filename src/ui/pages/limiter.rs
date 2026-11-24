@@ -728,11 +728,12 @@ impl Knob {
         i.from_normalized(a + (b - a) * n.clamp(0.0, 1.0))
     }
 
+    /// Same geometry as the cell knobs (`kit::knob_circle`), so the ring clears the label.
     pub fn circle(&self) -> (f32, f32, f32) {
         let (x, y, w, _) = self.rect;
         match self.size {
-            Size::Big => (x + w * 0.5, y + 54.0, 36.0),
-            Size::Small | Size::Mini => (x + w * 0.5, y + 36.0, 20.0),
+            Size::Big => (x + w * 0.5, y + 59.0, 33.0),
+            Size::Small | Size::Mini => (x + w * 0.5, y + 37.0, 17.0),
         }
     }
 

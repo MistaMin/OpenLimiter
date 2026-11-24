@@ -27,3 +27,5 @@ qa/**/hide_pid
 qa/**/reaper.log
 qa/**/load-repro/
 qa/**/reaper-clap-debug*/
+qa/**/*.reapeaks
+qa/**/Backups/

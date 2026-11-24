@@ -1,0 +1,109 @@
+[w0 08:32:26] ready, 1985 parameters
+[w1 08:32:29] ready, 1985 parameters
+[w2 08:32:32] ready, 1985 parameters
+[w3 08:32:35] ready, 1985 parameters
+[w0 08:32:44] deq 725-764: 40 params, 0 suspect, 0 dead, 18 s
+[w1 08:32:47] deq 765-804: 40 params, 0 suspect, 0 dead, 18 s
+[w2 08:32:50] deq 805-844: 40 params, 0 suspect, 0 dead, 18 s
+[w3 08:32:54] deq 845-884: 40 params, 0 suspect, 0 dead, 19 s
+[w0 08:33:29] deq 885-924: 40 params, 40 suspect, 0 dead, 45 s
+[w1 08:33:32] deq 925-964: 40 params, 40 suspect, 0 dead, 44 s
+[w2 08:33:35] deq 965-1004: 40 params, 40 suspect, 0 dead, 44 s
+[w3 08:33:38] deq 1005-1044: 40 params, 40 suspect, 0 dead, 44 s
+[w0 08:33:54] deq 1045-1084: 40 params, 0 suspect, 0 dead, 25 s
+[w1 08:33:57] deq 1085-1124: 40 params, 0 suspect, 0 dead, 25 s
+[w2 08:34:00] deq 1125-1164: 40 params, 0 suspect, 0 dead, 25 s
+[w3 08:34:03] deq 1165-1204: 40 params, 0 suspect, 0 dead, 25 s
+[w1 08:34:45] deq 1245-1284: 40 params, 40 suspect, 0 dead, 48 s
+[w2 08:34:48] deq 1285-1324: 40 params, 40 suspect, 0 dead, 48 s
+[w3 08:34:51] deq 1325-1364: 40 params, 40 suspect, 0 dead, 48 s
+[w0 08:35:07] deq 1205-1244: 40 params, 40 suspect, 0 dead, 73 s
+[w1 08:35:10] deq 1365-1404: 40 params, 0 suspect, 0 dead, 25 s
+[w2 08:35:13] deq 1405-1444: 40 params, 0 suspect, 0 dead, 25 s
+[w3 08:35:16] deq 1445-1484: 40 params, 0 suspect, 0 dead, 25 s
+[w0 08:35:33] deq 1485-1524: 40 params, 0 suspect, 0 dead, 26 s
+[w1 08:35:55] deq 1525-1564: 40 params, 40 suspect, 0 dead, 45 s
+[w2 08:35:59] deq 1565-1604: 40 params, 40 suspect, 0 dead, 46 s
+[w3 08:36:01] deq 1605-1644: 40 params, 40 suspect, 0 dead, 45 s
+[w0 08:36:18] deq 1645-1684: 40 params, 40 suspect, 0 dead, 45 s
+[w1 08:36:20] deq 1685-1724: 40 params, 0 suspect, 0 dead, 25 s
+[w2 08:36:24] deq 1725-1764: 40 params, 0 suspect, 0 dead, 25 s
+[w3 08:36:26] deq 1765-1804: 40 params, 0 suspect, 0 dead, 26 s
+[w1 08:36:26] deq 1815-1815: 1 params, 1 suspect, 0 dead, 6 s
+[w0 08:36:30] deq 1805-1814: 10 params, 0 suspect, 0 dead, 12 s
+[w1 08:36:48] peq 364-403: 40 params, 0 suspect, 0 dead, 22 s
+[w2 08:37:02] peq 284-323: 40 params, 25 suspect, 0 dead, 39 s
+[w3 08:37:16] peq 324-363: 40 params, 40 suspect, 0 dead, 50 s
+[w0 08:37:20] peq 404-443: 40 params, 40 suspect, 0 dead, 50 s
+[w2 08:37:26] peq 484-523: 40 params, 0 suspect, 0 dead, 24 s
+[w1 08:37:38] peq 444-483: 40 params, 40 suspect, 0 dead, 50 s
+[w3 08:37:45] peq 524-563: 40 params, 0 suspect, 0 dead, 29 s
+[w0 08:37:49] peq 564-603: 40 params, 0 suspect, 0 dead, 29 s
+[w0 08:37:53] peq 723-723: 1 params, 1 suspect, 0 dead, 4 s
+[w1 08:38:09] peq 644-683: 40 params, 0 suspect, 0 dead, 31 s
+[w0 08:38:26] eq 51-90: 40 params, 0 suspect, 0 dead, 34 s
+[w2 08:38:27] peq 604-643: 40 params, 40 suspect, 0 dead, 61 s
+[w0 08:38:30] eq 128-128: 1 params, 1 suspect, 0 dead, 4 s
+[w0 08:38:42] bands 263-281: 19 params, 0 suspect, 0 dead, 12 s
+[w0 08:38:43] bands 282-282: 1 params, 0 suspect, 0 dead, 1 s
+[w3 08:38:49] peq 684-722: 39 params, 29 suspect, 0 dead, 63 s
+[w2 08:38:54] bands 223-262: 40 params, 0 suspect, 0 dead, 27 s
+[w2 08:38:55] dual 208-208: 1 params, 0 suspect, 0 dead, 1 s
+[w3 08:38:56] dual 203-207: 5 params, 0 suspect, 0 dead, 7 s
+[w3 08:38:57] smart 1965-1965: 1 params, 0 suspect, 0 dead, 1 s
+[w1 08:38:58] eq 91-127: 37 params, 37 suspect, 0 dead, 48 s
+[w1 08:39:03] hcomp 1873-1873: 1 params, 0 suspect, 0 dead, 5 s
+[w0 08:39:03] dual 163-202: 40 params, 0 suspect, 0 dead, 20 s
+[w0 08:39:04] sup 1843-1843: 1 params, 0 suspect, 0 dead, 1 s
+[w2 08:39:11] smart 1935-1964: 30 params, 0 suspect, 0 dead, 16 s
+[w2 08:39:12] decomp 1896-1896: 1 params, 0 suspect, 0 dead, 1 s
+[w3 08:39:13] hcomp 1845-1872: 28 params, 0 suspect, 0 dead, 16 s
+[w3 08:39:14] classic 20-20: 1 params, 0 suspect, 0 dead, 1 s
+[w0 08:39:16] decomp 1875-1895: 21 params, 0 suspect, 0 dead, 11 s
+[w1 08:39:16] sup 1817-1842: 26 params, 0 suspect, 0 dead, 14 s
+[w0 08:39:16] sone 149-149: 1 params, 0 suspect, 0 dead, 1 s
+[w0 08:39:17] modes 49-49: 1 params, 0 suspect, 0 dead, 1 s
+[w2 08:39:20] classic 0-19: 20 params, 0 suspect, 0 dead, 9 s
+[w2 08:39:21] harm 1933-1933: 1 params, 0 suspect, 0 dead, 1 s
+[w3 08:39:24] sone 130-148: 19 params, 0 suspect, 0 dead, 10 s
+[w3 08:39:24] deexp 1914-1914: 1 params, 0 suspect, 0 dead, 1 s
+[w1 08:39:25] modes 32-48: 17 params, 0 suspect, 0 dead, 8 s
+[w0 08:39:26] harm 1916-1932: 17 params, 0 suspect, 0 dead, 8 s
+[w1 08:39:26] wall 221-221: 1 params, 0 suspect, 0 dead, 1 s
+[w1 08:39:26] clear 161-161: 1 params, 0 suspect, 0 dead, 1 s
+[w2 08:39:29] deexp 1898-1913: 16 params, 0 suspect, 0 dead, 8 s
+[w3 08:39:30] wall 210-220: 11 params, 0 suspect, 0 dead, 6 s
+[w2 08:39:30] shaper 30-30: 1 params, 0 suspect, 0 dead, 1 s
+[w1 08:39:31] shaper 22-29: 8 params, 0 suspect, 0 dead, 4 s
+[w0 08:39:31] clear 151-160: 10 params, 0 suspect, 0 dead, 5 s
+[w2 08:39:31] input 1975-1978: 4 params, 0 suspect, 0 dead, 1 s
+[w1 08:39:32] monitor 1979-1980: 2 params, 0 suspect, 0 dead, 1 s
+[w3 08:39:34] requantise 1967-1974: 8 params, 0 suspect, 0 dead, 4 s
+# OpenLimiter host sweep, one module at a time
+
+VST3: OpenLimiter (OpenGrid), 4 workers, 2 s renders, 7.4 min, 1985 host parameters
+
+| Module | Result counts |
+|---|---|
+| classic | non-audio 2, ok 19 |
+| shaper | ok 9 |
+| modes | ok 18 |
+| eq | CONDITIONAL 38, ok 40 |
+| sone | ok 20 |
+| clear | ok 11 |
+| dual | ok 46 |
+| wall | ok 12 |
+| bands | ok 60 |
+| peq | CONDITIONAL 215, ok 225 |
+| deq | CONDITIONAL 481, ok 610 |
+| sup | ok 27 |
+| hcomp | ok 29 |
+| decomp | ok 22 |
+| deexp | ok 17 |
+| harm | ok 18 |
+| smart | ok 31 |
+| requantise | ok 8 |
+| input | non-audio 2, ok 2 |
+| monitor | ok 2 |
+
+## Not ok

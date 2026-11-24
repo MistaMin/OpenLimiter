@@ -100,31 +100,46 @@ fn band(s: &mut Scene, t: &Theme, ui: &Ui) {
     panel(s, t, HIST_PANEL);
     panel(s, t, RADAR_PANEL);
     title(s, t, HIST_PANEL, "HISTORY");
-    let mut lx = 196.0;
-    for (label, colour) in [("IN", t.in_line), ("OUT", t.out_line), ("GR", t.accent)] {
-        s.fill_round(Rect::new(lx, 67.0, 12.0, 6.0), 2.0, colour, colour, true);
-        s.text(Point::new(lx + 17.0, 70.0), label, t.dim, 9.0, false);
-        lx += 26.0 + text::width(label, 9.0) + 10.0;
-    }
+    let mode = ui.hist_mode;
+    segmented(s, t, super::HIST_MODE, &["LEVELS", "2D", "3D"], mode as usize);
     s.fill_rect(rect(PLOT), t.plot_bg, t.plot_bg, true);
-    let mut level = PLOT_TOP_DB;
-    while level >= PLOT_TOP_DB - PLOT_SPAN_DB {
-        let y = PLOT.1 + live::plot_y(level, PLOT);
-        let label = if level == 0.0 { "0".to_string() } else { format!("{level:+.0}") };
-        text_right(s, PLOT.0 - 6.0, y, &label, if level == 0.0 { t.text } else { t.dim }, 9.0);
-        let depth = PLOT_TOP_DB - level;
-        let label = if depth == 0.0 { "0".to_string() } else { format!("-{depth:.0}") };
-        s.text(Point::new(PLOT.0 + PLOT.2 + 6.0, y), label, t.accent.with_alpha(0.75), 9.0, false);
-        level -= 6.0;
+    if mode == 0 {
+        let mut lx = 196.0;
+        for (label, colour) in [("IN", t.in_line), ("OUT", t.out_line), ("GR", t.accent)] {
+            s.fill_round(Rect::new(lx, 67.0, 12.0, 6.0), 2.0, colour, colour, true);
+            s.text(Point::new(lx + 17.0, 70.0), label, t.dim, 9.0, false);
+            lx += 26.0 + text::width(label, 9.0) + 10.0;
+        }
+        let mut level = PLOT_TOP_DB;
+        while level >= PLOT_TOP_DB - PLOT_SPAN_DB {
+            let y = PLOT.1 + live::plot_y(level, PLOT);
+            let label = if level == 0.0 { "0".to_string() } else { format!("{level:+.0}") };
+            text_right(s, PLOT.0 - 6.0, y, &label, if level == 0.0 { t.text } else { t.dim }, 9.0);
+            let depth = PLOT_TOP_DB - level;
+            let label = if depth == 0.0 { "0".to_string() } else { format!("-{depth:.0}") };
+            s.text(Point::new(PLOT.0 + PLOT.2 + 6.0, y), label, t.accent.with_alpha(0.75), 9.0, false);
+            level -= 6.0;
+        }
+    } else {
+        s.text(Point::new(196.0, 70.0), "OUTPUT SPECTRUM", t.dim, 9.0, false);
+        for (x, y, label, right) in super::spectro::labels(mode, PLOT) {
+            if right {
+                text_right(s, x, y, &label, t.dim, 9.0);
+            } else {
+                s.text(Point::new(x, y), label, t.dim, 9.0, true);
+            }
+        }
     }
-    for sec in 0..=WINDOW_S as usize {
-        let x = PLOT.0 + PLOT.2 * (1.0 - sec as f32 / WINDOW_S);
-        let label = if sec == 0 { "now".to_string() } else { format!("-{sec} s") };
-        let y = PLOT.1 + PLOT.3 + 13.0;
-        if sec == 0 {
-            text_right(s, x, y, &label, t.dim, 9.0);
-        } else {
-            s.text(Point::new(x, y), label, t.dim, 9.0, sec != WINDOW_S as usize);
+    if mode != 2 {
+        for sec in 0..=WINDOW_S as usize {
+            let x = PLOT.0 + PLOT.2 * (1.0 - sec as f32 / WINDOW_S);
+            let label = if sec == 0 { "now".to_string() } else { format!("-{sec} s") };
+            let y = PLOT.1 + PLOT.3 + 13.0;
+            if sec == 0 {
+                text_right(s, x, y, &label, t.dim, 9.0);
+            } else {
+                s.text(Point::new(x, y), label, t.dim, 9.0, sec != WINDOW_S as usize);
+            }
         }
     }
     title(s, t, RADAR_PANEL, "LOUDNESS RADAR");
@@ -143,6 +158,25 @@ fn band(s: &mut Scene, t: &Theme, ui: &Ui) {
     s.line(Point::new(x + 46.0, y), Point::new(x + 58.0, y), t.text, 1.5);
     s.text(Point::new(x + 63.0, y), "IN", t.dim, 8.5, false);
     chevron(s, t, true);
+    if super::CAN_POP {
+        for (r, on) in [(super::HIST_POP, ui.popped[0]), (super::RADAR_POP, ui.popped[1])] {
+            pop_icon(s, t, r, on);
+        }
+    }
+}
+
+/// A window with an arrow out of it: opens the panel in its own window.
+fn pop_icon(s: &mut Scene, t: &Theme, r: R, on: bool) {
+    if on {
+        s.fill_round(rect(r), 5.0, t.accent, t.accent, true);
+    } else {
+        kit::inset(s, t, r, 5.0);
+    }
+    let ink = if on { t.on_accent } else { t.text };
+    let (x, y) = (r.0 + r.2 * 0.5 - 5.0, r.1 + r.3 * 0.5 - 4.0);
+    s.stroke_poly(vec![Point::new(x + 4.0, y), Point::new(x, y), Point::new(x, y + 9.0), Point::new(x + 9.0, y + 9.0), Point::new(x + 9.0, y + 5.0)], ink, 1.2, false);
+    s.line(Point::new(x + 5.0, y + 4.0), Point::new(x + 10.5, y - 1.5), ink, 1.2);
+    s.stroke_poly(vec![Point::new(x + 7.0, y - 1.5), Point::new(x + 10.5, y - 1.5), Point::new(x + 10.5, y + 2.0)], ink, 1.2, false);
 }
 
 fn title(s: &mut Scene, t: &Theme, panel: R, label: &str) {

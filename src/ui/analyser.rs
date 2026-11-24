@@ -51,7 +51,7 @@ pub struct Spectrum {
     re: Vec<f32>,
     im: Vec<f32>,
     smooth: f32,
-    decay_db_s: f32,
+    pub decay_db_s: f32,
 }
 
 pub const SPECTRUM_FLOOR: f32 = -120.0;

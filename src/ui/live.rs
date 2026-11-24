@@ -147,8 +147,12 @@ pub fn paint(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, k: f32, lut: &[(f
             paint_plot(ui, f, t, k, RIBBON, false);
             paint_loud_ribbon(ui, f, glyphs, t, k);
         } else {
-            paint_plot(ui, f, t, k, PLOT, true);
-            paint_radar(ui, f, glyphs, t, k, lut);
+            match ui.hist_mode {
+                0 => paint_plot(ui, f, t, k, PLOT, true),
+                1 => super::spectro::paint_2d(&ui.spec, f, t, k, PLOT),
+                _ => super::spectro::paint_3d(&ui.spec, f, t, k, PLOT),
+            }
+            paint_radar(ui, f, glyphs, t, k, lut, (RADAR_C, RADAR_R));
             paint_band_marks(ui, f, glyphs, t, k, threshold, limiting);
         }
     }
@@ -165,7 +169,7 @@ fn paint_band_marks(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme,
     }
     f.round(chip, 5.0 * k, k, if active { t.accent } else { t.border }, if active { 0.6 } else { 1.0 });
     f.text(glyphs, (GR_CHIP.0 + GR_CHIP.2 * 0.5) * k, (GR_CHIP.1 + GR_CHIP.3 * 0.5) * k, &format!("CHAIN GR {:.1}", -gr.max(0.0) + 0.0), 9.5 * k, if active { t.accent } else { t.dim }, Align::Centre);
-    if !ui.first_on() {
+    if !ui.first_on() || ui.hist_mode != 0 {
         return;
     }
     let soft = ui.value(P_SOFT_CLIP);
@@ -198,7 +202,7 @@ fn paint_band_marks(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme,
 }
 
 /// The history: input and output as filled areas, gain reduction hanging from the top.
-fn paint_plot(ui: &Ui, f: &mut Target, t: &Theme, k: f32, plot: R, grid_lines: bool) {
+pub(super) fn paint_plot(ui: &Ui, f: &mut Target, t: &Theme, k: f32, plot: R, grid_lines: bool) {
     let (x0, y0) = ((plot.0 * k).round() as usize, (plot.1 * k).round() as usize);
     let (w, h) = ((plot.2 * k).round().max(1.0) as usize, (plot.3 * k).round().max(1.0) as usize);
     if x0 + w > f.w || y0 + h > f.h {
@@ -235,16 +239,17 @@ fn paint_plot(ui: &Ui, f: &mut Target, t: &Theme, k: f32, plot: R, grid_lines: b
     // Levels fall like a meter's (60 dB/s) between peaks: the peaks stay exact and the trace
     // between them reads as a line instead of a fence of 5 ms spikes.
     let fall = 60.0 * WINDOW_S / w as f32;
-    let mut held = (f32::MIN, f32::MIN);
+    // Gain reduction recovers at the same rate, so it reads as one envelope, not per-block teeth.
+    let mut held = (f32::MIN, f32::MIN, 0.0f32);
     let columns: Vec<(f32, f32, f32)> = columns
         .into_iter()
         .map(|c| {
             if c == none {
-                held = (f32::MIN, f32::MIN);
+                held = (f32::MIN, f32::MIN, 0.0);
                 return none;
             }
-            held = (c.0.max(held.0 - fall), c.1.max(held.1 - fall));
-            (y_of(held.0), y_of(held.1), c.2 / PLOT_SPAN_DB * h as f32)
+            held = (c.0.max(held.0 - fall), c.1.max(held.1 - fall), c.2.max(held.2 - fall));
+            (y_of(held.0), y_of(held.1), held.2 / PLOT_SPAN_DB * h as f32)
         })
         .collect();
     let bg = rgb(t.plot_bg);
@@ -370,14 +375,14 @@ fn paint_loud_ribbon(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme
 }
 
 /// The radar: momentary loudness around a clock face, one turn per `RADAR_SLOTS` entries.
-fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f32, lut: &[(f32, f32)]) {
-    let (x0, y0, side) = radar_box(k, RADAR_C, RADAR_R);
+pub(super) fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f32, lut: &[(f32, f32)], (centre, radius): ((f32, f32), f32)) {
+    let (x0, y0, side) = radar_box(k, centre, radius);
     if lut.len() != side * side || x0 + side > f.w || y0 + side > f.h {
         return;
     }
     let n = RADAR_SLOTS;
     let target = ui.target();
-    let rk = RADAR_R * k;
+    let rk = radius * k;
     let mut slots = vec![(0.0f32, 0.0f32, u32::MAX); n];
     for (age, &(input, output)) in ui.loud_hist.iter().rev().enumerate().take(n.min(ui.loud_count)) {
         slots[(ui.loud_count - 1 - age) % n] = (loud_norm(input, target) * rk, loud_norm(output, target) * rk, age as u32);
@@ -405,20 +410,23 @@ fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f
             let s0 = (e.floor() as isize).rem_euclid(n as isize) as usize;
             let (p, q) = (slots[s0], slots[(s0 + 1) % n]);
             let m = e - e.floor();
+            // Distance to a trace across its slope, not along the radius: a steep step between slots
+            // otherwise thins the stroke into broken dashes.
+            let across = |dr: f32| (1.0 + (dr * n as f32 / (std::f32::consts::TAU * d.max(1.0))).powi(2)).sqrt().recip();
             let value = if p.2 != u32::MAX && q.2 != u32::MAX && p.2.abs_diff(q.2) == 1 {
-                Some((p.0 + (q.0 - p.0) * m, p.1 + (q.1 - p.1) * m, p.2))
+                Some((p.0 + (q.0 - p.0) * m, p.1 + (q.1 - p.1) * m, p.2, across(q.0 - p.0), across(q.1 - p.1)))
             } else {
                 let near = if m < 0.5 { p } else { q };
-                (near.2 != u32::MAX).then_some(near)
+                (near.2 != u32::MAX).then_some((near.0, near.1, near.2, 1.0, 1.0))
             };
-            if let Some((r_in, r_out, age)) = value {
+            if let Some((r_in, r_out, age, k_in, k_out)) = value {
                 let fade = 1.0 - 0.4 * age as f32 / n as f32;
                 if r_out > 0.5 {
                     c = blend(c, colour_at(d), (r_out - d + 0.5).clamp(0.0, 1.0) * 0.6 * fade);
-                    c = blend(c, colour_at(r_out), (line + 0.3 - (d - r_out).abs()).clamp(0.0, 1.0) * (0.4 + 0.6 * fade));
+                    c = blend(c, colour_at(r_out), (line + 0.3 - (d - r_out).abs() * k_out).clamp(0.0, 1.0) * (0.4 + 0.6 * fade));
                 }
                 if r_in > 0.5 {
-                    c = blend(c, t.text, (line - (d - r_in).abs()).clamp(0.0, 1.0) * (0.55 + 0.4 * fade));
+                    c = blend(c, t.text, (line - (d - r_in).abs() * k_in).clamp(0.0, 1.0) * (0.55 + 0.4 * fade));
                 }
             }
             // The target ring: 60 dashes, their ends anti-aliased along the arc.
@@ -432,12 +440,12 @@ fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f
         }
     }
     for (lu, colour) in [(0.0, t.accent), (-12.0, t.dim), (-24.0, t.dim)] {
-        let y = RADAR_C.1 - (RADAR_BELOW + lu) / RADAR_SPAN * RADAR_R + 7.0;
+        let y = centre.1 - (RADAR_BELOW + lu) / RADAR_SPAN * radius + 7.0;
         let label = format!("{:.0}", target + lu);
         // A plate under the number, so it reads over the coloured fill.
         let w = openplugin::dri::goodlookindri_shell::text::width(&label, 9.0) + 6.0;
-        f.round(((RADAR_C.0 + 1.0) * k, (y - 6.5) * k, w * k, 13.0 * k), 3.0 * k, 0.0, t.plot_bg, 0.85);
-        f.text(glyphs, (RADAR_C.0 + 4.0) * k, y * k, &label, 9.0 * k, colour, Align::Left);
+        f.round(((centre.0 + 1.0) * k, (y - 6.5) * k, w * k, 13.0 * k), 3.0 * k, 0.0, t.plot_bg, 0.85);
+        f.text(glyphs, (centre.0 + 4.0) * k, y * k, &label, 9.0 * k, colour, Align::Left);
     }
 }
 

@@ -235,8 +235,14 @@ static THEME: AtomicU8 = AtomicU8::new(u8::MAX);
 static TARGET: AtomicU8 = AtomicU8::new(u8::MAX);
 
 pub fn pref_file(name: &str) -> Option<std::path::PathBuf> {
-    let home = std::env::var_os("HOME")?;
-    Some(std::path::Path::new(&home).join("Library/Application Support/OpenGrid/OpenLimiter").join(name))
+    let base = if cfg!(target_os = "windows") {
+        std::path::PathBuf::from(std::env::var_os("APPDATA")?)
+    } else if cfg!(target_os = "macos") {
+        std::path::Path::new(&std::env::var_os("HOME")?).join("Library/Application Support")
+    } else {
+        std::env::var_os("XDG_CONFIG_HOME").map(std::path::PathBuf::from).or_else(|| Some(std::path::Path::new(&std::env::var_os("HOME")?).join(".config")))?
+    };
+    Some(base.join("OpenGrid/OpenLimiter").join(name))
 }
 
 fn theme_file() -> Option<std::path::PathBuf> {
