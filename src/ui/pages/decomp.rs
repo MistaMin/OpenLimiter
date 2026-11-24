@@ -147,7 +147,7 @@ pub(super) fn lift_scale(s: &mut Scene, t: &Theme, r: R, scale: f32) {
         let yy = y + h - d / scale * h;
         s.line(Point::new(x + 16.0, yy), Point::new(x + 19.0, yy), t.grid_strong, 1.0);
         if (d as i32) % (every as i32) == 0 && d > 0.0 {
-            s.text(Point::new(x + 20.0, yy), format!("+{d:.0}"), t.dim, 7.5, false);
+            s.text(Point::new(x + 20.0, yy), format!("+{d:.0}"), t.dim, 8.0, false);
         }
         d += tick;
     }
@@ -166,7 +166,7 @@ pub(super) fn lift_meter(s: &mut Scene, t: &Theme, r: R, lift: f32, hold: f32, s
         s.line(Point::new(x, y + h - hy), Point::new(x + 14.0, y + h - hy), t.text, 1.5);
     }
     if lift > scale + 0.05 {
-        s.text(Point::new(x + 7.0, y + 6.0), "▲", t.panel, 7.0, true);
+        s.text(Point::new(x + 7.0, y + 6.0), "▲", t.panel, 8.0, true);
     }
 }
 
@@ -476,15 +476,10 @@ impl Decomp {
         let (lifted, capped) = pts(thr, range);
         s.clip_round(kit::rect(CURVE), 4.0);
         // Lift: the area between unity and the curve.
-        let mut poly = lifted.clone();
-        poly.push(Point::new(m.x(0.0), m.y(0.0)));
-        poly.push(Point::new(m.x(-60.0), m.y(-60.0)));
-        s.fill_poly(poly, lift_fill(t), lift_fill(t));
+        kit::between(s, &lifted, &[Point::new(m.x(-60.0), m.y(-60.0)), Point::new(m.x(0.0), m.y(0.0))], lift_fill(t));
         // What the ceiling cuts off.
         if ceil_on {
-            let mut cut = lifted.clone();
-            cut.extend(capped.iter().rev());
-            s.fill_poly(cut, t.accent.with_alpha(0.2), t.accent.with_alpha(0.2));
+            kit::between(s, &lifted, &capped, t.accent.with_alpha(0.2));
         }
         // Match: the set range as a dashed line above the curve Match uses.
         if cx.on(ix::MATCH) && (cx.v(ix::RANGE) - range).abs() > 0.05 {
@@ -659,7 +654,7 @@ impl Page for Decomp {
             let tag = if i < 2 { format!("▲{label}") } else { (*label).to_string() };
             // Between two labelled ticks: 3 dB up from the bottom, 9 dB down from the top.
             let y = if i < 2 { r.1 + r.3 * (1.0 - 3.0 / scale) } else { r.1 + r.3 * 0.75 };
-            s.text(Point::new(r.0 + 28.0, y), tag, t.text, 7.0, true);
+            s.text(Point::new(r.0 + 28.0, y), tag, t.text, 8.0, true);
         }
         let ln = Lanes::new(top);
         kit::plot(s, t, (TRACE_X, top, TRACE_W, 616.0 - top));

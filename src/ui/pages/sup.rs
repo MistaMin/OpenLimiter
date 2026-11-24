@@ -345,9 +345,8 @@ impl Page for Sup {
         let lane = Self::lane(cx);
         s.line(Point::new(lane.0, lane.1 + lane.3), Point::new(lane.0 + lane.2, lane.1 + lane.3), t.grid_strong, 1.0);
         kit::text_right(s, plot.0 - 4.0, lane.1 + 6.0, "0", t.dim, 8.5);
-        // The lane's half-scale mark: its full-scale mark would sit on the spectrum's "+0".
-        let half = SCALES[self.scale] * 0.5;
-        kit::text_right(s, plot.0 - 4.0, self.lane_y(cx, half), &format!("-{half:.0}"), t.dim, 8.5);
+        // No scale mark inside the lane: at 1x it ran into the spectrum's "+0"; the header's
+        // -6 / -12 / -24 switch shows the lane's scale.
         let m = Self::meter(cx);
         kit::gr_scale(s, t, m, SCALES[self.scale]);
         if cx.more {
@@ -438,14 +437,14 @@ impl Page for Sup {
         kit::gr_meter(s, t, m, live.gr, self.hold.0, SCALES[self.scale]);
         let mb = Self::max_box(cx);
         kit::inset(s, t, mb, 4.0);
-        s.text(kit::rect(mb).center(), format!("{:.1}", -self.max.0), t.text, 9.5, true);
+        s.text(kit::rect(mb).center(), format!("{:.1}", -self.max.0 + 0.0), t.text, 9.5, true);
         g::paint_switch(s, t, Self::show_rect(cx), SHOW_KEYS, show, true);
         g::paint_switch(s, t, Self::scale_rect(cx), SCALE_KEYS, self.scale, true);
         let key_on = cx.key_present && live.key.0;
         g::paint_key_chip(s, t, Self::key_chip(cx), key_on, live.key.1, cx.on(P_SIDECHAIN));
         if !cx.more {
             let at = if self.max.0 > 0.05 { format!("at {}", g::hz_text(self.max.1)) } else { "no cut yet".into() };
-            g::paint_readout(s, t, READOUT, &[(format!("MAX {:.1} dB", -self.max.0), t.text, 13.0), (at, t.dim, 9.5)]);
+            g::paint_readout(s, t, READOUT, &[(format!("MAX {:.1} dB", -self.max.0 + 0.0), t.text, 13.0), (at, t.dim, 9.5)]);
             g::paint_key_meter(s, t, KEY_METER, key_on, live.key.1);
         }
     }

@@ -146,9 +146,7 @@ pub(crate) fn fill_between(s: &mut Scene, upper: &[Point], lower: &[Point], c: C
     if upper.len() < 2 || upper.len() != lower.len() {
         return;
     }
-    let mut poly = upper.to_vec();
-    poly.extend(lower.iter().rev());
-    s.fill_poly(poly, c, c);
+    kit::between(s, upper, lower, c);
 }
 
 /// A graph node: a disc in the band colour with its number, a ring when selected, faded

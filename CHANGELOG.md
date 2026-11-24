@@ -1,6 +1,16 @@
 # Changelog
 
-## 1.0.0 Beta (2026-11-23)
+## 1.0.1 Beta (2026-11-24)
+
+- Editor: the analyser pages draw 20 to 100 times faster (SimplEQ 1.2 s to 15 ms a frame at Retina size, PrecisionEQ 2 s to 18 ms); long curves, fills and hatching are drawn in short pieces, and a page's moving parts are repainted in one pass.
+- Loudness (LUFS, LU) and RMS readouts show whole numbers, so they no longer flicker; true peak keeps its tenth.
+- History: each column shows the peak of a fixed stretch of time and scrolls in whole columns, so peaks no longer change shape as they move; levels fall at 60 dB/s between peaks. Loudness radar: wider lines, anti-aliased target dashes, less fading, level labels on a plate.
+- Multiband IN / GR / OUT and the per-band reduction, and Punch & Energy's LIFT / PUNCH / CLIP, read in whole dB. No readout shows "-0.0".
+- No text below 8 pt; Suppressor's lane mark that ran into the spectrum scale is gone.
+- Meter scales in text ink (the grey all but vanished on the light theme); the GR scale at full colour; SOFT CLIP in the history on a plate.
+- Text is Source Sans Pro Semibold, the GoodLookin DRI standard, with light-on-dark edges lifted.
+
+## 1.0.0 Beta (2026-11-23, not published)
 
 First public release.
 

@@ -1,7 +1,7 @@
 [package]
 name = "openlimiter"
 description = "OpenLimiter: a modular mastering chain on OpenPluginSDK with GoodLookin DRI"
-version = "1.0.0-beta"
+version = "1.0.1-beta"
 edition = "2021"
 publish = false
 
@@ -28,6 +28,12 @@ dyn-deexpand = { path = "crates/dyn-deexpand" }
 harmonics = { path = "crates/harmonics" }
 limiter-smart = { path = "crates/limiter-smart" }
 openplugin = { path = "../../Dependencies/OpenPluginSDK/crates/openplugin" }
+
+# GoodLookin DRI after v0.2.1: Source Sans Pro Semibold and lifted light-on-dark edges (3fe0426),
+# the toolkit's text standard. The SDK pins the tag; this takes the checkout beside it.
+[patch."https://github.com/MistaMin/GoodLookinDri"]
+goodlookindri = { path = "../../Dependencies/GoodLookinDri" }
+goodlookindri-shell = { path = "../../Dependencies/GoodLookinDri/shell" }
 
 # Keep this project out of any parent workspace.
 [workspace]

@@ -172,9 +172,7 @@ fn band(s: &mut Scene, top: &[Point], bottom: &[Point], c: C) {
     if top.len() < 2 || top.len() != bottom.len() {
         return;
     }
-    let mut poly = top.to_vec();
-    poly.extend(bottom.iter().rev().copied());
-    s.fill_poly(poly, c, c);
+    kit::between(s, top, bottom, c);
 }
 
 /// A bracket that opens downward onto the controls under it, caption in the middle.
@@ -801,7 +799,7 @@ impl Page for Smart {
             } else {
                 s.text(Point::new(rp.0 + 8.0, rp.1 + 12.0), "RECOVERY", t.dim, 9.0, false);
             }
-            s.text(Point::new(rp.0 + 8.0, rp.1 + 196.0 - 4.0), "thin 5 ms peak · thick 500 ms", t.dim, 7.5, false);
+            s.text(Point::new(rp.0 + 8.0, rp.1 + 196.0 - 4.0), "thin 5 ms peak · thick 500 ms", t.dim, 8.0, false);
             let _ = rp;
             if cx.on(idx::AUTO_RELEASE) {
                 let rel = cx.v(idx::RELEASE);
@@ -916,7 +914,7 @@ impl Page for Smart {
                 for (k, f) in sp.iter().enumerate() {
                     s.text(Point::new(1040.0, 662.0 + 16.0 * k as f32), hz_text(*f as f32), t.text, 10.0, true);
                 }
-                s.text(Point::new(1040.0, 708.0), "edit in MORE", t.dim, 7.5, true);
+                s.text(Point::new(1040.0, 708.0), "edit in MORE", t.dim, 8.0, true);
             }
             _ => {}
         }
@@ -1196,7 +1194,7 @@ fn paint_curve(s: &mut Scene, cx: &Ctx, g: &Geo, view: &[f32], e: usize, delta: 
         PUNCH => {
             let y = curve_xy(p, 0.0, cf + hr as f32).y;
             kit::dashed_h(s, p.0, p.0 + p.2, y, 3.0, 3.0, t.dim, 1.0);
-            s.text(Point::new(p.0 + 6.0, y + 7.0), "LIMIT", t.dim, 7.5, false);
+            s.text(Point::new(p.0 + 6.0, y + 7.0), "LIMIT", t.dim, 8.0, false);
         }
         PURE if cx.choice(idx::SLOW_MODE) == 0 => {
             // The wedge above the ceiling, split into what the body and the peak lane take.
@@ -1216,8 +1214,8 @@ fn paint_curve(s: &mut Scene, cx: &Ctx, g: &Geo, view: &[f32], e: usize, delta: 
                 let last = split[split.len() - 1];
                 let y_c = curve_xy(p, 0.0, cf).y;
                 if last.y < y_c - 22.0 {
-                    kit::text_right(s, last.x - 4.0, (last.y + y_c) * 0.5, "PEAK", t.dim, 7.5);
-                    kit::text_right(s, last.x - 4.0, last.y - 8.0, "BODY", t.dim, 7.5);
+                    kit::text_right(s, last.x - 4.0, (last.y + y_c) * 0.5, "PEAK", t.dim, 8.0);
+                    kit::text_right(s, last.x - 4.0, last.y - 8.0, "BODY", t.dim, 8.0);
                 }
             }
         }
@@ -1225,7 +1223,7 @@ fn paint_curve(s: &mut Scene, cx: &Ctx, g: &Geo, view: &[f32], e: usize, delta: 
             let th = cf - cx.v(idx::CREST_HEADROOM);
             let y = curve_xy(p, 0.0, th).y;
             s.line(Point::new(p.0, y), Point::new(p.0 + 8.0, y), t.dim, 1.5);
-            s.text(Point::new(p.0 + 11.0, y), "CREST", t.dim, 7.5, false);
+            s.text(Point::new(p.0 + 11.0, y), "CREST", t.dim, 8.0, false);
             let loud = v(view, view::SLOW_LOUDNESS);
             if loud > CURVE_LO && !delta {
                 s.fill_ellipse_solid(Scene::ellipse_at(curve_xy(p, (loud - drive as f32).min(0.0), CURVE_LO - 0.0).translated_y(-3.0), 3.0), t.warm);
@@ -1346,8 +1344,8 @@ fn paint_trace(s: &mut Scene, cx: &Ctx, page: &Smart, g: &Geo, live: &Live, e: u
                 let x = w[1].0;
                 s.line(Point::new(x, tr.1), Point::new(x, tr.1 + 14.0), t.text, 1.0);
                 let label = format!("{} {}", SHORT[w[0].1.engine as usize], SHORT[w[1].1.engine as usize]);
-                let lx = (x + 3.0).min(tr.0 + tr.2 - text::width(&label, 7.5) - 2.0);
-                s.text(Point::new(lx, tr.1 + 8.0), label, t.text, 7.5, false);
+                let lx = (x + 3.0).min(tr.0 + tr.2 - text::width(&label, 8.0) - 2.0);
+                s.text(Point::new(lx, tr.1 + 8.0), label, t.text, 8.0, false);
             }
         }
         // The trim lane: where the shared trim acted.
@@ -1362,7 +1360,7 @@ fn paint_trace(s: &mut Scene, cx: &Ctx, page: &Smart, g: &Geo, live: &Live, e: u
     s.pop_clip();
     let lane_y = tr.1 + tr.3 - 6.0;
     s.line(Point::new(tr.0, lane_y), Point::new(tr.0 + tr.2, lane_y), t.grid_strong, 1.0);
-    s.text(Point::new(tr.0 + 4.0, lane_y - 5.0), if cx.on(idx::TRUE_PEAK) { "TP TRIM" } else { "PEAK TRIM" }, t.dim, 7.5, false);
+    s.text(Point::new(tr.0 + 4.0, lane_y - 5.0), if cx.on(idx::TRUE_PEAK) { "TP TRIM" } else { "PEAK TRIM" }, t.dim, 8.0, false);
     // Legend chips for the layers this engine has.
     if !page.trace_ch {
         let chips: &[(&str, C)] = match e {
@@ -1372,13 +1370,13 @@ fn paint_trace(s: &mut Scene, cx: &Ctx, page: &Smart, g: &Geo, live: &Live, e: u
             GLIDE => &[("PEAK", t.accent.with_alpha(0.5))],
             _ => &[("TOTAL", t.accent.with_alpha(0.4)), ("SLOW", t.text.with_alpha(0.7))],
         };
-        let width: f32 = chips.iter().map(|(l, _)| 16.0 + text::width(l, 7.5)).sum();
+        let width: f32 = chips.iter().map(|(l, _)| 16.0 + text::width(l, 8.0)).sum();
         let mut x = tr.0 + tr.2 - 4.0 - width;
         let yy = tr.1 + tr.3 - 14.0;
         for (label, c) in chips {
             s.fill_round(Rect::new(x, yy - 3.5, 7.0, 7.0), 1.5, *c, *c, true);
-            s.text(Point::new(x + 10.0, yy), *label, t.dim, 7.5, false);
-            x += 16.0 + text::width(label, 7.5);
+            s.text(Point::new(x + 10.0, yy), *label, t.dim, 8.0, false);
+            x += 16.0 + text::width(label, 8.0);
         }
     }
     // Title read-out.
@@ -1518,7 +1516,7 @@ fn paint_detail(s: &mut Scene, cx: &Ctx, page: &Smart, e: usize, dp: R, p: R, vi
             } else {
                 s.stroke_round(lamp, 6.5, t.border, 1.0);
             }
-            s.text(lamp.center(), "HELD", if held { t.on_accent } else { t.dim }, 7.5, true);
+            s.text(lamp.center(), "HELD", if held { t.on_accent } else { t.dim }, 8.0, true);
             s.text(Point::new(strip.0 + 4.0, strip.1 + 9.0), format!("slow {:.1} dB", v(view, view::SLOW_GAIN).min(0.0)), t.dim, 8.0, false);
             // post-hold bar
             let post = v(view, view::POST_HOLD_MS).clamp(0.0, 20.0);
@@ -1640,7 +1638,7 @@ fn paint_detail(s: &mut Scene, cx: &Ctx, page: &Smart, e: usize, dp: R, p: R, vi
             }
             if Smart::ms(cx) {
                 let x = Smart::band_x(p, 20.0) + 4.0;
-                s.text(Point::new(x, p.1 + p.3 - 8.0), "LINKED", t.dim, 7.5, false);
+                s.text(Point::new(x, p.1 + p.3 - 8.0), "LINKED", t.dim, 8.0, false);
             }
             s.pop_clip();
             let label = sp.iter().map(|f| hz_text(*f as f32)).collect::<Vec<_>>().join(" · ");
@@ -1672,13 +1670,13 @@ fn paint_detail(s: &mut Scene, cx: &Ctx, page: &Smart, e: usize, dp: R, p: R, vi
             if early > -1.0 {
                 let ex = x(early);
                 kit::dashed(s, &[Point::new(ex, p.1), Point::new(ex, p.1 + p.3)], 3.0, 2.0, t.text, 1.0);
-                s.text(Point::new(ex + 3.0, p.1 + p.3 - 8.0), "2.5 ms", t.text, 7.5, false);
+                s.text(Point::new(ex + 3.0, p.1 + p.3 - 8.0), "2.5 ms", t.text, 8.0, false);
             }
             s.pop_clip();
             // the lookahead bracket under the first burst
             let (a, z) = (x(-1.0), x(0.0));
             s.line(Point::new(a, p.1 + p.3 - 3.0), Point::new(z, p.1 + p.3 - 3.0), t.text, 1.0);
-            s.text(Point::new(a + 3.0, p.1 + p.3 - 10.0), "L", t.text, 7.5, false);
+            s.text(Point::new(a + 3.0, p.1 + p.3 - 10.0), "L", t.text, 8.0, false);
             kit::text_right(s, dp.0 + dp.2 - 8.0, dp.1 + 12.0, &format!("L = {} · thin: needed", ms_text(o.lookahead_ms)), t.text, 9.0);
         }
     }
@@ -1708,7 +1706,7 @@ fn paint_more(s: &mut Scene, cx: &Ctx, e: usize, view: &[f32]) {
         PURE => {
             let crest = Smart::crest_mode(cx);
             let note = if crest { (768.0, "used by Peak Body") } else { (864.0, "used by Loudness Crest") };
-            s.text(Point::new(note.0 + 40.0, 738.0), note.1, t.dim, 7.5, true);
+            s.text(Point::new(note.0 + 40.0, 738.0), note.1, t.dim, 8.0, true);
         }
         _ => {}
     }

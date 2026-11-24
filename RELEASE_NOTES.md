@@ -1,4 +1,4 @@
-# OpenLimiter 1.0.0-Beta
+# OpenLimiter 1.0.1-Beta
 
 The first public release of OpenLimiter, a modular mastering chain by OpenGrid:
 seventeen modules you switch on, order and set in one plugin, ending in a
@@ -9,9 +9,9 @@ printed. This is a beta.
 
 | Download | System | Formats |
 |---|---|---|
-| `OpenLimiter-1.0.0-Beta-macos.pkg` | macOS 11 or later, Apple silicon and Intel (universal) | VST3, Audio Unit, CLAP, LV2, AAX |
-| `OpenLimiter-1.0.0-Beta-windows-x64-setup.exe` | Windows 10 or later, x64 | VST3, CLAP |
-| `OpenLimiter-1.0.0-Beta-linux-x86_64.tar.gz` | Linux x86_64 | CLAP, LV2 (no editor) |
+| `OpenLimiter-1.0.1-Beta-macos.pkg` | macOS 11 or later, Apple silicon and Intel (universal) | VST3, Audio Unit, CLAP, LV2, AAX |
+| `OpenLimiter-1.0.1-Beta-windows-x64-setup.exe` | Windows 10 or later, x64 | VST3, CLAP |
+| `OpenLimiter-1.0.1-Beta-linux-x86_64.tar.gz` | Linux x86_64 | CLAP, LV2 (no editor) |
 
 ## Install
 
@@ -56,8 +56,8 @@ printed. This is a beta.
 
 ## Files
 
-- `OpenLimiter-1.0.0-Beta-macos.pkg` and `.sha256`
-- `OpenLimiter-1.0.0-Beta-windows-x64-setup.exe` and `.sha256`
-- `OpenLimiter-1.0.0-Beta-linux-x86_64.tar.gz` and `.sha256`
-- `OpenLimiter-1.0.0-Beta-User-Manual.pdf`
+- `OpenLimiter-1.0.1-Beta-macos.pkg` and `.sha256`
+- `OpenLimiter-1.0.1-Beta-windows-x64-setup.exe` and `.sha256`
+- `OpenLimiter-1.0.1-Beta-linux-x86_64.tar.gz` and `.sha256`
+- `OpenLimiter-1.0.1-Beta-User-Manual.pdf`
 - `opengrid-manifest.json`

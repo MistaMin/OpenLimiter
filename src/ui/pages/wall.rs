@@ -95,7 +95,7 @@ impl Page for Wall {
             let r = kit::rect(AUTO_TAG);
             s.fill_round(r, 6.5, t.inset, t.inset, true);
             s.stroke_round(r, 6.5, t.accent, 1.0);
-            s.text(r.center(), "AUTO", t.accent, 7.5, true);
+            s.text(r.center(), "AUTO", t.accent, 8.0, true);
         }
         let _ = text::width("", 9.0);
     }

@@ -17,7 +17,7 @@ made to be the last plugin before the master is printed.
 
 *The pictures are rendered from the plugin's own editor code.*
 
-## Version 1.0.0-Beta
+## Version 1.0.1-Beta
 
 The first public release.
 
@@ -33,24 +33,24 @@ The first public release.
 ## Download
 
 **macOS 11 or later, Apple silicon and Intel:**
-[OpenLimiter-1.0.0-Beta-macos.pkg](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.0-Beta/OpenLimiter-1.0.0-Beta-macos.pkg) ·
-[User manual (PDF)](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.0-Beta/OpenLimiter-1.0.0-Beta-User-Manual.pdf)
+[OpenLimiter-1.0.1-Beta-macos.pkg](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.1-Beta/OpenLimiter-1.0.1-Beta-macos.pkg) ·
+[User manual (PDF)](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.1-Beta/OpenLimiter-1.0.1-Beta-User-Manual.pdf)
 
 The installer offers **VST3, Audio Unit, CLAP, LV2 and AAX**. It is signed with
 Developer ID and notarized by Apple, and the AAX is signed with PACE Eden for
 Pro Tools.
 
 **Windows 10 or later, x64:**
-[OpenLimiter-1.0.0-Beta-windows-x64-setup.exe](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.0-Beta/OpenLimiter-1.0.0-Beta-windows-x64-setup.exe)
+[OpenLimiter-1.0.1-Beta-windows-x64-setup.exe](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.1-Beta/OpenLimiter-1.0.1-Beta-windows-x64-setup.exe)
 installs **VST3 and CLAP** with the editor. It is not code-signed, so Windows
 may ask before running it.
 
 **Linux x86_64:**
-[OpenLimiter-1.0.0-Beta-linux-x86_64.tar.gz](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.0-Beta/OpenLimiter-1.0.0-Beta-linux-x86_64.tar.gz)
+[OpenLimiter-1.0.1-Beta-linux-x86_64.tar.gz](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.1-Beta/OpenLimiter-1.0.1-Beta-linux-x86_64.tar.gz)
 holds **CLAP and LV2** without an editor; the host shows its own controls.
 
 Checksums are on the
-[release page](https://github.com/MistaMin/OpenLimiter/releases/tag/v1.0.0-Beta).
+[release page](https://github.com/MistaMin/OpenLimiter/releases/tag/v1.0.1-Beta).
 
 This is a beta. The Windows and Linux builds are made by GitHub Actions and
 have not been tested in a host yet. There is no standalone application.

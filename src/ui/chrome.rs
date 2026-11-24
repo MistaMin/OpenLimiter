@@ -60,12 +60,14 @@ fn rails(s: &mut Scene, t: &Theme) {
     for level in [6.0f32, 0.0, -6.0, -12.0, -18.0, -24.0, -36.0, -48.0] {
         let y = IN_PPM[0].1 + (METER_TOP_DB - level) / METER_SPAN_DB * IN_PPM[0].3;
         let label = if level > 0.0 { format!("+{level:.0}") } else { format!("{level:.0}") };
-        s.text(Point::new(62.0, y), label.clone(), if level == 0.0 { t.text } else { t.dim }, 8.0, false);
-        text_right(s, OUT_PPM[0].0 - 3.0, y, &label, if level == 0.0 { t.text } else { t.dim }, 8.0);
+        // Text ink, not the caption grey: the dim grey all but vanished at 8 pt on the light theme.
+        let ink = if level == 0.0 { t.text } else { t.text.with_alpha(0.72) };
+        s.text(Point::new(62.0, y), label.clone(), ink, 8.0, false);
+        text_right(s, OUT_PPM[0].0 - 3.0, y, &label, ink, 8.0);
     }
     for d in [0.0f32, 6.0, 12.0, 18.0, 24.0] {
         let y = CHAIN_GR.1 + d / GR_METER_SPAN_DB * CHAIN_GR.3;
-        s.text(Point::new(CHAIN_GR.0 + 17.0, y), format!("{d:.0}"), t.accent.with_alpha(0.75), 8.0, false);
+        s.text(Point::new(CHAIN_GR.0 + 17.0, y), format!("{d:.0}"), t.accent, 8.0, false);
     }
     for r in [IN_PEAK, OUT_PEAK] {
         inset(s, t, r, 5.0);
@@ -234,9 +236,22 @@ fn header_taken(ui: &Ui) -> Vec<(f32, f32)> {
     let live = ui.live();
     ui.page.paint(&mut scratch, &cx, &live);
     use openplugin::dri::goodlookindri::scene::Cmd;
-    let mut rect_of = |r: Rect| add(r.x, r.x + r.w, r.y, r.y + r.h);
+    // What a clip hides takes no room: a plot's fill can run past its frame into the header rows.
+    let mut clips: Vec<Rect> = Vec::new();
     for cmd in &scratch.cmds {
+        let clip = clips.last().copied();
+        let mut rect_of = |r: Rect| match clip {
+            Some(c) => add(r.x.max(c.x), (r.x + r.w).min(c.x + c.w), r.y.max(c.y), (r.y + r.h).min(c.y + c.h)),
+            None => add(r.x, r.x + r.w, r.y, r.y + r.h),
+        };
         match cmd {
+            Cmd::ClipRound { rect, .. } => clips.push(match clip {
+                Some(c) => Rect::new(rect.x.max(c.x), rect.y.max(c.y), (rect.x + rect.w).min(c.x + c.w) - rect.x.max(c.x), (rect.y + rect.h).min(c.y + c.h) - rect.y.max(c.y)),
+                None => *rect,
+            }),
+            Cmd::PopClip => {
+                clips.pop();
+            }
             Cmd::FillEllipse { rect, .. } | Cmd::StrokeEllipse { rect, .. } | Cmd::FillRoundRect { rect, .. } | Cmd::StrokeRoundRect { rect, .. } | Cmd::FillRect { rect, .. } => rect_of(*rect),
             Cmd::Line { a, b, .. } => rect_of(Rect::new(a.x.min(b.x), a.y.min(b.y), (a.x - b.x).abs(), (a.y - b.y).abs().max(1.0))),
             Cmd::Text { at, text: label, size, center, .. } => {

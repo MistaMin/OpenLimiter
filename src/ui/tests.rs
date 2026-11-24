@@ -756,3 +756,143 @@ fn dump_layout() {
     );
     std::fs::write(format!("{}/build/layout.json", env!("CARGO_MANIFEST_DIR")), json).expect("write");
 }
+
+/// Frame cost with audio playing: `cargo test --release frame_cost -- --ignored --nocapture`.
+/// Prints, per page, the share of the window marked dirty per frame and the render time at 2x.
+#[test]
+#[ignore]
+fn frame_cost() {
+    let (w, h) = (WIDTH as f32, HEIGHT as f32);
+    let only = std::env::var("PAGES").ok();
+    for page in 0..=dither_page() {
+        let key = LAYOUT.slots.get(page).map_or("dither", |s| if s.key.is_empty() { "limiter" } else { s.key });
+        if only.as_deref().is_some_and(|o| !o.split(',').any(|k| k == key)) {
+            continue;
+        }
+        let (mut e, shared) = editor(ThemeId::Dark);
+        feed(&shared, WINDOW);
+        if let Some(s) = LAYOUT.slots.get(page) {
+            e.param_changed(s.on, 1.0);
+        }
+        e.open_page(page);
+        let _ = e.render(2.0);
+        let (mut area, mut time, frames) = (0.0f64, std::time::Duration::ZERO, 30);
+        let mut seed = 1u32;
+        for f in 0..frames {
+            // 1600 samples per 30 Hz tick at 48 kHz.
+            let block: Vec<f32> = (0..1600).map(|i| {
+                seed = seed.wrapping_mul(1664525).wrapping_add(1013904223);
+                0.3 * ((f * 1600 + i) as f32 * 0.05).sin() + 0.2 * (seed as f32 / u32::MAX as f32 - 0.5)
+            }).collect();
+            shared.push_taps([&block, &block], [&block, &block], None);
+            feed(&shared, 7);
+            e.tick(1.0 / 30.0);
+            if let Some(r) = e.damage() {
+                area += r.iter().map(|d| (d.w.min(w * 2.0) * d.h.min(h * 2.0)) as f64).sum::<f64>();
+            } else {
+                area += (w * h * 4.0) as f64;
+            }
+            let t0 = std::time::Instant::now();
+            let _ = e.render(2.0);
+            time += t0.elapsed();
+        }
+        let zoom = e.zoom() as f64;
+        println!("{key:8} dirty {:5.1}% of window per frame, render {:6.2} ms per frame", 100.0 * area / frames as f64 / (w as f64 * h as f64 * zoom * zoom), time.as_secs_f64() * 1000.0 / frames as f64);
+    }
+}
+
+
+/// The column fill looks like the polygon it replaces: same pixels within anti-aliasing, and a
+/// flat translucent band has no seams between its pieces.
+#[test]
+fn column_fill_matches_the_polygon() {
+    use openplugin::dri::goodlookindri::hardware;
+    use openplugin::dri::goodlookindri::scene::{Point, Scene};
+    use openplugin::dri::goodlookindri_shell::raster::Framebuffer;
+    let paint = |s: &Scene| {
+        let mut fb = Framebuffer::new(400, 200);
+        fb.clear(openplugin::dri::goodlookindri::color::Color(0xff10_1010));
+        fb.replay(s, 2.0);
+        fb.pixels
+    };
+    hardware::set_device_scale(2.0);
+    let c = openplugin::dri::goodlookindri::color::Color(0xff80_c0ff).with_alpha(0.4);
+    let pts: Vec<Point> = (0..=120).map(|i| Point::new(5.0 + i as f32 * 1.6, 50.0 + 30.0 * (i as f32 * 0.11).sin())).collect();
+    let mut cols = Scene::new();
+    kit::area(&mut cols, &pts, 95.0, c);
+    let mut poly = Scene::new();
+    let mut p = vec![Point::new(pts[0].x, 95.0)];
+    p.extend_from_slice(&pts);
+    p.push(Point::new(pts[pts.len() - 1].x, 95.0));
+    poly.fill_poly(p, c, c);
+    let (a, b) = (paint(&cols), paint(&poly));
+    let ch = |v: u32, s: u32| ((v >> s) & 255) as i32;
+    let worst = a.iter().zip(&b).map(|(x, y)| [0, 8, 16].iter().map(|&s| (ch(*x, s) - ch(*y, s)).abs()).max().unwrap()).max().unwrap();
+    let mean = a.iter().zip(&b).map(|(x, y)| (ch(*x, 8) - ch(*y, 8)).abs() as f64).sum::<f64>() / a.len() as f64;
+    assert!(mean < 0.5 && worst < 120, "mean {mean}, worst {worst}");
+    // Flat band: every pixel of a row well inside it is the same.
+    let mut flat = Scene::new();
+    kit::area(&mut flat, &[Point::new(3.3, 40.0), Point::new(190.7, 40.0)], 90.0, c);
+    let px = paint(&flat);
+    let row = &px[150 * 400 + 10..150 * 400 + 370];
+    assert!(row.iter().all(|&v| v == row[0]), "a seam in the flat band");
+}
+/// Every page, both heights: no text is cut by its clip, no two labels overlap, nothing is
+/// smaller than 8 pt (about 8 pixels on a 1x screen).
+#[test]
+fn text_is_whole_apart_and_readable() {
+    let mut bad = Vec::new();
+    use openplugin::dri::goodlookindri::scene::Cmd;
+    use openplugin::dri::goodlookindri_shell::text;
+    for tall in [false, true] {
+        for page in 0..=dither_page() {
+            let key = LAYOUT.slots.get(page).map_or("dither", |s| if s.key.is_empty() { "limiter" } else { s.key });
+            let (mut e, shared) = editor(ThemeId::Dark);
+            feed(&shared, WINDOW);
+            if let Some(s) = LAYOUT.slots.get(page) { e.param_changed(s.on, 1.0); }
+            e.open_page(page);
+            e.set_tall(tall);
+            let block: Vec<f32> = (0..1600).map(|i| 0.5 * (i as f32 * 0.03).sin()).collect();
+            for _ in 0..5 {
+                shared.push_taps([&block, &block], [&block, &block], Some([&block, &block]));
+                feed(&shared, 7);
+                e.tick(1.0 / 30.0);
+            }
+            let mut dl = openplugin::dri::DrawList::default();
+            chrome::paint_static(&e.ui, &mut dl);
+            chrome::paint_dynamic(&e.ui, &mut dl, &|_| true);
+            let mut clips: Vec<(f32, f32, f32, f32)> = vec![];
+            let mut texts: Vec<(f32, f32, f32, f32, String, f32)> = vec![];
+            for c in &dl.scene.cmds {
+                match c {
+                    Cmd::ClipRound { rect, .. } => clips.push((rect.x, rect.y, rect.x + rect.w, rect.y + rect.h)),
+                    Cmd::PopClip => { clips.pop(); }
+                    Cmd::Text { at, text: s, size, center, .. } => {
+                        let w = text::width(s, *size);
+                        let x0 = if *center { at.x - w * 0.5 } else { at.x };
+                        let (y0, y1) = (at.y - size * 0.36, at.y + size * 0.36);
+                        if let Some(cl) = clips.iter().fold(None::<(f32, f32, f32, f32)>, |a, c| Some(a.map_or(*c, |a| (a.0.max(c.0), a.1.max(c.1), a.2.min(c.2), a.3.min(c.3))))) {
+                            if x0 < cl.0 - 0.5 || x0 + w > cl.2 + 0.5 || y0 < cl.1 - 0.5 || y1 > cl.3 + 0.5 {
+                                bad.push(format!("CLIPPED {key} tall={tall}: {s:?} size {size} at ({:.0},{:.0}) w {w:.0} clip {cl:?}", at.x, at.y));
+                            }
+                        }
+                        if *size < 8.0 {
+                            bad.push(format!("SMALL {key} tall={tall}: {s:?} size {size}"));
+                        }
+                        texts.push((x0, y0, x0 + w, y1, s.clone(), *size));
+                    }
+                    _ => {}
+                }
+            }
+            for i in 0..texts.len() {
+                for j in i + 1..texts.len() {
+                    let (a, b) = (&texts[i], &texts[j]);
+                    if a.0 < b.2 - 0.5 && b.0 < a.2 - 0.5 && a.1 < b.3 - 0.5 && b.1 < a.3 - 0.5 && a.4 != b.4 && !a.4.trim().is_empty() && !b.4.trim().is_empty() {
+                        bad.push(format!("OVERLAP {key} tall={tall}: {:?} ({}) and {:?} ({})", a.4, a.5, b.4, b.5));
+                    }
+                }
+            }
+        }
+    }
+    assert!(bad.is_empty(), "{}", bad.join("\n"));
+}

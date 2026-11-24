@@ -286,10 +286,7 @@ impl HComp {
         let pts = Self::curve_points(cx);
         s.clip_round(kit::rect(CURVE), 4.0);
         let line: Vec<Point> = pts.iter().map(|&(l, o)| Point::new(m.x(l), m.y(o.clamp(-61.0, 0.5)))).collect();
-        let mut poly = line.clone();
-        poly.push(Point::new(m.x(0.0), m.y(0.0)));
-        poly.push(Point::new(m.x(-60.0), m.y(-60.0)));
-        s.fill_poly(poly, t.accent.with_alpha(0.2), t.accent.with_alpha(0.2));
+        kit::between(s, &line, &[Point::new(m.x(-60.0), m.y(-60.0)), Point::new(m.x(0.0), m.y(0.0))], t.accent.with_alpha(0.2));
         kit::curve(s, line, t.accent, 2.0);
         // The part above 0 dBFS clips at the top: an arrow where it leaves.
         if let Some(&(l, _)) = pts.iter().find(|p| p.1 > 0.0) {
@@ -482,7 +479,7 @@ impl Page for HComp {
         bipolar_scale(s, t, g.meter(1));
         bipolar_scale(s, t, g.meter(2));
         for (i, l) in ["GR", "TRANS", "AUTO"].iter().enumerate() {
-            s.text(Point::new(g.meter(i).0 + 28.0, 588.0), *l, t.text, 7.0, true);
+            s.text(Point::new(g.meter(i).0 + 28.0, 588.0), *l, t.text, 8.0, true);
         }
         let tr = g.trace();
         kit::plot(s, t, tr);

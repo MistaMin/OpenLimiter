@@ -703,23 +703,108 @@ pub fn gr_scale(s: &mut Scene, t: &Theme, r: R, range_db: f32) {
     }
 }
 
+/// Segments per piece of a long polyline. The toolkit measures every segment of a shape at
+/// every pixel of its box, so a 400-point curve across a plot costs 400 tests per pixel;
+/// short pieces keep each box, and its cost, small.
+const PIECE: usize = 8;
+
 /// A polyline through `points`, clipped to nothing: the caller keeps it in its plot.
 pub fn curve(s: &mut Scene, points: Vec<Point>, c: C, width: f32) {
-    if points.len() >= 2 {
-        s.stroke_poly(points, c, width, false);
+    if points.len() < 2 {
+        return;
+    }
+    for start in (0..points.len() - 1).step_by(PIECE) {
+        s.stroke_poly(points[start..=(start + PIECE).min(points.len() - 1)].to_vec(), c, width, false);
     }
 }
 
 /// A filled area between a polyline and a horizontal base line at `base_y`.
 pub fn area(s: &mut Scene, points: &[Point], base_y: f32, c: C) {
-    if points.len() < 2 {
+    columns(s, points, None, base_y, c);
+}
+
+/// A filled area between two polylines.
+pub fn between(s: &mut Scene, upper: &[Point], lower: &[Point], c: C) {
+    columns(s, upper, Some(lower), 0.0, c);
+}
+
+/// The y of a polyline sorted by x at `x`; `i` walks forward with x.
+fn y_at(pts: &[Point], i: &mut usize, x: f32) -> f32 {
+    while *i + 2 < pts.len() && pts[*i + 1].x < x {
+        *i += 1;
+    }
+    let (a, b) = (pts[*i], pts[*i + 1]);
+    if b.x <= a.x {
+        return b.y;
+    }
+    a.y + (b.y - a.y) * ((x - a.x) / (b.x - a.x)).clamp(0.0, 1.0)
+}
+
+/// Fills between `upper` and `lower` (or the line `base_y`) one device-pixel column at a time:
+/// each column is a small rectangle on whole pixels, so neighbours meet without a seam and the
+/// cost is the area filled. Points not sorted by x fall back to one polygon.
+fn columns(s: &mut Scene, upper: &[Point], lower: Option<&[Point]>, base_y: f32, c: C) {
+    // A trace drawn newest-first runs right to left: take it the other way round.
+    let forward = |p: &[Point]| -> Vec<Point> { if p.len() >= 2 && p[0].x > p[p.len() - 1].x { p.iter().rev().copied().collect() } else { p.to_vec() } };
+    let (upper, lower) = (&forward(upper)[..], lower.map(forward));
+    let lower = lower.as_deref();
+    let sorted = |p: &[Point]| p.len() >= 2 && p.windows(2).all(|w| w[1].x >= w[0].x);
+    if !sorted(upper) || lower.is_some_and(|l| !sorted(l)) {
+        let mut poly = Vec::with_capacity(upper.len() + 2);
+        match lower {
+            Some(l) if upper.len() >= 2 && l.len() >= 2 => {
+                poly.extend_from_slice(upper);
+                poly.extend(l.iter().rev());
+            }
+            None if upper.len() >= 2 => {
+                poly.push(Point::new(upper[0].x, base_y));
+                poly.extend_from_slice(upper);
+                poly.push(Point::new(upper[upper.len() - 1].x, base_y));
+            }
+            _ => return,
+        }
+        s.fill_poly(poly, c, c);
         return;
     }
-    let mut poly = Vec::with_capacity(points.len() + 2);
-    poly.push(Point::new(points[0].x, base_y));
-    poly.extend_from_slice(points);
-    poly.push(Point::new(points[points.len() - 1].x, base_y));
-    s.fill_poly(poly, c, c);
+    let k = openplugin::dri::goodlookindri::hardware::device_scale().max(1.0);
+    let (mut x0, mut x1) = (upper[0].x, upper[upper.len() - 1].x);
+    if let Some(l) = lower {
+        (x0, x1) = (x0.max(l[0].x), x1.min(l[l.len() - 1].x));
+    }
+    let (mut i, mut j) = (0, 0);
+    let spans: Vec<(f32, f32)> = ((x0 * k).round() as i64..(x1 * k).round() as i64)
+        .map(|col| {
+            let x = (col as f32 + 0.5) / k;
+            let a = y_at(upper, &mut i, x);
+            let b = lower.map_or(base_y, |l| y_at(l, &mut j, x));
+            (a.min(b), a.max(b))
+        })
+        .collect();
+    let first = (x0 * k).round() as i64;
+    let rect = |s: &mut Scene, col: i64, n: usize, top: f32, bottom: f32| {
+        if bottom - top > 1e-3 {
+            s.fill_rect(Rect::new(col as f32 / k, top, n as f32 / k, bottom - top), c, c, true);
+        }
+    };
+    // Eight columns share one rectangle for the part they all cover, snapped to whole pixel
+    // rows; each column adds only its own ragged ends. The toolkit evaluates a box a pixel
+    // wider on each side, so one rectangle per column would cost three times the area.
+    for (n, chunk) in spans.chunks(8).enumerate() {
+        let col0 = first + 8 * n as i64;
+        let top = (chunk.iter().fold(f32::MIN, |m, c| m.max(c.0)) * k).ceil() / k;
+        let bottom = (chunk.iter().fold(f32::MAX, |m, c| m.min(c.1)) * k).floor() / k;
+        if bottom - top < 2.0 / k {
+            for (m, &(t, b)) in chunk.iter().enumerate() {
+                rect(s, col0 + m as i64, 1, t, b);
+            }
+            continue;
+        }
+        rect(s, col0, chunk.len(), top, bottom);
+        for (m, &(t, b)) in chunk.iter().enumerate() {
+            rect(s, col0 + m as i64, 1, t, top);
+            rect(s, col0 + m as i64, 1, bottom, b);
+        }
+    }
 }
 
 /// A dashed horizontal line.

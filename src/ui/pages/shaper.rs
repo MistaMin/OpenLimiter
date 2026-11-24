@@ -408,13 +408,15 @@ impl Page for ShaperPage {
             Self::paint_meter(s, t, Self::meter(cx, i), v, range, colour, down);
             let b = Self::max_box(cx, i);
             kit::inset(s, t, b, 4.0);
-            let text = if i == 2 { format!("{:.1}", -self.max[i]) } else { format!("{:.1}", self.max[i]) };
+            let text = if i == 2 { format!("{:.1}", -self.max[i] + 0.0) } else { format!("{:.1}", self.max[i]) };
             s.text(kit::rect(b).center(), text, t.text, 9.5, true);
         }
         // Header read-outs.
         let r = Self::readout(cx);
         let y = r.1 + 14.0;
-        let words = [("LIFT", format!("{:+.1}", self.held[0]), t.warm), ("PUNCH", format!("{:+.1}", self.held[1]), t.warm), ("CLIP", format!("{:.1} dB", -self.held[2]), t.accent)];
+        // Live amounts in whole dB, like the other moving readouts.
+        let whole = |v: f32| v.round() + 0.0;
+        let words = [("LIFT", format!("{:+.0}", whole(self.held[0])), t.warm), ("PUNCH", format!("{:+.0}", whole(self.held[1])), t.warm), ("CLIP", format!("{:.0} dB", whole(-self.held[2])), t.accent)];
         let mut x = r.0;
         for (label, value, colour) in words {
             s.text(Point::new(x, y), label, t.dim, 10.0, false);

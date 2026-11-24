@@ -157,10 +157,7 @@ impl Sone {
             pts.push(Point::new(m.x(l), m.y(l + Self::slow_gain(cx, l))));
             l += 1.0;
         }
-        let mut poly = pts.clone();
-        poly.push(Point::new(m.x(0.0), m.y(0.0)));
-        poly.push(Point::new(m.x(-60.0), m.y(-60.0)));
-        s.fill_poly(poly, t.accent.with_alpha(0.2 * slow_a), t.accent.with_alpha(0.2 * slow_a));
+        kit::between(s, &pts, &[Point::new(m.x(-60.0), m.y(-60.0)), Point::new(m.x(0.0), m.y(0.0))], t.accent.with_alpha(0.2 * slow_a));
         kit::curve(s, pts, t.accent.with_alpha(slow_a), 2.0);
         // The fast branch from the slow dot.
         let (loud, reference, gs, live_data) = Self::state(cx, live);
@@ -225,7 +222,7 @@ impl Sone {
             max_box(s, t, max_rect(i), self.max[i]);
         }
         for (i, l) in ["SLOW", "FAST", "TOTAL"].iter().enumerate() {
-            s.text(Point::new(METERS[i].0 + 28.0, 588.0), *l, t.text, 7.0, true);
+            s.text(Point::new(METERS[i].0 + 28.0, 588.0), *l, t.text, 8.0, true);
         }
     }
 

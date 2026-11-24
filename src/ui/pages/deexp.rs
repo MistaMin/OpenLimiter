@@ -151,10 +151,7 @@ impl DeExp {
         if xf > CURVE.0 + 1.0 {
             hatch(s, (CURVE.0, CURVE.1, xf - CURVE.0, CURVE.3), t.dim.with_alpha(0.35), 7.0);
         }
-        let mut poly = pts.clone();
-        poly.push(Point::new(Map::x(0.0), Map::y(0.0)));
-        poly.push(Point::new(Map::x(LO), Map::y(LO)));
-        s.fill_poly(poly, lift_fill(t), lift_fill(t));
+        kit::between(s, &pts, &[Point::new(Map::x(LO), Map::y(LO)), Point::new(Map::x(0.0), Map::y(0.0))], lift_fill(t));
         // The two markers.
         kit::dashed(s, &[Point::new(xf, CURVE.1), Point::new(xf, CURVE.1 + CURVE.3)], 3.0, 3.0, t.dim, 1.0);
         let xt = Map::x(thr);
@@ -177,16 +174,16 @@ impl DeExp {
         s.pop_clip();
         // Labels.
         if xf - CURVE.0 > 56.0 {
-            s.text(Point::new((CURVE.0 + xf) * 0.5, CURVE.1 + 14.0), "UNTOUCHED", t.dim, 7.5, true);
+            s.text(Point::new((CURVE.0 + xf) * 0.5, CURVE.1 + 14.0), "UNTOUCHED", t.dim, 8.0, true);
         }
         if floor < LO {
             s.text(Point::new(CURVE.0 + 6.0, CURVE.1 + CURVE.3 - 22.0), format!("◀ {floor:.0}"), t.dim, 8.0, false);
         } else {
             let fx = (xf + 7.0).min(CURVE.0 + CURVE.2 - 30.0);
-            s.text(Point::new(fx, CURVE.1 + CURVE.3 - 8.0), "FLOOR", t.dim, 7.5, false);
+            s.text(Point::new(fx, CURVE.1 + CURVE.3 - 8.0), "FLOOR", t.dim, 8.0, false);
         }
         let tx = xt.clamp(CURVE.0 + 26.0, CURVE.0 + CURVE.2 - 26.0);
-        s.text(Point::new(tx, CURVE.1 + 10.0), "THRESHOLD", t.accent, 7.5, true);
+        s.text(Point::new(tx, CURVE.1 + 10.0), "THRESHOLD", t.accent, 8.0, true);
     }
 
     fn paint_meters(&self, s: &mut Scene, cx: &Ctx, live: &Live) {
@@ -214,9 +211,7 @@ impl DeExp {
             kit::area(s, &pts(&|p| ln.lift_y(p.lift, scale)), ln.lift_base(), t.text.with_alpha(0.55));
             let before = pts(&|p| ln.level_y(p.env));
             let after = pts(&|p| ln.level_y(p.env + mixed(p.lift, mix)));
-            let mut gap = after.clone();
-            gap.extend(before.iter().rev());
-            s.fill_poly(gap, lift_fill(t), lift_fill(t));
+            kit::between(s, &after, &before, lift_fill(t));
             kit::curve(s, before, t.warm, 1.5);
             kit::curve(s, after, t.text, 1.0);
         }
@@ -300,7 +295,7 @@ impl Page for DeExp {
         for (i, label) in ["▲L", "▲R"].iter().enumerate() {
             let r = meter(METER_X[i], top);
             lift_scale(s, t, r, scale);
-            s.text(Point::new(r.0 + 28.0, r.1 + r.3 * (1.0 - 3.0 / scale)), *label, t.text, 7.0, true);
+            s.text(Point::new(r.0 + 28.0, r.1 + r.3 * (1.0 - 3.0 / scale)), *label, t.text, 8.0, true);
         }
         let ln = Lanes::new(top);
         kit::plot(s, t, (TRACE_X, top, TRACE_W, 616.0 - top));

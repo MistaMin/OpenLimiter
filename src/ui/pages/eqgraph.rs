@@ -154,9 +154,7 @@ pub(crate) fn fill_between(s: &mut Scene, upper: &[Point], lower: &[Point], c: C
     if upper.len() < 2 || upper.len() != lower.len() {
         return;
     }
-    let mut poly = upper.to_vec();
-    poly.extend(lower.iter().rev());
-    s.fill_poly(poly, c, c);
+    kit::between(s, upper, lower, c);
 }
 
 /// The area between two curves split by sign: `below` where `a` is under `b` (cutting),
@@ -199,11 +197,11 @@ pub(crate) fn paint_key_badge(s: &mut Scene, t: &Theme, at: Point, present: bool
     let r = Rect::new(at.x - 5.0, at.y - 5.0, 10.0, 10.0);
     if present {
         s.fill_round(r, 2.5, t.warm, t.warm, true);
-        s.text(r.center(), "K", t.on_accent, 7.5, true);
+        s.text(r.center(), "K", t.on_accent, 8.0, true);
     } else {
         s.fill_round(r, 2.5, t.plot_bg, t.plot_bg, true);
         s.stroke_round(r, 2.5, t.warm, 1.2);
-        s.text(r.center(), "K", t.warm, 7.5, true);
+        s.text(r.center(), "K", t.warm, 8.0, true);
     }
 }
 

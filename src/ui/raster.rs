@@ -21,6 +21,11 @@ pub fn blend(under: u32, over: C, alpha: f32) -> u32 {
     (ch(16) << 16) | (ch(8) << 8) | ch(0)
 }
 
+/// Brightness weights the toolkit's shell uses to tell light text from dark.
+fn luma(c: u32) -> u32 {
+    2 * ((c >> 16) & 255) + 5 * ((c >> 8) & 255) + (c & 255)
+}
+
 pub fn rgb(c: C) -> u32 {
     c.0 & 0x00ff_ffff
 }
@@ -99,8 +104,13 @@ impl Target<'_> {
                 for col in 0..g.width {
                     let cover = g.coverage[row * g.width + col];
                     let (tx, ty) = (gx + col as i64, gy + row as i64);
-                    if cover > 0 && tx >= 0 && ty >= 0 {
-                        self.mix(tx as usize, ty as usize, c, cover as f32 / 255.0);
+                    if cover > 0 && tx >= 0 && (tx as usize) < self.w && ty >= 0 && (ty as usize) < self.h {
+                        let (x, y) = (tx as usize, ty as usize);
+                        let cover = cover as f32 / 255.0;
+                        // The GoodLookin DRI rule: light text on a darker ground has its edges lifted,
+                        // since blending in sRGB thins them; dark text on light is left alone.
+                        let cover = if luma(c.0) > luma(self.px[y * self.w + x]) { cover.powf(1.0 / 1.45) } else { cover };
+                        self.mix(x, y, c, cover);
                     }
                 }
             }

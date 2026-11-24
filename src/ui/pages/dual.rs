@@ -379,7 +379,7 @@ impl Dual {
         for (i, l) in labels.iter().enumerate() {
             s.text(Point::new(METERS[i].0 + 28.0, 588.0), *l, t.text, 8.5, true);
         }
-        s.text(Point::new(METERS[2].0 + 28.0, 588.0), "LIM", t.text, 7.5, true);
+        s.text(Point::new(METERS[2].0 + 28.0, 588.0), "LIM", t.text, 8.0, true);
     }
 
     fn paint_band(&self, s: &mut Scene, cx: &Ctx, live: &Live) {

@@ -9,6 +9,12 @@ use super::theme::{loud_colour, pref_file, theme, Theme};
 use super::*;
 
 /// Y of a level inside a plot, in points from the plot's top.
+/// Loudness and RMS read in whole units: tenths changed four times a second and could not be read.
+/// `+ 0.0` turns a rounded -0 into 0.
+fn whole(v: f32) -> f32 {
+    v.round() + 0.0
+}
+
 pub fn plot_y(level_db: f32, plot: R) -> f32 {
     (PLOT_TOP_DB - level_db) / PLOT_SPAN_DB * plot.3
 }
@@ -131,7 +137,7 @@ pub fn paint(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, k: f32, lut: &[(f
     f.text(glyphs, (TP_BOX.0 + TP_BOX.2 * 0.5) * k, (TP_BOX.1 + 26.0) * k, &label, 14.0 * k, colour, Align::Centre);
     // The output RMS over the chosen window.
     let (label, colour) = match ui.rms {
-        Some(v) => (format!("{v:+.1}"), if v > 0.0 { t.over } else { t.text }),
+        Some(v) => (format!("{:+.0}", whole(v)), if v > 0.0 { t.over } else { t.text }),
         None => ("--".to_string(), t.dim),
     };
     f.text(glyphs, (RMS_BOX.0 + RMS_BOX.2 * 0.5) * k, (RMS_BOX.1 + 26.0) * k, &label, 14.0 * k, colour, Align::Centre);
@@ -167,7 +173,10 @@ fn paint_band_marks(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme,
         let y = PLOT.1 + plot_y(soft, PLOT);
         if y > PLOT.1 + 12.0 && y < PLOT.1 + PLOT.3 - 4.0 {
             let colour = if ui.clipping() { t.over } else { t.dim };
-            f.text(glyphs, (PLOT.0 + 8.0) * k, (y - 8.0) * k, "SOFT CLIP", 8.0 * k, colour, Align::Left);
+            // On a plate: the level fill runs right under it.
+            let w = openplugin::dri::goodlookindri_shell::text::width("SOFT CLIP", 8.5) + 8.0;
+            f.round(((PLOT.0 + 4.0) * k, (y - 14.5) * k, w * k, 13.0 * k), 3.0 * k, 0.0, t.plot_bg, 0.85);
+            f.text(glyphs, (PLOT.0 + 8.0) * k, (y - 8.0) * k, "SOFT CLIP", 8.5 * k, colour, Align::Left);
         }
     }
     let grip = ui.controls.iter().zip(&ui.cells).find(|(_, cell)| cell.kind == Kind::Grip && cell.param == P_THRESHOLD).map(|(c, _)| c);
@@ -197,20 +206,45 @@ fn paint_plot(ui: &Ui, f: &mut Target, t: &Theme, k: f32, plot: R, grid_lines: b
     }
     let y_of = |level_db: f32| plot_y(level_db, plot) * k;
     let len = ui.history.len();
-    let lead = WINDOW - len.min(WINDOW);
-    let ys: Vec<(f32, f32, f32)> = ui.history.iter().map(|e| (y_of(db(e.input)), y_of(db(e.output)), -db(e.gain) / PLOT_SPAN_DB * h as f32)).collect();
     let none = (h as f32 + 4.0, h as f32 + 4.0, 0.0);
+    // Column c of an endless strip covers entries [c * per, (c + 1) * per) of everything ever
+    // pushed, and shows their peak. The strip only moves in whole columns, so a peak keeps its
+    // shape as it scrolls instead of being sampled at a new phase on every frame.
+    let per = WINDOW as f64 / w as f64;
+    let count = ui.hist_count;
+    let last = ((count as f64 / per).floor() as i64).max(1) - 1;
+    let first_entry = count - len;
     let columns: Vec<(f32, f32, f32)> = (0..w)
         .map(|x| {
-            let e = (x as f32 + 0.5) / w as f32 * WINDOW as f32 - lead as f32 - 0.5;
-            if len == 0 || e < 0.0 {
+            let c = last - (w - 1 - x) as i64;
+            if c < 0 || len == 0 {
                 return none;
             }
-            let i0 = (e.floor() as usize).min(len - 1);
-            let i1 = (i0 + 1).min(len - 1);
-            let m = (e - i0 as f32).clamp(0.0, 1.0);
-            let mix = |a: f32, b: f32| a + (b - a) * m;
-            (mix(ys[i0].0, ys[i1].0), mix(ys[i0].1, ys[i1].1), mix(ys[i0].2, ys[i1].2))
+            let (a, b) = ((c as f64 * per).ceil() as usize, (((c + 1) as f64 * per).ceil() as usize).max((c as f64 * per).ceil() as usize + 1));
+            let (a, b) = (a.max(first_entry), b.min(count));
+            if a >= b {
+                return none;
+            }
+            let (mut i, mut o, mut g) = (0.0f32, 0.0f32, 1.0f32);
+            for e in ui.history.range(a - first_entry..b - first_entry) {
+                (i, o, g) = (i.max(e.input), o.max(e.output), g.min(e.gain));
+            }
+            (db(i), db(o), -db(g))
+        })
+        .collect();
+    // Levels fall like a meter's (60 dB/s) between peaks: the peaks stay exact and the trace
+    // between them reads as a line instead of a fence of 5 ms spikes.
+    let fall = 60.0 * WINDOW_S / w as f32;
+    let mut held = (f32::MIN, f32::MIN);
+    let columns: Vec<(f32, f32, f32)> = columns
+        .into_iter()
+        .map(|c| {
+            if c == none {
+                held = (f32::MIN, f32::MIN);
+                return none;
+            }
+            held = (c.0.max(held.0 - fall), c.1.max(held.1 - fall));
+            (y_of(held.0), y_of(held.1), c.2 / PLOT_SPAN_DB * h as f32)
         })
         .collect();
     let bg = rgb(t.plot_bg);
@@ -354,7 +388,8 @@ fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f
     let rings = [(RADAR_BELOW - 24.0) / RADAR_SPAN, (RADAR_BELOW - 12.0) / RADAR_SPAN];
     let target_ring = RADAR_BELOW / RADAR_SPAN * rk;
     let bg = rgb(t.plot_bg);
-    let line = 0.5 * k + 0.5;
+    // Half a line width in device pixels: at least a full pixel, so no line is a hairline.
+    let line = 0.6 * k + 0.6;
     for y in 0..side {
         for x in 0..side {
             let (a, d) = lut[y * side + x];
@@ -377,18 +412,20 @@ fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f
                 (near.2 != u32::MAX).then_some(near)
             };
             if let Some((r_in, r_out, age)) = value {
-                let fade = 1.0 - 0.65 * age as f32 / n as f32;
+                let fade = 1.0 - 0.4 * age as f32 / n as f32;
                 if r_out > 0.5 {
                     c = blend(c, colour_at(d), (r_out - d + 0.5).clamp(0.0, 1.0) * 0.6 * fade);
                     c = blend(c, colour_at(r_out), (line + 0.3 - (d - r_out).abs()).clamp(0.0, 1.0) * (0.4 + 0.6 * fade));
                 }
                 if r_in > 0.5 {
-                    c = blend(c, t.text, (line - (d - r_in).abs()).clamp(0.0, 1.0) * (0.35 + 0.5 * fade));
+                    c = blend(c, t.text, (line - (d - r_in).abs()).clamp(0.0, 1.0) * (0.55 + 0.4 * fade));
                 }
             }
-            if (a * 60.0).fract() < 0.5 {
-                c = blend(c, t.accent, (line - (d - target_ring).abs()).clamp(0.0, 1.0));
-            }
+            // The target ring: 60 dashes, their ends anti-aliased along the arc.
+            let dash = std::f32::consts::TAU * target_ring / 60.0;
+            let u = (a * 60.0).fract() * dash;
+            let on = (0.5 + u.min(dash * 0.5 - u)).clamp(0.0, 1.0);
+            c = blend(c, t.accent, (line - (d - target_ring).abs()).clamp(0.0, 1.0) * on);
             let across = ((a - hand + 0.5).rem_euclid(1.0) - 0.5).abs() * std::f32::consts::TAU * d;
             c = blend(c, t.text, (line - across).clamp(0.0, 1.0) * 0.85);
             f.mix(x0 + x, y0 + y, C(0xff00_0000 | c), edge);
@@ -396,7 +433,11 @@ fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f
     }
     for (lu, colour) in [(0.0, t.accent), (-12.0, t.dim), (-24.0, t.dim)] {
         let y = RADAR_C.1 - (RADAR_BELOW + lu) / RADAR_SPAN * RADAR_R + 7.0;
-        f.text(glyphs, (RADAR_C.0 + 4.0) * k, y * k, &format!("{:.0}", target + lu), 8.0 * k, colour, Align::Left);
+        let label = format!("{:.0}", target + lu);
+        // A plate under the number, so it reads over the coloured fill.
+        let w = openplugin::dri::goodlookindri_shell::text::width(&label, 9.0) + 6.0;
+        f.round(((RADAR_C.0 + 1.0) * k, (y - 6.5) * k, w * k, 13.0 * k), 3.0 * k, 0.0, t.plot_bg, 0.85);
+        f.text(glyphs, (RADAR_C.0 + 4.0) * k, y * k, &label, 9.0 * k, colour, Align::Left);
     }
 }
 
@@ -404,10 +445,10 @@ fn paint_radar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f
 fn paint_loud_bar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k: f32) {
     let (l, target) = (ui.readout, ui.target());
     let heard = |v: f32| v > LOUD_FLOOR;
-    let lufs = |v: f32| if heard(v) { (format!("{v:.1}"), loud_colour(t, v - target)) } else { ("--".to_string(), t.dim) };
+    let lufs = |v: f32| if heard(v) { (format!("{:.0}", whole(v)), loud_colour(t, v - target)) } else { ("--".to_string(), t.dim) };
     let plain = |v: Option<f32>, signed: bool| match v {
-        Some(v) if signed => (format!("{v:+.1}"), t.accent),
-        Some(v) => (format!("{v:.1}"), t.text),
+        Some(v) if signed => (format!("{:+.0}", whole(v)), t.accent),
+        Some(v) => (format!("{:.0}", whole(v)), t.text),
         None => ("--".to_string(), t.dim),
     };
     let peak = ui.output[0].hold.max(ui.output[1].hold);
@@ -425,7 +466,7 @@ fn paint_loud_bar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k
         let y = LOUD_BAR.1;
         f.text(glyphs, (x + 8.0) * k, (y + 31.0) * k, label, 18.0 * k, *colour, Align::Left);
         if let Some(v) = inp.filter(|v| heard(*v)) {
-            let s = format!("in {v:.1}");
+            let s = format!("in {:.0}", whole(v));
             // Right-aligned under the unit, clear of the output value.
             let right = x + LOUD_CELL_PITCH - 14.0;
             let left = (right - openplugin::dri::goodlookindri_shell::text::width(&s, 10.0)).max(x + 8.0 + openplugin::dri::goodlookindri_shell::text::width(label, 18.0) + 6.0);

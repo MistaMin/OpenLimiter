@@ -11,6 +11,8 @@ on:
 env:
   # The OpenPluginSDK revision this release is built and tested with (as in scripts/build.sh).
   OPENPLUGIN_SDK_REF: 6f8172476bd99f18c206072adc08353e2e688c78
+  # GoodLookin DRI with the Semibold text standard; Cargo.toml patches the SDK's v0.2.1 to it.
+  GOODLOOKINDRI_REF: 3fe04263a7e1eb21931717393d0f1d705417e884
   VST3_SDK_REF: v3.8.1_build_84
   CARGO_TERM_COLOR: always
 
@@ -32,6 +34,11 @@ jobs:
           repository: MistaMin/OpenPluginSDK
           ref: ${{ env.OPENPLUGIN_SDK_REF }}
           path: Dependencies/OpenPluginSDK
+      - uses: actions/checkout@v4
+        with:
+          repository: MistaMin/GoodLookinDri
+          ref: ${{ env.GOODLOOKINDRI_REF }}
+          path: Dependencies/GoodLookinDri
       - uses: actions/checkout@v4
         with:
           repository: steinbergmedia/vst3sdk
@@ -83,6 +90,11 @@ jobs:
           repository: MistaMin/OpenPluginSDK
           ref: ${{ env.OPENPLUGIN_SDK_REF }}
           path: Dependencies/OpenPluginSDK
+      - uses: actions/checkout@v4
+        with:
+          repository: MistaMin/GoodLookinDri
+          ref: ${{ env.GOODLOOKINDRI_REF }}
+          path: Dependencies/GoodLookinDri
       - uses: dtolnay/rust-toolchain@stable
       - name: Tests
         working-directory: w/openlimiter

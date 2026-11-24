@@ -461,7 +461,7 @@ impl Bands {
             }
             if gr + lim > 0.5 {
                 let ny = (g.gr0 + depth + ld + 7.0).min(g.gr_bot - 4.0);
-                s.text(Point::new((a + z) * 0.5, ny), format!("{:.1}", gr + lim), t.text, 8.0, true);
+                s.text(Point::new((a + z) * 0.5, ny), format!("{:.0}", (gr + lim).round() + 0.0), t.text, 8.0, true);
             }
         }
         // Band chips.
@@ -500,11 +500,8 @@ impl Bands {
             l += 1.0;
         }
         // The reduction between unity and the curve.
-        let mut poly: Vec<Point> = pts.clone();
-        poly.push(Point::new(m.x(0.0), m.y(0.0)));
-        poly.push(Point::new(m.x(-60.0), m.y(-60.0)));
         s.clip_round(kit::rect(g.curve), 4.0);
-        s.fill_poly(poly, t.accent.with_alpha(0.1), t.accent.with_alpha(0.1));
+        kit::between(s, &pts, &[Point::new(m.x(-60.0), m.y(-60.0)), Point::new(m.x(0.0), m.y(0.0))], t.accent.with_alpha(0.1));
         if cx.on(cb::P_BAND_LIMITER) {
             kit::dashed_h(s, g.curve.0, g.curve.0 + g.curve.2, m.y(Self::bv(cx, b, cb::B_CEILING)), 4.0, 3.0, t.over.with_alpha(0.7), 1.0);
         }
@@ -538,11 +535,13 @@ impl Bands {
             s.text(Point::new(880.0, y), label, t.dim, 9.0, false);
             s.text(Point::new(912.0, y), value, t.text, 10.5, false);
         };
-        let db_or = |v: Option<f32>| v.filter(|v| *v > -119.0).map_or("-".to_string(), |v| format!("{v:.1} dB"));
+        // Live values in whole dB: tenths changed on every frame and could not be read.
+        let db_or = |v: Option<f32>| v.filter(|v| *v > -119.0).map_or("-".to_string(), |v| format!("{:.0} dB", v.round() + 0.0));
         line(s, 469.0, "IN", db_or(Self::view(live, vw::DETECTOR + b)));
         let gr = Self::view(live, vw::GR + b).unwrap_or(0.0);
         let lim = Self::view(live, vw::LIMIT + b).unwrap_or(0.0);
-        let gtext = if cx.on(cb::P_BAND_LIMITER) { format!("{:.1} dB (lim {lim:.1})", -gr) } else { format!("{:.1} dB", -gr) };
+        let whole = |v: f32| v.round() + 0.0;
+        let gtext = if cx.on(cb::P_BAND_LIMITER) { format!("{:.0} dB (lim {:.0})", whole(-gr), whole(lim)) } else { format!("{:.0} dB", whole(-gr)) };
         line(s, 487.0, "GR", gtext);
         line(s, 505.0, "OUT", db_or(Self::view(live, vw::OUTPUT + b)));
         let mb = g.max_box();
@@ -1159,8 +1158,17 @@ pub(super) mod common {
         }
         s.clip_round(kit::rect(r), 0.0);
         let mut k = -r.3;
+        // In pieces about 8 pt long: one long diagonal costs its whole square box.
+        let pieces = (r.3 / 6.0).ceil().max(1.0) as usize;
+        let d = r.3 / pieces as f32;
         while k < r.2 {
-            s.line(Point::new(r.0 + k, r.1 + r.3), Point::new(r.0 + k + r.3, r.1), c, 1.0);
+            for i in 0..pieces {
+                let (u, v) = (i as f32 * d, (i + 1) as f32 * d);
+                if k + v < 0.0 || k + u > r.2 {
+                    continue; // outside the rect: the clip would drop it anyway
+                }
+                s.line(Point::new(r.0 + k + u, r.1 + r.3 - u), Point::new(r.0 + k + v, r.1 + r.3 - v), c, 1.0);
+            }
             k += step;
         }
         s.pop_clip();

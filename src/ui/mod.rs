@@ -159,6 +159,14 @@ const READOUT_PERIOD: f32 = 0.25;
 /// Ticks of module reduction the pages get, about four seconds at 60 ticks a second.
 const GR_HIST: usize = 256;
 
+/// One rectangle around all of `rects` (none for none). The canvas replays the whole moving
+/// scene once per rectangle and walks every shape's full box each time, so it gets this one;
+/// the host still gets the small ones, and the pixels between them repaint unchanged.
+fn bounds(rects: &[DamageRect]) -> Vec<DamageRect> {
+    let (x0, y0, x1, y1) = rects.iter().fold((f32::MAX, f32::MAX, f32::MIN, f32::MIN), |m, r| (m.0.min(r.x), m.1.min(r.y), m.2.max(r.x + r.w), m.3.max(r.y + r.h)));
+    if x1 > x0 && y1 > y0 { vec![DamageRect::new(x0, y0, x1 - x0, y1 - y0)] } else { Vec::new() }
+}
+
 fn dmg(r: R) -> DamageRect {
     DamageRect::new(r.0, r.1, r.2, r.3)
 }
@@ -185,7 +193,7 @@ pub(crate) fn module_names(key: &str) -> (&'static str, &'static str) {
         "hcomp" => ("HARM COMP", "7 styles"),
         "decomp" => ("RESTORE", "Restores lost peaks"),
         "deexp" => ("FLOOR LIFT", "Lifts quiet parts and tails"),
-        "harm" => ("OVERTONES", "2nd to 5th, alias-free"),
+        "harm" => ("OVERTONES", "2nd–5th, alias-free"),
         "smart" => ("SMART", "Six switchable limiter engines"),
         _ => ("MODULE", ""),
     }
@@ -385,6 +393,8 @@ pub(crate) struct Ui {
 
     // Band and meters.
     history: VecDeque<Entry>,
+    /// Entries ever pushed to `history`: the plot's columns are anchored to it.
+    hist_count: usize,
     quiet: usize,
     input: [Meter; 2],
     output: [Meter; 2],
@@ -670,6 +680,7 @@ impl OpenLimiterEditor {
                 page_grab: false,
                 page_rev: 0,
                 history: VecDeque::with_capacity(WINDOW + 1),
+                hist_count: 0,
                 quiet: 0,
                 input: [Meter::new(FLOOR_DB); 2],
                 output: [Meter::new(FLOOR_DB); 2],
@@ -1141,8 +1152,8 @@ impl OpenLimiterEditor {
         } else if r.repaint {
             let values = self.ui.values.clone();
             let cx = self.ui.ctx(&values);
-            for rect in self.ui.page.paint_rects(&cx) {
-                self.damage.add(dmg(rect));
+            for r in self.ui.page.paint_rects(&cx) {
+                self.damage.add(dmg(r));
             }
         }
     }
@@ -1283,6 +1294,7 @@ impl OpenLimiterEditor {
                 ui.history.pop_front();
             }
             ui.history.push_back(e);
+            ui.hist_count += 1;
             if ui.rms_ms.len() == RMS_HIST {
                 ui.rms_ms.pop_front();
             }
@@ -1531,7 +1543,7 @@ impl Editor for OpenLimiterEditor {
         let scale = scale * self.zoom();
         let ui = &self.ui;
         let key = ui.static_key();
-        let damage = self.damage.pending().map(<[DamageRect]>::to_vec);
+        let damage = self.damage.pending().map(bounds);
         let touched = |r: &DamageRect| damage.as_ref().is_none_or(|d| d.iter().any(|x| x.touches(r)));
         let frame = self.canvas.frame_damaged(scale, key, |dl| chrome::paint_static(ui, dl), |dl| chrome::paint_dynamic(ui, dl, &touched), damage.as_deref());
         let (w, h) = (frame.width, frame.height);
