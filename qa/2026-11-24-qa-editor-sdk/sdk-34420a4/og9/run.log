@@ -1,0 +1,16 @@
+OpenLimiter    VST3 FAIL state mismatch: None
+OpenLimiter    AU   PASS loads, 1981 params, sweep ok, state round trip ok
+OpenLimiter    LV2  PASS loads in OpenGrid9 (LV2 params are exposed via the parameters extension; 1989 ports)
+HybridEQ       VST3 FAIL create phase failed after retries (exit 1)
+HybridEQ       AU   PASS loads, 47 params, sweep ok, state round trip ok
+HybridEQ       LV2  PASS loads in OpenGrid9 (LV2 params are exposed via the parameters extension; 53 ports)
+OpenPreamp     VST3 FAIL create phase failed after retries (exit 1)
+OpenPreamp     AU   PASS loads, 24 params, sweep ok, state round trip ok
+OpenPreamp     LV2  PASS loads in OpenGrid9 (LV2 params are exposed via the parameters extension; 9 ports)
+Tube Channel   VST3 PASS loads, 86 params, sweep ok, state round trip ok
+Tube Channel   AU   PASS loads, 85 params, sweep ok, state round trip ok
+Tube Channel   LV2  PASS loads in OpenGrid9 (LV2 params are exposed via the parameters extension; 11 ports)
+Blue Channel   VST3 PASS loads, 62 params, sweep ok, state round trip ok
+Blue Channel   AU   PASS loads, 62 params, sweep ok, state round trip ok
+Blue Channel   LV2  PASS loads in OpenGrid9 (LV2 params are exposed via the parameters extension; 70 ports)
+report: /Volumes/Developer/OpenGrid/OpenLimiter/qa/2026-11-24-qa-editor-sdk/sdk-34420a4/og9/og9qa-report.json

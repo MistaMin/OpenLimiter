@@ -10,7 +10,7 @@ on:
 
 env:
   # The OpenPluginSDK revision this release is built and tested with (as in scripts/build.sh).
-  OPENPLUGIN_SDK_REF: dea89d1d271e56b0387f8622935c074d2674001b
+  OPENPLUGIN_SDK_REF: 34420a4274402c61a7e678963ecf589697684658
   # GoodLookin DRI with the Semibold text standard; Cargo.toml patches the SDK's v0.2.1 to it.
   GOODLOOKINDRI_REF: 3fe04263a7e1eb21931717393d0f1d705417e884
   VST3_SDK_REF: v3.8.1_build_84

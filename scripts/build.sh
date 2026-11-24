@@ -12,7 +12,7 @@ set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SDK="$(cd "$ROOT/deps/OpenPluginSDK" && pwd)"
 # The OpenPluginSDK revision this release is built and tested with.
-SDK_REV=dea89d1d271e56b0387f8622935c074d2674001b
+SDK_REV=34420a4274402c61a7e678963ecf589697684658
 
 find_sdk() { # env override, then folder names under nearby Dependencies or SDKs folders
   if [ -n "$1" ] && [ -d "$1" ]; then echo "$1"; return 0; fi

@@ -1,7 +1,7 @@
 [package]
 name = "openlimiter"
 description = "OpenLimiter: a modular mastering chain on OpenPluginSDK with GoodLookin DRI"
-version = "1.0.1-beta"
+version = "1.0.2-beta"
 edition = "2021"
 publish = false
 

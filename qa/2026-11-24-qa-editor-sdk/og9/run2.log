@@ -1,0 +1,4 @@
+OpenLimiter    VST3 FAIL parameter count 1982 vs expected 1985 (host-specific +-2 tolerated); state mismatch: None; param 2 missing in pattern; param 28 (Punch & Energy Upward threshold) 0.0000 -> -16.0000 (re-set -> -16.0); param 31 (Punch & Energy Position) 1.0000 -> 2.0000 (re-set -> 2.0); param 35 (Loudness MAX Learn: Measured Loudness (LUFS)) 0.0000 -> -70.0000 (re-set -> -70.0)
+OpenLimiter    AU   FAIL parameter count 1981 vs expected 1985 (host-specific +-2 tolerated)
+report: /Volumes/Developer/OpenGrid/OpenLimiter/qa/2026-11-24-qa-editor-sdk/og9/og9qa-report.json
+exit 1

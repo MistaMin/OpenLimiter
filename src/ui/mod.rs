@@ -56,8 +56,6 @@ pub(crate) const P_GAIN_L: usize = 0;
 pub(crate) const P_GAIN_R: usize = 1;
 pub(crate) const P_THRESHOLD: usize = 2;
 pub(crate) const P_SOFT_CLIP: usize = 3;
-pub(crate) const P_RELEASE_A: usize = 4;
-pub(crate) const P_RELEASE_M: usize = 5;
 pub(crate) const P_OUTPUT: usize = 7;
 pub(crate) const P_DELAY_L: usize = 8;
 pub(crate) const P_DELAY_R: usize = 9;
@@ -233,36 +231,6 @@ pub(crate) fn slot_label(slot: Option<usize>) -> &'static str {
 /// What the page shows: a slot of the chain, or (one past the last slot) the dither.
 pub(crate) fn dither_page() -> usize {
     LAYOUT.slots.len()
-}
-
-/// The value of parameter `index` as the editor shows it.
-pub fn value_text(index: usize, v: f32, unit: usize) -> String {
-    match index {
-        P_GAIN_L | P_GAIN_R => format!("{v:+.1} dB"),
-        P_THRESHOLD if v > 0.05 => "Off".into(),
-        P_THRESHOLD => format!("{v:.1} dB"),
-        P_SOFT_CLIP if v >= 24.0 => "Off".into(),
-        P_SOFT_CLIP => format!("{v:+.0} dB"),
-        P_RELEASE_A if v < -0.5 => format!("Slow {:.0}", -v),
-        P_RELEASE_A if v > 0.5 => format!("Fast +{v:.0}"),
-        P_RELEASE_A => "Normal".into(),
-        P_RELEASE_M if v >= 1000.0 => format!("{:.2} s", v / 1000.0),
-        P_RELEASE_M => format!("{v:.0} ms"),
-        P_OUTPUT if v <= -120.0 => "Off".into(),
-        P_OUTPUT => format!("{v:.1} dB"),
-        P_DELAY_L | P_DELAY_R => match unit {
-            1 => format!("{:.2} fr", v * 24.0 / 1000.0),
-            2 => format!("{:.2} fr", v * 25.0 / 1000.0),
-            3 => format!("{:.2} fr", v * 30.0 / 1000.0),
-            _ => format!("{v:.1} ms"),
-        },
-        P_FINE_L | P_FINE_R => format!("{v:.0} smp"),
-        P_HEADROOM => format!("{v:.0} dB"),
-        P_DITHER if v >= 25.0 => "Off".into(),
-        P_DITHER => format!("{v:.0} bit"),
-        i if LAYOUT.input_gain.contains(&i) => format!("{v:+.1} dB"),
-        _ => INFO.params.get(index).map_or_else(String::new, |p| p.format(v)),
-    }
 }
 
 fn level_text(level_db: f32) -> String {
@@ -568,10 +536,6 @@ impl Ui {
 
     fn target(&self) -> f32 {
         TARGETS[self.target.min(TARGETS.len() - 1)]
-    }
-
-    fn unit(&self) -> usize {
-        self.value(P_UNIT).round() as usize
     }
 
     /// A setup-sheet control is away from its default.

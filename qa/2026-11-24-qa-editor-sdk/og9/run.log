@@ -1,0 +1,5 @@
+OpenLimiter    VST3 FAIL create phase failed after retries (exit 1)
+OpenLimiter    AU   FAIL create phase failed after retries (exit 1)
+OpenLimiter    LV2  PASS loads in OpenGrid9 (LV2 params are exposed via the parameters extension; 1989 ports)
+report: /Volumes/Developer/OpenGrid/OpenLimiter/qa/2026-11-24-qa-editor-sdk/og9/og9qa-report.json
+exit 1

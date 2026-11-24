@@ -1,0 +1,15 @@
+[w0 14:22:19] ready, 1985 parameters
+[w0 14:22:32] classic 0-19: 20 params, 5 suspect, 0 dead, 13 s
+[w0 14:22:34] classic 20-20: 1 params, 0 suspect, 0 dead, 2 s
+[w0 14:22:38] shaper 22-29: 8 params, 0 suspect, 0 dead, 4 s
+[w0 14:22:39] shaper 30-30: 1 params, 0 suspect, 0 dead, 1 s
+# OpenLimiter host sweep, one module at a time
+
+VST3: OpenLimiter (OpenGrid), 1 workers, 2 s renders, 0.6 min, 1985 host parameters
+
+| Module | Result counts |
+|---|---|
+| classic | CONDITIONAL 5, non-audio 2, ok 14 |
+| shaper | ok 9 |
+
+## Not ok
