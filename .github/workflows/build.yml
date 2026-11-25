@@ -6,6 +6,7 @@ name: Windows and Linux builds
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     tags: ["v*"]
 
 env:
