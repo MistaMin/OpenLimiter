@@ -88,3 +88,31 @@ copy with that one stamp removed (`native/vst3/OpenPluginVST3.cpp`, setProcessin
 - **Released 1.0.2 Beta VST3 (SDK 34420a4, controller state of #40): 0 strict mismatches.** So the regression came with #51, and #56 did not cover it.
 - **Cause: not found yet.** Next step is to instrument the controller and processor (counts of setParamNormalized, sendEdit and notify) in a scratch copy of the SDK.
 - **Status:** the port is not committed. The installed VST3 is the normal ce6454f build.
+
+## Audit fixes, 2026-11-27
+
+1. **VST3 values lost on save (the SDK's fault): OpenPluginSDK PR #60** (branch `vst3-save-controller-values`, 22a6073).
+   - **Trace** (scratch SDK with a log):
+     1. OpenGrid9 delivers the first pattern in a block.
+     2. The controller passes each value on; the processor ignores it while blocks run, as designed.
+     3. A second block delivers the sweep's last values.
+     4. The host saves before delivering the final pattern writes.
+   - Only the controller had the values the host set. #51 had removed the controller's own state (OPCS) as redundant; PR #60 restores it and loads it under the loading guard.
+   - **SDK test:** `check_save_before_delivery` fails on main (line 822) and passes on the branch, ctest 14/14.
+   - **OpenGrid9 strict check:** OpenLimiter on 22a6073: 0 values differ, twice. Before: 135, 135 and 392 lost on main.
+   - **Limit:** on main the OpenGrid9 loss only shows under heavy load (60 to 85). Five later runs at load about 22 lost nothing, even with a 200 ms wait after the sweep. The SDK test is the deterministic check.
+   - **Pin:** OpenLimiter is pinned at 6d33f2c (main; README only since ce6454f), which does not have the fix yet. Repin after #60 merges.
+2. **OpenGrid9 worker** (`/Volumes/Developer/OpenGrid/qa/og9qa_worker.lua`, not under git; old copy in the session scratchpad):
+   - Every value that differs after reload is a mismatch; setting it again is only reported.
+   - Numbers with exponents parse correctly.
+   - The JSON writer writes 1-based lists whole.
+   - README updated, including the VST3 rescan rule.
+3. **`scripts/build.sh`** stops when the SDK checkout is not at `SDK_REV`; `ALLOW_SDK_MISMATCH=1` overrides it for a test build. It caught the shared checkout at 6d33f2c on the first run.
+4. **PrecisionEQ worker** parks until `submit` wakes it (`unpark`: no lock, no allocation), with a 50 ms timeout to free retired kernels.
+   - 50 idle instances: 377.6 ms down to 6.6 ms of CPU per second.
+   - Kernels can only arrive sooner than before, so an offline render waits no longer.
+   - eq-parametric tests PASS.
+5. **CHANGELOG:** Unreleased section added.
+6. **`Chain::process`** is `#[cfg(test)]`.
+
+**Checks:** full tier 6/6 PASS on 6d33f2c, build 0 warnings, auval PASS.

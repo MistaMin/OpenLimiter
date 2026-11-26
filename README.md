@@ -67,7 +67,7 @@ See the [user manual](docs/USER_MANUAL.md) and the generated
 OpenLimiter is written in Rust on OpenPluginSDK, with a GoodLookinDri editor.
 Put [OpenPluginSDK](https://github.com/MistaMin/OpenPluginSDK), at the revision
 named in `scripts/build.sh`, in `deps/OpenPluginSDK` (a checkout or a link;
-`deps/` is git-ignored); it carries GoodLookinDri in `crates/goodlookindri`. Set `VST3_SDK` and `AU_SDK` to the
+`deps/` is git-ignored; the build stops at another revision unless `ALLOW_SDK_MISMATCH=1`); it carries GoodLookinDri in `crates/goodlookindri`. Set `VST3_SDK` and `AU_SDK` to the
 VST3 and Audio Unit SDKs (and `AAX_SDK` for AAX), then:
 
     cargo test --release

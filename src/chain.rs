@@ -210,7 +210,7 @@ impl Chain {
     }
 
     /// Processes in place. `right` is `None` for a mono stream.
-    #[cfg_attr(not(test), allow(dead_code))]
+    #[cfg(test)]
     pub fn process(&mut self, left: &mut [f32], right: Option<&mut [f32]>) {
         self.process_keyed(left, right, None);
     }

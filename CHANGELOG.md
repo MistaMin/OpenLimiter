@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Hosts list the module group "Compressor / De-esser" as "Compressor & De-esser": hosts now read "/" as a sub-group. Parameter names, ids and automation are unchanged.
+- NaN, infinity and denormal numbers at the input or output are set to 0; normal audio passes unchanged.
+- Less idle CPU: PrecisionEQ's linear-phase helper thread waits until it has work instead of checking 1000 times a second (50 idle instances: 378 ms to 7 ms of CPU per second).
+- VST3: values set just before a host saves are kept again (OpenGrid9 lost up to 392 of them with the newer SDK; fixed in OpenPluginSDK).
+
 ## 1.0.2 Beta (2026-11-24)
 
 - History and Loudness Radar open in their own resizable windows (button in each header, lit while open). They stay open when the plug-in window closes, reopen where they were, and close with the plug-in.

@@ -11,7 +11,7 @@ on:
 
 env:
   # The OpenPluginSDK revision this release is built and tested with (as in scripts/build.sh).
-  OPENPLUGIN_SDK_REF: ce6454f94f3c885764e2263522681709b173e3cf
+  OPENPLUGIN_SDK_REF: 6d33f2c29512028f14a7ffb1bcee0d7d4812aa98
   VST3_SDK_REF: v3.8.1_build_84
   CARGO_TERM_COLOR: always
 

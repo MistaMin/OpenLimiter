@@ -189,9 +189,20 @@ impl Worker {
     }
 }
 
+impl Worker {
+    /// Wakes the worker for a new request. Any thread, the audio thread too: no lock, no
+    /// allocation, no wait.
+    fn wake(&self) {
+        if let Some(t) = &self.thread {
+            t.thread().unpark();
+        }
+    }
+}
+
 impl Drop for Worker {
     fn drop(&mut self) {
         self.shared.quit.store(true, Ordering::Release);
+        self.wake();
         if let Some(t) = self.thread.take() {
             let _ = t.join();
         }
@@ -205,7 +216,8 @@ fn worker_loop(s: &Shared) {
     while !s.quit.load(Ordering::Acquire) {
         s.drain_retired();
         if !s.ready.load(Ordering::Acquire) {
-            std::thread::sleep(std::time::Duration::from_millis(1));
+            // Woken by `Worker::wake` when a request comes; the timeout only frees retired kernels.
+            std::thread::park_timeout(std::time::Duration::from_millis(50));
             continue;
         }
         if s.busy.compare_exchange(false, true, Ordering::Acquire, Ordering::Relaxed).is_err() {
@@ -508,6 +520,7 @@ impl LpEngine {
         unsafe { *s.request.get() = *r };
         s.ready.store(true, Ordering::Release);
         s.busy.store(false, Ordering::Release);
+        self.worker.wake();
         self.last_hash = h;
         self.submit_pending = false;
         true
