@@ -466,7 +466,7 @@ impl Page for Sone {
         };
         if kit::inside(TRACE, x, y) {
             let ty = loud_y(cx.v(idx::THRESHOLD));
-            if (y - ty).abs() <= 6.0 && x >= TX0 && x <= TX1 {
+            if (y - ty).abs() <= 6.0 && (TX0..=TX1).contains(&x) {
                 let d = Drag::Plain { param: cx.p(idx::THRESHOLD), last: (x, y), v: cx.v(idx::THRESHOLD), along: Along::Y, per: 2.0 };
                 return start(self, io, idx::THRESHOLD, d);
             }

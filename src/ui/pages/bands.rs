@@ -469,7 +469,7 @@ impl Bands {
             }
         }
         // Band chips.
-        for b in 0..BANDS {
+        for (b, &band_name) in NAMES.iter().enumerate() {
             let (a, z) = Self::band_span(&e, b);
             let w = (z - a - 8.0).min(120.0);
             if w < 24.0 {
@@ -481,7 +481,7 @@ impl Bands {
             s.fill_rect(Rect::new(r.0 + 3.0, r.1 + 4.0, 3.0, 14.0), t.bands[b], t.bands[b], true);
             let full = w >= 76.0;
             let name_w = if full { w - 58.0 } else { w - 12.0 };
-            let name = text_fit(NAMES[b], 8.5, name_w);
+            let name = text_fit(band_name, 8.5, name_w);
             s.text(Point::new(r.0 + 10.0, r.1 + 11.0), name, t.text, 8.5, false);
             if full {
                 for (i, (off, lab)) in [(cb::B_SOLO, "S"), (cb::B_BYPASS, "B")].into_iter().enumerate() {
@@ -637,8 +637,8 @@ impl Page for Bands {
             Cell::pill(cx.p(cb::P_BAND_LIMITER), "BAND LIMIT", (700.0, hy + 9.0, 88.0, 22.0)).tip("A peak limiter on every band"),
         ];
         if cx.more {
-            for k in 0..4 {
-                v.push(Cell::value(cx.p(cb::P_SPLIT_1 + k), format!("SPLIT {}", k + 1), (SPLIT_X[k], 664.0, 84.0, 22.0)).format(split_text));
+            for (k, &x) in SPLIT_X.iter().enumerate() {
+                v.push(Cell::value(cx.p(cb::P_SPLIT_1 + k), format!("SPLIT {}", k + 1), (x, 664.0, 84.0, 22.0)).format(split_text));
             }
             let lift = Self::mode(cx) != 3;
             v.push(Cell::knob(Size::Small, cx.p(cb::P_FLOOR_GUARD_THRESHOLD), "GUARD THRESH", GUARD_T.0, GUARD_T.1).tip("Floor guard threshold, relative to the reference (LIFT)").dim(lift));
@@ -982,7 +982,7 @@ impl Bands {
             return Response::TAKEN;
         }
         // The graph.
-        if !(x >= X0 - 6.0 && x <= X1 + 6.0 && y >= g.gr_top && y <= CHIP_Y + 22.0) {
+        if !((X0 - 6.0..=X1 + 6.0).contains(&x) && y >= g.gr_top && y <= CHIP_Y + 22.0) {
             return Response::NONE;
         }
         let e = Self::edges(cx);

@@ -189,9 +189,9 @@ impl DeExp {
     fn paint_meters(&self, s: &mut Scene, cx: &Ctx, live: &Live) {
         let t = cx.t;
         let top = cx.zones.picture.1;
-        for c in 0..2 {
-            lift_meter(s, t, meter(METER_X[c], top), view(live, vw::GAIN + c).unwrap_or(0.0), self.holds[c].hold, Self::scale(cx));
-            lift_box(s, t, max_rect(METER_X[c]), self.holds[c].max);
+        for (c, &x) in METER_X.iter().enumerate().take(2) {
+            lift_meter(s, t, meter(x, top), view(live, vw::GAIN + c).unwrap_or(0.0), self.holds[c].hold, Self::scale(cx));
+            lift_box(s, t, max_rect(x), self.holds[c].max);
         }
     }
 

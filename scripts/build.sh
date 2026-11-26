@@ -12,7 +12,7 @@ set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SDK="$(cd "$ROOT/deps/OpenPluginSDK" && pwd)"
 # The OpenPluginSDK revision this release is built and tested with.
-SDK_REV=34420a4274402c61a7e678963ecf589697684658
+SDK_REV=ce6454f94f3c885764e2263522681709b173e3cf
 
 find_sdk() { # env override, then folder names under nearby Dependencies or SDKs folders
   if [ -n "$1" ] && [ -d "$1" ]; then echo "$1"; return 0; fi
@@ -31,11 +31,6 @@ if AAX_SDK="$(find_sdk "$AAX_SDK" aax-sdk-2-8-1)"; then FORMATS="$FORMATS,aax"; 
 
 have="$(git -C "$SDK" rev-parse HEAD 2>/dev/null || echo unknown)"
 [ "$have" = "$SDK_REV" ] || echo "note: OpenPluginSDK is at $have, the release uses $SDK_REV" >&2
-# GoodLookin DRI beside the SDK (Cargo.toml patches it in): the release uses this commit's files.
-DRI="$ROOT/deps/GoodLookinDri"
-DRI_REV=3fe04263a7e1eb21931717393d0f1d705417e884
-[ "$(git -C "$DRI" rev-parse 'HEAD^{tree}' 2>/dev/null)" = "$(git -C "$DRI" rev-parse "$DRI_REV^{tree}" 2>/dev/null)" ] && [ -z "$(git -C "$DRI" status --porcelain 2>/dev/null)" ] \
-  || echo "note: GoodLookinDri is not at $DRI_REV" >&2
 
 VERSION="$(sed -n 's/^version = "\(.*\)"/\1/p' "$ROOT/Cargo.toml" | head -1)"
 # Bundle versions are numbers only; the plugin itself reports the full version.

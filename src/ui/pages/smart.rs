@@ -722,7 +722,7 @@ impl Page for Smart {
             s.text(Point::new(120.0, 656.0), "LIVE", t.dim, 9.0, false);
             s.text(Point::new(280.0, 656.0), "OFFLINE BOUNCE", t.dim, 9.0, false);
             s.line(Point::new(512.0, 632.0), Point::new(512.0, 764.0), t.border, 1.0);
-            s.text(Point::new(528.0, 630.0), &format!("{} ADVANCED", KEYS[e]), t.dim, 9.0, false);
+            s.text(Point::new(528.0, 630.0), format!("{} ADVANCED", KEYS[e]), t.dim, 9.0, false);
             match e {
                 PURE => {
                     s.text(Point::new(528.0, 656.0), "SLOW DRIVER", t.dim, 9.0, false);

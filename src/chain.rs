@@ -58,6 +58,11 @@ fn leak(s: String) -> &'static str {
     Box::leak(s.into_boxed_str())
 }
 
+/// The host group for a module: '/' separates nested groups, so "Compressor / De-esser" becomes "Compressor & De-esser".
+fn host_group(label: &'static str) -> &'static str {
+    if label.contains('/') { leak(label.replace(" / ", " & ").replace('/', "&")) } else { label }
+}
+
 pub(crate) fn info_for(key: &'static str, label: &'static str, d: &ParamDesc) -> ParamInfo {
     let unit = match d.kind {
         Kind::Db => Unit::Db,
@@ -78,7 +83,7 @@ pub(crate) fn info_for(key: &'static str, label: &'static str, d: &ParamDesc) ->
         info = info.with_choices(labels);
     }
     if !key.is_empty() {
-        info = info.with_group(label);
+        info = info.with_group(host_group(label));
     }
     info
 }
@@ -112,8 +117,8 @@ impl Chain {
         for (i, slot) in self.slots.iter().enumerate() {
             out.extend(slot.module.params().iter().map(|d| info_for(slot.key, slot.label, d)));
             let key = if slot.key.is_empty() { "chain0" } else { slot.key };
-            out.push(ParamInfo::new(leak(format!("{key}.on")), leak(format!("{} On", slot.label)), 0.0, 1.0, if i == 0 { 1.0 } else { 0.0 }, Unit::Toggle).with_group(slot.label));
-            out.push(ParamInfo::new(leak(format!("{key}.position")), leak(format!("{} Position", slot.label)), 1.0, n.max(2) as f32, (i + 1) as f32, Unit::None).with_steps(n.max(2) as u32).with_group(slot.label));
+            out.push(ParamInfo::new(leak(format!("{key}.on")), leak(format!("{} On", slot.label)), 0.0, 1.0, if i == 0 { 1.0 } else { 0.0 }, Unit::Toggle).with_group(host_group(slot.label)));
+            out.push(ParamInfo::new(leak(format!("{key}.position")), leak(format!("{} Position", slot.label)), 1.0, n.max(2) as f32, (i + 1) as f32, Unit::None).with_steps(n.max(2) as u32).with_group(host_group(slot.label)));
         }
         out
     }
@@ -232,9 +237,9 @@ impl Chain {
                 }
             };
             if let Some(k) = key {
-                for c in 0..2 {
-                    for j in 0..n {
-                        self.key_ring[c][(self.key_pos + j) & mask] = k[c][start + j];
+                for (ring, key) in self.key_ring.iter_mut().zip(k) {
+                    for (j, &v) in key[start..start + n].iter().enumerate() {
+                        ring[(self.key_pos + j) & mask] = v;
                     }
                 }
             }

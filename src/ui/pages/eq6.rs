@@ -151,6 +151,7 @@ pub(crate) fn fill_between(s: &mut Scene, upper: &[Point], lower: &[Point], c: C
 
 /// A graph node: a disc in the band colour with its number, a ring when selected, faded
 /// when the band is off. `badge` is a placement letter drawn beside it (M, S, L, R), if any.
+#[allow(clippy::too_many_arguments, reason = "a drawing primitive: every argument is one plain value of the stroke")]
 pub(crate) fn paint_node(s: &mut Scene, t: &Theme, at: Point, colour: C, label: &str, selected: bool, faded: bool, badge: Option<&str>) {
     let r = NODE_D * 0.5;
     let disc = Scene::ellipse_at(at, r);

@@ -175,6 +175,7 @@ pub(crate) fn fill_signed(s: &mut Scene, a: &[Point], b: &[Point], below: C, abo
 
 /// A graph node: a disc in the band colour with its number, a ring when selected, faded
 /// when the band is not heard. `badge` is a placement letter beside it.
+#[allow(clippy::too_many_arguments, reason = "a drawing primitive: every argument is one plain value of the stroke")]
 pub(crate) fn paint_node(s: &mut Scene, t: &Theme, at: Point, colour: C, label: &str, selected: bool, faded: bool, badge: &str) {
     let r = NODE_D * 0.5;
     let disc = Scene::ellipse_at(at, r);
@@ -702,7 +703,8 @@ mod tests {
         let deq = |b: usize, f: usize| eq_dynamic::band_param(b, f);
         use eq_dynamic as d;
         use eq_parametric as p;
-        let cases: Vec<(&str, Vec<(usize, f32)>, usize, bool)> = vec![
+        type Case = (&'static str, Vec<(usize, f32)>, usize, bool);
+        let cases: Vec<Case> = vec![
             ("peq", vec![(peq(0, p::F_TYPE), 3.0), (peq(0, p::F_SLOPE), 50.0), (peq(0, p::F_FREQ), 40.0), (peq(1, p::F_GAIN), 4.0), (peq(1, p::F_FREQ), 120.0), (peq(2, p::F_GAIN), -6.0), (peq(2, p::F_FREQ), 900.0), (peq(2, p::F_Q), 3.0), (peq(3, p::F_ON), 1.0), (peq(3, p::F_TYPE), 2.0), (peq(3, p::F_FREQ), 8000.0), (peq(3, p::F_GAIN), 3.0), (peq(3, p::F_PLACEMENT), 2.0)], 2, false),
             ("deq", vec![(deq(0, d::F_GAIN), 2.0), (deq(1, d::F_DYN), 1.0), (deq(1, d::F_FREQ), 250.0), (deq(1, d::F_THRESH), -40.0), (deq(1, d::F_ABOVE_ON), 1.0), (deq(1, d::F_ABOVE_RANGE), -9.0), (deq(2, d::F_DYN), 1.0), (deq(2, d::F_FREQ), 3000.0), (deq(2, d::F_SOURCE), 5.0), (deq(2, d::F_THRESH), -45.0), (deq(2, d::F_RANGE), -8.0), (deq(2, d::F_DET_LINK), 0.0), (deq(2, d::F_DET_FREQ), 6000.0)], 1, true),
             ("sup", vec![(reso_suppress::P_DEPTH, 80.0), (reso_suppress::P_WIDTH, 4.0), (reso_suppress::P_CENTRE, 2500.0), (reso_suppress::focus_param(0, 0), 60.0)], 0, true),

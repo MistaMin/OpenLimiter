@@ -36,11 +36,14 @@ fn peak_text(v: f32) -> String {
     }
 }
 
+/// (shaping, depth, sample rate) and the curve drawn for them.
+type CurveKeyed = ((usize, u32, u32), Vec<f32>);
+
 struct Dither {
     /// The variant last used in each family.
     last: [usize; 4],
     /// The response curve, cached for (shaping, depth, sample rate).
-    cache: std::sync::Mutex<Option<((usize, u32, u32), Vec<f32>)>>,
+    cache: std::sync::Mutex<Option<CurveKeyed>>,
 }
 
 impl Dither {

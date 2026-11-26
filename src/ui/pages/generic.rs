@@ -27,7 +27,7 @@ impl Generic {
         self.params.len().div_ceil(COLS).max(1)
     }
 
-    fn arrows(cx: &Ctx) -> ((f32, f32, f32, f32), (f32, f32, f32, f32)) {
+    fn arrows(cx: &Ctx) -> (crate::ui::raster::R, crate::ui::raster::R) {
         let (x, y, w, _) = cx.zones.slot;
         ((x + w - 76.0, y, 24.0, 24.0), (x + w - 24.0, y, 24.0, 24.0))
     }

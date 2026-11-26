@@ -536,10 +536,10 @@ impl Decomp {
         let t = cx.t;
         let top = cx.zones.picture.1;
         let scale = lift_scale_for(cx.v(ix::RANGE), &[12.0, 24.0]);
-        for c in 0..2 {
-            let r = meter(METER_X[c], top);
+        for (c, &x) in METER_X.iter().enumerate().take(2) {
+            let r = meter(x, top);
             lift_meter(s, t, r, view(live, vw::GAIN + c).unwrap_or(0.0), self.holds[c].hold, scale);
-            lift_box(s, t, max_rect(METER_X[c]), self.holds[c].max);
+            lift_box(s, t, max_rect(x), self.holds[c].max);
         }
         let r = meter(METER_X[2], top);
         kit::gr_meter(s, t, r, view(live, vw::CEILING).unwrap_or(0.0), self.holds[2].hold, 12.0);
@@ -884,7 +884,7 @@ pub(super) mod dump {
         let view = |k: usize| {
             let ph = ((k + 3) % 18) as f32 / 18.0;
             let hit = (-ph * 5.0).exp();
-            let big = if ((k + 3) / 18) % 3 == 0 { 1.0 } else { 0.6 };
+            let big = if ((k + 3) / 18).is_multiple_of(3) { 1.0 } else { 0.6 };
             let env = -30.0 + 26.0 * hit * big;
             let lift = (dyn_decompress::static_gain_db(env as f64, -18.0, 0.5, 6.0, 6.0) as f32).max(0.0);
             let ceil = (env + lift + 1.0).max(0.0);

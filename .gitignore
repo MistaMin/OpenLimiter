@@ -31,8 +31,11 @@ qa/**/*.reapeaks
 qa/**/Backups/
 # The SDK and GoodLookin DRI: links to the one checkout locally, checked out by CI
 /deps/
-qa/**/og9/sessions/
+qa/**/og9*/sessions/
+qa/2026-11-26-sdk-19fac89/og9/*
+!qa/2026-11-26-sdk-19fac89/og9/OpenLimiter_*
 qa/2026-11-24-qa-editor-sdk/sdk-34420a4/og9/*
 !qa/2026-11-24-qa-editor-sdk/sdk-34420a4/og9/OpenLimiter_*
 !qa/2026-11-24-qa-editor-sdk/sdk-34420a4/og9/run.log
 !qa/2026-11-24-qa-editor-sdk/sdk-34420a4/og9/vst3-load-rerun.log
+

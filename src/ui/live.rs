@@ -287,10 +287,9 @@ pub(super) fn paint_plot(ui: &Ui, f: &mut Target, t: &Theme, k: f32, plot: R, gr
         }
     }
     let grid = rgb(t.grid);
-    for y in 0..h {
+    for (y, &grid_row) in grid_rows.iter().enumerate().take(h) {
         let yc = y as f32 + 0.5;
         let row = &mut f.px[(y0 + y) * f.w + x0..(y0 + y) * f.w + x0 + w];
-        let grid_row = grid_rows[y];
         for (x, (px, col)) in row.iter_mut().zip(&columns).enumerate() {
             let i = usize::from(yc >= col.0) | usize::from(yc >= col.1) << 1 | usize::from(yc < col.2) << 2;
             *px = if i != 0 {
@@ -471,8 +470,8 @@ fn paint_loud_bar(ui: &Ui, f: &mut Target, glyphs: &mut GlyphCache, t: &Theme, k
         lufs(l.short_out),
         lufs(l.integrated),
         plain(heard(l.integrated).then_some(l.range), false),
-        plain((heard(l.short_in) && heard(l.short_out)).then(|| l.short_out - l.short_in), true),
-        plain((heard(l.short_out) && peak > FLOOR_DB).then(|| peak - l.short_out), false),
+        plain((heard(l.short_in) && heard(l.short_out)).then_some(l.short_out - l.short_in), true),
+        plain((heard(l.short_out) && peak > FLOOR_DB).then_some(peak - l.short_out), false),
     ];
     let input = [Some(l.momentary_in), Some(l.short_in), Some(l.integrated_in), None, None, None];
     for (i, ((label, colour), inp)) in out.iter().zip(input).enumerate() {

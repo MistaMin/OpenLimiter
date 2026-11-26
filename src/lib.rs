@@ -306,6 +306,20 @@ impl Taps {
         }
     }
 
+    /// Back to the state `new` gives, without allocating (reset may run on the audio thread).
+    fn reset(&mut self) {
+        self.window = [[[0.0; TAPS]; 2]; 2];
+        self.loud_in.reset();
+        self.loud_out.reset();
+        self.loud_count = 0;
+        self.hop_count = 0;
+        self.hop = (0.0, 0.0, 0.0);
+        self.ring.fill(0.0);
+        self.ring_pos = 0;
+        self.peaks = ([0.0; 2], [0.0; 2]);
+        self.sq = [0.0; 2];
+    }
+
     /// Measures one point (0 input, 1 output) over a chunk; returns its inter-sample peak.
     fn measure(&mut self, point: usize, left: &[f32], right: &[f32], stereo: bool) -> f32 {
         let mut top = 0.0f32;
@@ -417,6 +431,8 @@ impl OpenLimiter {
         });
         self.shared.set_key_present(key.is_some());
         let left = &mut first[..frames];
+        // NaN, infinity and denormal input become 0 (ST-2, ST-3).
+        zero_abnormal(left, rest, frames);
         if self.shared.take_loud_reset() {
             taps.loud_in.reset();
             taps.loud_out.reset();
@@ -514,6 +530,9 @@ impl OpenLimiter {
             }
             start += n;
         }
+        // The kit and some hosts run without flush-to-zero: an f64 result too small for f32 lands
+        // as a denormal (Shaper after the multiband compressor, soak seed 8).
+        zero_abnormal(left, rest, frames);
         let (peak_in, peak_out) = std::mem::take(&mut taps.peaks);
         for c in 0..2 {
             let c_src = if stereo { c } else { 0 };
@@ -560,9 +579,11 @@ impl Plugin for OpenLimiter {
     fn reset(&mut self) {
         self.chain.reset();
         self.dither.reset();
-        if self.taps.is_some() {
-            self.taps = Some(Taps::new(self.sample_rate));
-            self.monitor = Some(self.new_monitor());
+        if let Some(taps) = &mut self.taps {
+            taps.reset();
+        }
+        if let Some(monitor) = &mut self.monitor {
+            monitor.reset(self.values[LAYOUT.autogain] >= 0.5, self.values[LAYOUT.delta] >= 0.5);
         }
         self.gain = self.gain_target;
     }
@@ -659,6 +680,16 @@ impl Plugin for OpenLimiter {
 openplugin::targets::export_clap!(OpenLimiter, editor = make_editor);
 openplugin::targets::export_lv2!(OpenLimiter, editor = make_editor);
 openplugin::targets::export_shell!(OpenLimiter, editor = make_editor);
+
+/// Every sample that is not a normal float (NaN, infinity, denormal, zero) becomes +0; normal
+/// samples pass bit for bit, so the sound does not change.
+fn zero_abnormal(left: &mut [f32], rest: &mut [&mut [f32]], frames: usize) {
+    for s in left.iter_mut().chain(rest.iter_mut().flat_map(|c| c.iter_mut().take(frames))) {
+        if !s.is_normal() {
+            *s = 0.0;
+        }
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -968,7 +999,7 @@ mod tests {
         let key: Vec<f32> = (0..4800).map(|i| 0.25 * (i as f32 * 0.011).cos()).collect();
         for _ in 0..3 {
             let mut io = vec![tone.clone(), tone.clone()];
-            process_buses(&mut plugin, &mut io, &[key.clone()], 4800);
+            process_buses(&mut plugin, &mut io, std::slice::from_ref(&key), 4800);
         }
         assert!(plugin.shared.take_key().0, "key bus seen");
         let mut pre = vec![0.0; 1024];
@@ -1006,7 +1037,7 @@ mod tests {
                 seed ^= seed << 5;
                 let t = i as f32 / sr;
                 let env = if (t * 2.0).fract() < 0.1 { 1.0 } else { 0.35 };
-                env * (0.5 * (t * 55.0 * 6.283).sin() + 0.25 * (t * 1234.0 * 6.283).sin() + 0.3 * (seed as f32 / u32::MAX as f32 - 0.5))
+                env * (0.5 * (t * 55.0 * std::f32::consts::TAU).sin() + 0.25 * (t * 1234.0 * std::f32::consts::TAU).sin() + 0.3 * (seed as f32 / u32::MAX as f32 - 0.5))
             })
             .collect();
         let slots: Vec<(usize, &str)> = OpenLimiter::default().chain.slots().iter().map(|s| (s.on_index(), s.label)).collect();
@@ -1226,11 +1257,12 @@ mod tests {
                 if si != 0 {
                     values[LAYOUT.slots[0].on] = 0.0;
                 }
-                for i in slot.base..slot.base + slot.count {
+                let span = slot.base..slot.base + slot.count;
+                for (p, v) in INFO.params[span.clone()].iter().zip(&mut values[span]) {
                     rng = rng.wrapping_mul(1_664_525).wrapping_add(1_013_904_223);
                     // A soloed band hides every other band: solo switches stay at their defaults.
-                    if !INFO.params[i].id.to_ascii_lowercase().contains("solo") {
-                        values[i] = INFO.params[i].from_normalized((rng >> 8) as f32 / 16_777_216.0);
+                    if !p.id.to_ascii_lowercase().contains("solo") {
+                        *v = p.from_normalized((rng >> 8) as f32 / 16_777_216.0);
                     }
                 }
                 let reference = render(&values);

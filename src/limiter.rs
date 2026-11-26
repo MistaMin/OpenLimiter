@@ -395,9 +395,9 @@ impl Limiter {
                         (chan.env, chan.slow) = step_env(&rel, chan.env, chan.slow, req);
                     }
                 }
-                for c in 0..nch {
-                    y[c] = self.chans[c].x[t] * self.chans[c].env;
-                    self.block_gain = self.block_gain.min(self.chans[c].env);
+                for (y, chan) in y.iter_mut().zip(&self.chans).take(nch) {
+                    *y = chan.x[t] * chan.env;
+                    self.block_gain = self.block_gain.min(chan.env);
                 }
             }
 

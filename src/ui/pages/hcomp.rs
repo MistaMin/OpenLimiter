@@ -533,7 +533,7 @@ impl Page for HComp {
         self.paint_trace(s, cx, live);
         self.paint_harmonics(s, cx);
         if cx.more {
-            let lat = vw_get(live, vw::LATENCY_SAMPLES).map_or(live.latency as f32, |l| l);
+            let lat = vw_get(live, vw::LATENCY_SAMPLES).unwrap_or(live.latency as f32);
             s.text(Point::new(MORE_LATENCY.0, MORE_LATENCY.1 + 10.0), format!("latency {lat:.0} smp"), cx.t.dim, 9.5, false);
         } else {
             Self::paint_ratio_knob(s, cx);
@@ -692,7 +692,7 @@ impl Page for HComp {
         let thr = cx.v(idx::THRESHOLD);
         let thr_p = cx.p(idx::THRESHOLD);
         if kit::inside(g.trace(), x, y) {
-            if (y - g.lv_y(thr)).abs() <= 6.0 && x >= TX0 && x <= TX1 {
+            if (y - g.lv_y(thr)).abs() <= 6.0 && (TX0..=TX1).contains(&x) {
                 if clicks >= 2 {
                     io.set(thr_p, INFO.params[thr_p].default);
                 } else {

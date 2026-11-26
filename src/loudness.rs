@@ -226,18 +226,20 @@ impl Loudness {
         let channels = if stereo { 2 } else { 1 };
         let input = [l as f64, r as f64];
         let mut energy = 0.0;
-        for c in 0..channels {
-            let y = self.stage2[c].run(self.stage1[c].run(input[c]));
+        for (c, &x) in input.iter().enumerate().take(channels) {
+            let y = self.stage2[c].run(self.stage1[c].run(x));
             energy += y * y;
-            self.sample_max = self.sample_max.max(input[c].abs());
+            self.sample_max = self.sample_max.max(x.abs());
             // True peak: the four interpolated phases of the unweighted signal.
             let h = &mut self.tp_hist[c];
-            h[self.tp_pos] = input[c];
-            h[self.tp_pos + 12] = input[c];
+            h[self.tp_pos] = x;
+            h[self.tp_pos + 12] = x;
             let taps = &h[self.tp_pos + 1..self.tp_pos + 13];
             for p in 0..4 {
                 let mut acc = 0.0;
-                for k in 0..12 { acc += TP_FIR[k][p] * taps[k]; }
+                for (fir, tap) in TP_FIR.iter().zip(taps) {
+                    acc += fir[p] * tap;
+                }
                 self.tp_max = self.tp_max.max(acc.abs());
             }
         }
@@ -276,7 +278,7 @@ impl Loudness {
         self.n_sub += 1;
         if self.n_sub >= 400 { self.max_m = self.max_m.max(self.window_db(0)); }
         if self.n_sub >= 3000 { self.max_s = self.max_s.max(self.window_db(1)); }
-        if self.n_sub % 100 == 0 {
+        if self.n_sub.is_multiple_of(100) {
             if self.n_sub >= 400 {
                 let z = self.win_e[0] / self.win_n[0].max(1) as f64;
                 self.integrated_hist.add(db(z), z);

@@ -11,9 +11,7 @@ on:
 
 env:
   # The OpenPluginSDK revision this release is built and tested with (as in scripts/build.sh).
-  OPENPLUGIN_SDK_REF: 34420a4274402c61a7e678963ecf589697684658
-  # GoodLookin DRI with the Semibold text standard; Cargo.toml patches the SDK's v0.2.1 to it.
-  GOODLOOKINDRI_REF: 3fe04263a7e1eb21931717393d0f1d705417e884
+  OPENPLUGIN_SDK_REF: ce6454f94f3c885764e2263522681709b173e3cf
   VST3_SDK_REF: v3.8.1_build_84
   CARGO_TERM_COLOR: always
 
@@ -26,7 +24,7 @@ jobs:
       # .cargo/config.toml here, since it runs outside the repository folder).
       CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS: -C target-feature=+crt-static
     steps:
-      # Cargo.toml finds the SDK and GoodLookin DRI in deps/ (links locally, checkouts here).
+      # Cargo.toml finds the SDK (with GoodLookin DRI inside it) in deps/ (links locally, checkouts here).
       - uses: actions/checkout@v4
         with:
           path: w/openlimiter
@@ -35,11 +33,6 @@ jobs:
           repository: MistaMin/OpenPluginSDK
           ref: ${{ env.OPENPLUGIN_SDK_REF }}
           path: w/openlimiter/deps/OpenPluginSDK
-      - uses: actions/checkout@v4
-        with:
-          repository: MistaMin/GoodLookinDri
-          ref: ${{ env.GOODLOOKINDRI_REF }}
-          path: w/openlimiter/deps/GoodLookinDri
       - uses: actions/checkout@v4
         with:
           repository: steinbergmedia/vst3sdk
@@ -91,11 +84,6 @@ jobs:
           repository: MistaMin/OpenPluginSDK
           ref: ${{ env.OPENPLUGIN_SDK_REF }}
           path: w/openlimiter/deps/OpenPluginSDK
-      - uses: actions/checkout@v4
-        with:
-          repository: MistaMin/GoodLookinDri
-          ref: ${{ env.GOODLOOKINDRI_REF }}
-          path: w/openlimiter/deps/GoodLookinDri
       - uses: dtolnay/rust-toolchain@stable
       - name: Tests
         working-directory: w/openlimiter

@@ -631,8 +631,7 @@ impl Page for Dual {
     fn tick(&mut self, _cx: &Ctx, live: &Live) -> bool {
         if live.view.len() >= vw::LEN {
             let values = [(-live.view[vw::GAIN]).max(0.0), (-live.view[vw::GAIN + 1]).max(0.0), live.view[vw::LIMIT]];
-            for i in 0..3 {
-                let r = values[i];
+            for (i, r) in values.into_iter().enumerate() {
                 if r >= self.hold[i] {
                     self.hold[i] = r;
                     self.age[i] = 0.0;

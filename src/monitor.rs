@@ -102,6 +102,23 @@ impl Monitor {
         }
     }
 
+    /// Back to the state `new` gives with these switches, without allocating.
+    pub fn reset(&mut self, autogain: bool, delta: bool) {
+        for ring in &mut self.ring {
+            ring.fill(0.0);
+        }
+        self.pos = 0;
+        for p in [&mut self.raw, &mut self.out] {
+            p.avg = 0.0;
+            p.filters.iter_mut().flatten().for_each(|f| f.z = [0.0; 2]);
+        }
+        self.gain = 1.0;
+        self.gain_target = 1.0;
+        self.mix = if delta { 1.0 } else { 0.0 };
+        self.autogain = autogain;
+        self.delta = delta;
+    }
+
     /// The gain Autogain applies now, dB (0 when it is off).
     pub fn gain_db(&self) -> f32 {
         20.0 * self.gain.max(1e-6).log10()
