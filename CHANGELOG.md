@@ -1,11 +1,14 @@
 # Changelog
 
-## Unreleased
+## 1.0.3 Beta (2026-11-27)
 
+- VST3: every value set just before a host saves survives save and reopen again (OpenGrid9 lost up to 392 of 1982 with the newer SDK; fixed in OpenPluginSDK).
+- Host parameter names of two modules are shorter, so every name is unique in the 31 characters Pro Tools shows: "Comp De-ess ..." (Compressor / De-esser) and "Harmonic Comp ..." (Harmonic Compressor). Ten pairs read the same before. Ids, automation and sessions are unchanged; the editor shows the full module names.
 - Hosts list the module group "Compressor / De-esser" as "Compressor & De-esser": hosts now read "/" as a sub-group. Parameter names, ids and automation are unchanged.
 - NaN, infinity and denormal numbers at the input or output are set to 0; normal audio passes unchanged.
 - Less idle CPU: PrecisionEQ's linear-phase helper thread waits until it has work instead of checking 1000 times a second (50 idle instances: 378 ms to 7 ms of CPU per second).
-- VST3: values set just before a host saves are kept again (OpenGrid9 lost up to 392 of them with the newer SDK; fixed in OpenPluginSDK).
+- macOS: the VST3, Audio Unit and AAX plug-ins are 7.8 MB instead of 19.5 MB; they no longer carry code and data nothing uses.
+- Built on the latest OpenPluginSDK, with GoodLookin DRI from inside the SDK.
 
 ## 1.0.2 Beta (2026-11-24)
 

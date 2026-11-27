@@ -17,41 +17,39 @@ made to be the last plugin before the master is printed.
 
 *The pictures are rendered from the plugin's own editor code.*
 
-## Version 1.0.2-Beta
+## Version 1.0.3-Beta
 
-The first public release.
+A maintenance release on the latest OpenPluginSDK.
 
+- VST3: every value you set survives save and reopen, also in hosts that save
+  before they hand the last changes to the plug-in.
+- Smaller macOS plug-ins (7.8 MB instead of 19.5 MB) and less idle CPU.
+- NaN, infinity and denormal numbers in the audio are set to 0.
 - Seventeen modules in one movable chain, each with its own page, plus
-  Requantise (word length, dither, noise shaping) pinned at the end.
-- Input and output meters, true peak, RMS, BS.1770 loudness, a history with
-  level, spectrogram and waterfall views, and a loudness radar; the history and
-  the radar open in their own resizable windows.
-- Autogain and Delta to hear the processing at matched loudness, or only what
-  it changes.
-- External sidechain for modules with a key, lined up through the chain.
-- A/B, factory presets and four themes.
+  Requantise (word length, dither, noise shaping) pinned at the end; meters,
+  true peak, loudness, history and loudness radar; Autogain and Delta.
 
 ## Download
 
 **macOS 11 or later, Apple silicon and Intel:**
-[OpenLimiter-1.0.2-Beta-macos.pkg](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.2-Beta/OpenLimiter-1.0.2-Beta-macos.pkg) ·
-[User manual (PDF)](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.2-Beta/OpenLimiter-1.0.2-Beta-User-Manual.pdf)
+[OpenLimiter-1.0.3-Beta-macos.pkg](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.3-Beta/OpenLimiter-1.0.3-Beta-macos.pkg) ·
+[User manual (PDF)](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.3-Beta/OpenLimiter-1.0.3-Beta-User-Manual.pdf)
 
 The installer offers **VST3, Audio Unit, CLAP, LV2 and AAX**. It is signed with
 Developer ID and notarized by Apple, and the AAX is signed with PACE Eden for
 Pro Tools.
 
 **Windows 10 or later, x64:**
-[OpenLimiter-1.0.2-Beta-windows-x64-setup.exe](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.2-Beta/OpenLimiter-1.0.2-Beta-windows-x64-setup.exe)
+[OpenLimiter-1.0.3-Beta-windows-x64-setup.exe](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.3-Beta/OpenLimiter-1.0.3-Beta-windows-x64-setup.exe)
 installs **VST3 and CLAP** with the editor. It is not code-signed, so Windows
 may ask before running it.
 
 **Linux x86_64:**
-[OpenLimiter-1.0.2-Beta-linux-x86_64.tar.gz](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.2-Beta/OpenLimiter-1.0.2-Beta-linux-x86_64.tar.gz)
+[OpenLimiter-1.0.3-Beta-linux-x86_64.tar.gz](https://github.com/MistaMin/OpenLimiter/releases/download/v1.0.3-Beta/OpenLimiter-1.0.3-Beta-linux-x86_64.tar.gz)
 holds **CLAP and LV2** without an editor; the host shows its own controls.
 
 Checksums are on the
-[release page](https://github.com/MistaMin/OpenLimiter/releases/tag/v1.0.2-Beta).
+[release page](https://github.com/MistaMin/OpenLimiter/releases/tag/v1.0.3-Beta).
 
 This is a beta. The Windows and Linux builds are made by GitHub Actions and
 have not been tested in a host yet. There is no standalone application.

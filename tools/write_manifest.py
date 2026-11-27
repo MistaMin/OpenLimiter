@@ -15,10 +15,10 @@ from pathlib import Path
 
 NAME = "OpenLimiter"
 HIGHLIGHTS = [
-    "Seventeen mastering modules in one movable chain",
-    "Requantise with dither and noise shaping, pinned last",
-    "True peak, RMS and BS.1770 loudness; history with spectrogram and waterfall views",
-    "History and loudness radar in their own resizable windows",
+    "VST3: every value survives save and reopen, also in hosts that save before delivering the last changes",
+    "Smaller macOS plug-ins (7.8 MB instead of 19.5 MB) and less idle CPU",
+    "NaN, infinity and denormal numbers in the audio are set to 0",
+    "Seventeen mastering modules in one movable chain, then Requantise",
     "macOS universal (VST3, AU, CLAP, LV2, AAX), Windows and Linux",
 ]
 

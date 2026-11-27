@@ -1,0 +1,34 @@
+PASS     loads VST3: OpenLimiter (OpenGrid), 1985 parameters
+PASS     finite output peak -3.5 dBFS
+PASS     not silent rms -14.9 dBFS
+FAIL     deterministic render repeat differs by -1.8 dB
+PASS     editor opens 1200x913, 4.1% animates by itself
+  Gain L                           audio=skipped (render not deterministic) visual=ok
+  Gain R                           audio=skipped (render not deterministic) visual=ok
+  Threshold                        audio=skipped (render not deterministic) visual=ok
+  Soft Clip                        audio=skipped (render not deterministic) visual=ok
+  Release A                        audio=skipped (render not deterministic) visual=ok
+  Release M                        audio=skipped (render not deterministic) visual=ok
+  Auto Release                     audio=skipped (render not deterministic) visual=ok
+  Output                           audio=skipped (render not deterministic) visual=ok
+  Delay L                          audio=skipped (render not deterministic) visual=ok
+  Delay R                          audio=skipped (render not deterministic) visual=ok
+  Delay Fine L                     audio=skipped (render not deterministic) visual=ok
+  Delay Fine R                     audio=skipped (render not deterministic) visual=ok
+  Phase Inv L                      audio=skipped (render not deterministic) visual=ok
+  Phase Inv R                      audio=skipped (render not deterministic) visual=ok
+  Delay Unit                       audio=skipped (render not deterministic) visual=ok
+  Upsample                         audio=skipped (render not deterministic) visual=ok
+  Link                             audio=skipped (render not deterministic) visual=ok
+  Headroom                         audio=skipped (render not deterministic) visual=ok
+  Dither                           audio=skipped (render not deterministic) visual=ok
+  No Latency                       audio=skipped (render not deterministic) visual=ok
+  Classic Limiter On               audio=skipped (render not deterministic) visual=ok
+  Classic Limiter Position         audio=skipped (render not deterministic) visual=ok
+  Punch & Energy Curve             audio=skipped (render not deterministic) visual=ok
+  Punch & Energy Threshold         audio=skipped (render not deterministic) visual=ok
+PASS     every parameter changes the sound 
+PASS     every parameter is shown in the GUI 
+PASS     state survives save and reopen 
+PASS     editor reopens 5 close/open cycles
+report: /Volumes/Developer/OpenGrid/OpenLimiter/qa/2026-11-27-qa-b40a04f/sdk-fix-22a6073/reaper-vst3/report.md

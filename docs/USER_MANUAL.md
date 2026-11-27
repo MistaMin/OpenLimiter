@@ -2,7 +2,7 @@
 
 OpenLimiter is a modular mastering chain by OpenGrid: seventeen processing modules that you switch on, order and set in one plug-in, followed by a word-length stage (Requantise). It is built to be the last plug-in before the master is printed, so it has no output gain after its limiters.
 
-Version 1.0.2 Beta. This is a beta: the processing has been measured and tested, but it has not yet had a full listening review. Report anything that sounds wrong.
+Version 1.0.3 Beta. This is a beta: the processing has been measured and tested, but it has not yet had a full listening review. Report anything that sounds wrong.
 
 ![OpenLimiter, Classic Limiter page](images/limiter.png)
 

@@ -63,6 +63,18 @@ fn host_group(label: &'static str) -> &'static str {
     if label.contains('/') { leak(label.replace(" / ", " & ").replace('/', "&")) } else { label }
 }
 
+/// The module's name at the start of its host parameter names. Pro Tools cuts a name at 31
+/// characters, so the two modules whose names would then be the same get a shorter one
+/// ("Compressor / De-esser Auto Release Time 1" and "... 2" both ended in "Auto Rele").
+/// The editor shows `label` itself; ids do not change.
+fn host_prefix(label: &'static str) -> &'static str {
+    match label {
+        "Compressor / De-esser" => "Comp De-ess",
+        "Harmonic Compressor" => "Harmonic Comp",
+        other => other,
+    }
+}
+
 pub(crate) fn info_for(key: &'static str, label: &'static str, d: &ParamDesc) -> ParamInfo {
     let unit = match d.kind {
         Kind::Db => Unit::Db,
@@ -74,7 +86,7 @@ pub(crate) fn info_for(key: &'static str, label: &'static str, d: &ParamDesc) ->
         Kind::Toggle => Unit::Toggle,
         Kind::Choice(_) => Unit::Choice,
     };
-    let (id, name) = if key.is_empty() { (d.id, d.name) } else { (leak(format!("{key}.{}", d.id)), leak(format!("{label} {}", d.name))) };
+    let (id, name) = if key.is_empty() { (d.id, d.name) } else { (leak(format!("{key}.{}", d.id)), leak(format!("{} {}", host_prefix(label), d.name))) };
     let mut info = ParamInfo::new(id, name, d.min, d.max, d.default, unit).with_steps(d.steps);
     if d.log {
         info = info.with_taper(Taper::Log);
@@ -117,8 +129,8 @@ impl Chain {
         for (i, slot) in self.slots.iter().enumerate() {
             out.extend(slot.module.params().iter().map(|d| info_for(slot.key, slot.label, d)));
             let key = if slot.key.is_empty() { "chain0" } else { slot.key };
-            out.push(ParamInfo::new(leak(format!("{key}.on")), leak(format!("{} On", slot.label)), 0.0, 1.0, if i == 0 { 1.0 } else { 0.0 }, Unit::Toggle).with_group(host_group(slot.label)));
-            out.push(ParamInfo::new(leak(format!("{key}.position")), leak(format!("{} Position", slot.label)), 1.0, n.max(2) as f32, (i + 1) as f32, Unit::None).with_steps(n.max(2) as u32).with_group(host_group(slot.label)));
+            out.push(ParamInfo::new(leak(format!("{key}.on")), leak(format!("{} On", host_prefix(slot.label))), 0.0, 1.0, if i == 0 { 1.0 } else { 0.0 }, Unit::Toggle).with_group(host_group(slot.label)));
+            out.push(ParamInfo::new(leak(format!("{key}.position")), leak(format!("{} Position", host_prefix(slot.label))), 1.0, n.max(2) as f32, (i + 1) as f32, Unit::None).with_steps(n.max(2) as u32).with_group(host_group(slot.label)));
         }
         out
     }

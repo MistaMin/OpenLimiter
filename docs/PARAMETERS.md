@@ -138,39 +138,39 @@ Generated from the plugin (`cargo test --release dump_manual_params -- --ignored
 
 | Control | Range or choices | Default |
 |---|---|---|
-| Compressor / De-esser On | Off, On | Off |
+| Comp De-ess On | Off, On | Off |
 | Threshold | -25.0 dB to 0.1 dB | 0.0 dB |
-| Compressor / De-esser Key Source | Internal, External | Internal |
-| Compressor / De-esser Channel Mode | Ganged, Per channel, Mid / Side | Ganged |
-| Compressor / De-esser Threshold n | -60.0 dB to 0.0 dB | 0.0 dB |
-| Compressor / De-esser Ratio n | 1:5.0 UP to ∞:1 | 2.0:1 |
-| Compressor / De-esser Attack n | 20 µs to 800 ms | 31.5 ms |
-| Compressor / De-esser Release Fast n | 20 µs to 8.00 s | 100 ms |
-| Compressor / De-esser Make-Up n | -60.0 dB to 60.0 dB | 0.0 dB |
-| Compressor / De-esser Band n | Low band, Mid band, High band, Full band | Full band |
-| Compressor / De-esser Band Frequency n | 41.0 Hz to 17.7 kHz | 415 Hz |
-| Compressor / De-esser Band Width n (oct) | 0.17 oct to 8.00 oct | 2.00 oct |
-| Compressor / De-esser Soft Knee n | 0% to 100% | 100% |
-| Compressor / De-esser Auto Release n | Off, On | Off |
-| Compressor / De-esser Band Solo | Off, On | Off |
-| Compressor / De-esser Look-Ahead | OFF to 63.0 ms | OFF |
-| Compressor / De-esser Input Gain | -60.0 dB to 12.0 dB | 0.0 dB |
-| Compressor / De-esser Parallel Mix | 0% to 100% | 100% |
-| Compressor / De-esser Auto Make-Up | Off, On | Off |
-| Compressor / De-esser Detector | Peak, RMS | Peak |
-| Compressor / De-esser Parallel | Off, Sum, Blend | Off |
-| Compressor / De-esser Release Hold n | 20 µs to 8.00 s | 20 µs |
-| Compressor / De-esser Release Average n | 20 µs to 8.00 s | 50.0 ms |
-| Compressor / De-esser Release Slow n | 20 µs to 8.00 s | 200 ms |
-| Compressor / De-esser Auto Release Time n | 630 µs to 8.00 s | 100 ms |
-| Compressor / De-esser RMS Time | 120 µs to 8.00 s | 20.0 ms |
-| Compressor / De-esser Limiter Drive | 0.0 dB to 30.0 dB | 0.0 dB |
-| Compressor / De-esser Output Gain |  to  |  |
-| Compressor / De-esser Safety Limiter | Off, On | On |
-| Compressor / De-esser Ceiling Type | Sample -0.05 dB, Sample -0.01 dB, True peak | Sample -0.01 dB |
-| Compressor / De-esser Key Link | Off, On | Off |
-| Compressor / De-esser Key Filter | Off, On | Off |
-| Compressor / De-esser Ganged Set | Set 1, Set 2 | Set 1 |
+| Comp De-ess Key Source | Internal, External | Internal |
+| Comp De-ess Channel Mode | Ganged, Per channel, Mid / Side | Ganged |
+| Comp De-ess Threshold n | -60.0 dB to 0.0 dB | 0.0 dB |
+| Comp De-ess Ratio n | 1:5.0 UP to ∞:1 | 2.0:1 |
+| Comp De-ess Attack n | 20 µs to 800 ms | 31.5 ms |
+| Comp De-ess Release Fast n | 20 µs to 8.00 s | 100 ms |
+| Comp De-ess Make-Up n | -60.0 dB to 60.0 dB | 0.0 dB |
+| Comp De-ess Band n | Low band, Mid band, High band, Full band | Full band |
+| Comp De-ess Band Frequency n | 41.0 Hz to 17.7 kHz | 415 Hz |
+| Comp De-ess Band Width n (oct) | 0.17 oct to 8.00 oct | 2.00 oct |
+| Comp De-ess Soft Knee n | 0% to 100% | 100% |
+| Comp De-ess Auto Release n | Off, On | Off |
+| Comp De-ess Band Solo | Off, On | Off |
+| Comp De-ess Look-Ahead | OFF to 63.0 ms | OFF |
+| Comp De-ess Input Gain | -60.0 dB to 12.0 dB | 0.0 dB |
+| Comp De-ess Parallel Mix | 0% to 100% | 100% |
+| Comp De-ess Auto Make-Up | Off, On | Off |
+| Comp De-ess Detector | Peak, RMS | Peak |
+| Comp De-ess Parallel | Off, Sum, Blend | Off |
+| Comp De-ess Release Hold n | 20 µs to 8.00 s | 20 µs |
+| Comp De-ess Release Average n | 20 µs to 8.00 s | 50.0 ms |
+| Comp De-ess Release Slow n | 20 µs to 8.00 s | 200 ms |
+| Comp De-ess Auto Release Time n | 630 µs to 8.00 s | 100 ms |
+| Comp De-ess RMS Time | 120 µs to 8.00 s | 20.0 ms |
+| Comp De-ess Limiter Drive | 0.0 dB to 30.0 dB | 0.0 dB |
+| Comp De-ess Output Gain |  to  |  |
+| Comp De-ess Safety Limiter | Off, On | On |
+| Comp De-ess Ceiling Type | Sample -0.05 dB, Sample -0.01 dB, True peak | Sample -0.01 dB |
+| Comp De-ess Key Link | Off, On | Off |
+| Comp De-ess Key Filter | Off, On | Off |
+| Comp De-ess Ganged Set | Set 1, Set 2 | Set 1 |
 
 ## Final Wall
 
@@ -366,35 +366,35 @@ Generated from the plugin (`cargo test --release dump_manual_params -- --ignored
 
 | Control | Range or choices | Default |
 |---|---|---|
-| Harmonic Compressor On | Off, On | Off |
+| Harmonic Comp On | Off, On | Off |
 | Threshold | -25.0 dB to 0.1 dB | 0.0 dB |
-| Harmonic Compressor Key Source | Internal, External | Internal |
-| Harmonic Compressor Mode | Class-A Peak, Hybrid FF/FB, Diode Bridge, Bus VCA, Fast FET, Optical, RMS VCA | Class-A Peak |
-| Harmonic Compressor nnd Harmonic | 0% to 100% | 0% |
-| Harmonic Compressor nrd Harmonic | 0% to 100% | 0% |
-| Harmonic Compressor nth Harmonic | 0% to 100% | 0% |
-| Harmonic Compressor Threshold | -60.0 dB to 0.0 dB | -18.0 dB |
-| Harmonic Compressor Ratio | -2.0:1 to 100:1 | 4.0:1 |
-| Harmonic Compressor Attack | 100 µs to 300 ms | 10.0 ms |
-| Harmonic Compressor Release | 5.00 ms to 3.00 s | 100 ms |
-| Harmonic Compressor Makeup Gain | -12.0 dB to +24.0 dB | +0.0 dB |
-| Harmonic Compressor Auto Attack | Off, On | Off |
-| Harmonic Compressor Auto Release | Off, On | Off |
-| Harmonic Compressor Knee | 0.0 dB to 24.0 dB | 6.0 dB |
-| Harmonic Compressor Input Gain | -24.0 dB to +24.0 dB | +0.0 dB |
-| Harmonic Compressor Mix | 0% to 100% | 100% |
-| Harmonic Compressor Sidechain Enable | Off, On | Off |
-| Harmonic Compressor Sidechain HP Freq | 20 Hz to 500 Hz | 150 Hz |
-| Harmonic Compressor Sidechain Listen | Off, On | Off |
-| Harmonic Compressor Transient Enable | Off, On | Off |
-| Harmonic Compressor Transient Attack | -100% to 100% | 0% |
-| Harmonic Compressor Transient Sustain | -100% to 100% | 0% |
-| Harmonic Compressor Transient Speed | 500 µs to 50.0 ms | 10.0 ms |
-| Harmonic Compressor Auto Gain | Off, On | Off |
-| Harmonic Compressor Delta Monitor | Off, On | Off |
-| Harmonic Compressor Output Gain | -24.0 dB to +24.0 dB | +0.0 dB |
-| Harmonic Compressor Oversample | 1x, 2x, 4x, 8x | 2x |
-| Harmonic Compressor Oversample Filter | Min Phase, Lin Phase | Min Phase |
+| Harmonic Comp Key Source | Internal, External | Internal |
+| Harmonic Comp Mode | Class-A Peak, Hybrid FF/FB, Diode Bridge, Bus VCA, Fast FET, Optical, RMS VCA | Class-A Peak |
+| Harmonic Comp nnd Harmonic | 0% to 100% | 0% |
+| Harmonic Comp nrd Harmonic | 0% to 100% | 0% |
+| Harmonic Comp nth Harmonic | 0% to 100% | 0% |
+| Harmonic Comp Threshold | -60.0 dB to 0.0 dB | -18.0 dB |
+| Harmonic Comp Ratio | -2.0:1 to 100:1 | 4.0:1 |
+| Harmonic Comp Attack | 100 µs to 300 ms | 10.0 ms |
+| Harmonic Comp Release | 5.00 ms to 3.00 s | 100 ms |
+| Harmonic Comp Makeup Gain | -12.0 dB to +24.0 dB | +0.0 dB |
+| Harmonic Comp Auto Attack | Off, On | Off |
+| Harmonic Comp Auto Release | Off, On | Off |
+| Harmonic Comp Knee | 0.0 dB to 24.0 dB | 6.0 dB |
+| Harmonic Comp Input Gain | -24.0 dB to +24.0 dB | +0.0 dB |
+| Harmonic Comp Mix | 0% to 100% | 100% |
+| Harmonic Comp Sidechain Enable | Off, On | Off |
+| Harmonic Comp Sidechain HP Freq | 20 Hz to 500 Hz | 150 Hz |
+| Harmonic Comp Sidechain Listen | Off, On | Off |
+| Harmonic Comp Transient Enable | Off, On | Off |
+| Harmonic Comp Transient Attack | -100% to 100% | 0% |
+| Harmonic Comp Transient Sustain | -100% to 100% | 0% |
+| Harmonic Comp Transient Speed | 500 µs to 50.0 ms | 10.0 ms |
+| Harmonic Comp Auto Gain | Off, On | Off |
+| Harmonic Comp Delta Monitor | Off, On | Off |
+| Harmonic Comp Output Gain | -24.0 dB to +24.0 dB | +0.0 dB |
+| Harmonic Comp Oversample | 1x, 2x, 4x, 8x | 2x |
+| Harmonic Comp Oversample Filter | Min Phase, Lin Phase | Min Phase |
 
 ## Dynamics Restore
 

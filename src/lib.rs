@@ -912,6 +912,18 @@ mod tests {
         assert!((right[base] - 0.25).abs() < 1e-6);
     }
 
+    /// Pro Tools shows the first 31 characters of a name: they must tell every parameter apart.
+    #[test]
+    fn names_differ_within_31_characters() {
+        let mut seen = std::collections::BTreeMap::new();
+        for p in INFO.params.iter() {
+            let cut: String = p.name.chars().take(31).collect();
+            if let Some(other) = seen.insert(cut, p.name) {
+                panic!("{:?} and {:?} are the same in 31 characters", other, p.name);
+            }
+        }
+    }
+
     #[test]
     fn every_module_runs_in_one_chain() {
         let ids: std::collections::HashSet<&str> = INFO.params.iter().map(|p| p.id).collect();

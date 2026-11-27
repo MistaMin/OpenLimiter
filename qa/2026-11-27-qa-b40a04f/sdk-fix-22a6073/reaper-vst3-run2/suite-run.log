@@ -1,0 +1,42 @@
+PASS     loads VST3: OpenLimiter (OpenGrid), 1985 parameters
+PASS     finite output peak -3.5 dBFS
+PASS     not silent rms -14.9 dBFS
+PASS     deterministic render repeat differs by -240.0 dB
+PASS     editor opens 1200x913, 10.0% animates by itself
+  Gain L                           audio=ok       visual=ok
+  Gain R                           audio=ok       visual=ok
+  Threshold                        audio=ok       visual=ok
+  Soft Clip                        audio=ok       visual=ok
+  Release A                        audio=ok       visual=ok
+  Release M                        audio=ok       visual=ok
+  Auto Release                     audio=DEAD     visual=ok
+  Output                           audio=ok       visual=ok
+  Delay L                          audio=ok       visual=ok
+  Delay R                          audio=ok       visual=ok
+  Delay Fine L                     audio=ok       visual=ok
+  Delay Fine R                     audio=ok       visual=ok
+  Phase Inv L                      audio=ok       visual=ok
+  Phase Inv R                      audio=ok       visual=ok
+  Delay Unit                       audio=ok       visual=ok
+  Upsample                         audio=DEAD     visual=ok
+  Link                             audio=ok       visual=ok
+  Headroom                         audio=DEAD     visual=ok
+  Dither                           audio=ok       visual=ok
+  No Latency                       audio=DEAD     visual=ok
+  Classic Limiter On               audio=DEAD     visual=ok
+  Classic Limiter Position         audio=DEAD     visual=ok
+  Punch & Energy Curve             audio=DEAD     visual=ok
+  Punch & Energy Threshold         audio=DEAD     visual=ok
+  Auto Release                     audio=CONDITIONAL (acts in random state 1)
+  Upsample                         audio=CONDITIONAL (acts in random state 1)
+  Headroom                         audio=CONDITIONAL (acts in random state 1)
+  No Latency                       audio=CONDITIONAL (acts in random state 1)
+  Classic Limiter On               audio=CONDITIONAL (acts in random state 1)
+  Classic Limiter Position         audio=CONDITIONAL (acts in random state 1)
+  Punch & Energy Curve             audio=CONDITIONAL (acts in random state 1)
+  Punch & Energy Threshold         audio=CONDITIONAL (acts in random state 1)
+PASS     every parameter changes the sound 
+PASS     every parameter is shown in the GUI 
+PASS     state survives save and reopen 
+PASS     editor reopens 5 close/open cycles
+report: /Volumes/Developer/OpenGrid/OpenLimiter/qa/2026-11-27-qa-b40a04f/sdk-fix-22a6073/reaper-vst3-run2/report.md
