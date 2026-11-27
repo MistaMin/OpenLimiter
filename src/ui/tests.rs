@@ -172,7 +172,8 @@ fn dump_manual_params() {
     let mut out = String::from(
         "# OpenLimiter parameter reference\n\nGenerated from the plugin (`cargo test --release dump_manual_params -- --ignored`). \
 Every control, page by page, with its range and default as the editor shows them. A control that repeats per band, set or \
-channel is listed once, with its number written as `n`.\n",
+channel is listed once, with its number written as `n`. The names are the ones a host lists; two modules have a short \
+form there (\"Comp De-ess\" for Compressor / De-esser, \"Harmonic Comp\" for Harmonic Compressor).\n",
     );
     let norm = |s: &str| {
         let mut o = String::new();

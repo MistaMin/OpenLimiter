@@ -1,6 +1,6 @@
 # OpenLimiter parameter reference
 
-Generated from the plugin (`cargo test --release dump_manual_params -- --ignored`). Every control, page by page, with its range and default as the editor shows them. A control that repeats per band, set or channel is listed once, with its number written as `n`.
+Generated from the plugin (`cargo test --release dump_manual_params -- --ignored`). Every control, page by page, with its range and default as the editor shows them. A control that repeats per band, set or channel is listed once, with its number written as `n`. The names are the ones a host lists; two modules have a short form there ("Comp De-ess" for Compressor / De-esser, "Harmonic Comp" for Harmonic Compressor).
 
 ## Top bar and input
 
