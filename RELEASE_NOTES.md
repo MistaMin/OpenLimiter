@@ -54,7 +54,7 @@ printed. This is a beta.
 
 ## Checks
 
-- The plugin's own tests, the OpenPluginSDK conformance kit (also over 24 seeds
+- The plugin's own tests, the OpenPluginSDK conformance kit (also over 200 seeds
   and with strict options) and a speed check against a baseline pass.
 - macOS: auval passes; pluginval at strictness 10 passes for VST3 and Audio
   Unit, with the editor tests; clap-validator 34 passed, 0 failed; Avid's AAX

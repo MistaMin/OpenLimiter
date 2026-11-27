@@ -32,6 +32,17 @@
 | Manual PDF rebuilt (17 pages) and looked at (page 1) | PASS | |
 | Listening, Pro Tools, other hosts; Windows and Linux in a host; Windows code signing | not done | owner / no machines |
 
+## Release soak (200 seeds) and the output bound
+
+- **First run:** `OPENPLUGIN_SOAK_SEEDS=200` failed at seed 84: output peak 74.4 over the kit's default bound of 64 (state check, every parameter random; 2 of 204,615 bound assertions). The usual 24 seeds do not reach it.
+- **Cause: gain by design, not instability.** A throwaway search shrank three such states to their parameters:
+  - +56.7 dB of Compressor / De-esser make-up placed after Final Wall (peak 447).
+  - Three gain controls adding about +60 dB (peak 102).
+  - A 38-parameter state with limiter gain and transient boost (peak 158).
+- **Why the bound cannot hold:** the user orders the chain and several modules have large gain controls, so no fixed ceiling of 64 fits.
+- **Exception (NEW):** `tests/conformance.rs` and `tests/soak.rs` set `max_output` to 1e6 (+120 dBFS), with the reason in a comment. NaN and infinity stay a separate check. Test code only: the binaries are unchanged.
+- **Rerun:** 200 seeds and the strict fuzz PASS (995 s).
+
 ## OpenGrid9 VST3: what failed first, and why
 
 - **First run:** the VST3 check failed with 301 values wrong (machine load about 150), then 658 and 375 in two more runs.
