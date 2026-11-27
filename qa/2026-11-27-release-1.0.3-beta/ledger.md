@@ -5,13 +5,13 @@
 - Merge to main and push; Windows and Linux built by GitHub Actions.
 - "merge 61 and fix the parameter names".
 
-**Source:** `27d0ecc` for the macOS binaries (clean tree), OpenPluginSDK `d93d926` (main, with #60 and #61). The later release commit changes documents, the parameter reference's introduction (test code) and this record only.
+**Source:** `27d0ecc` for the macOS binaries (clean tree); `a83842b` for Windows and Linux, which differs from it in documents and test code only, OpenPluginSDK `d93d926` (main, with #60 and #61). The later release commit changes documents, the parameter reference's introduction (test code) and this record only.
 
 | Platform | Where | Output |
 |---|---|---|
 | macOS | this Mac (arm64), `scripts/build.sh`, release, universal arm64 + x86_64, minos 11.0 | VST3, AU, CLAP, LV2, AAX |
-| Windows x64 | GitHub Actions, windows-latest (run in the table below) | VST3, CLAP; Inno Setup installer, not code-signed |
-| Linux x86_64 | GitHub Actions, ubuntu-22.04 | CLAP, LV2 (no editor), tar.gz |
+| Windows x64 | GitHub Actions run 45976969753 at `a83842b`, windows-latest | VST3, CLAP; Inno Setup installer, not code-signed |
+| Linux x86_64 | GitHub Actions run 45976969753 at `a83842b`, ubuntu-22.04 | CLAP, LV2 (no editor), tar.gz |
 
 ## Checks on the release build
 
@@ -31,6 +31,23 @@
 | OpenGrid9: VST3 (1982), AU (1981), LV2 (1989 ports); every value compared after save and reopen | PASS; VST3 0 and AU 0 wrong | og9/, `../2026-11-26-sdk-19fac89/og9-strict.py` |
 | Manual PDF rebuilt (17 pages) and looked at (page 1) | PASS | |
 | Listening, Pro Tools, other hosts; Windows and Linux in a host; Windows code signing | not done | owner / no machines |
+
+## Installer and files
+
+| Check | Result | Evidence |
+|---|---|---|
+| Installer: Developer ID Installer, notarized (Accepted), stapled, Gatekeeper "Notarized Developer ID" | PASS | pkg-build.log |
+| Installer payload: every bundle signed by team ZQYU67JUBH with hardened runtime, universal; AAX PACE signature verifies; no `._` files after a full expand; manual 1.0.3 and licences inside | PASS | |
+| Windows and Linux: the plugin's tests pass in the same run that built the files; checksums of the downloaded files match | PASS | run 45976969753 |
+| Linux archive: CLAP, LV2 and licences only, no `._` or `.DS_Store` | PASS | |
+| Manifest: schema 2, three archives, all `modern` (macOS 11.0, Windows 10.0, Linux glibc 2.35); sizes and hashes from the final files | PASS | `opengrid-manifest.json` in the release |
+
+| File | Bytes | SHA-256 |
+|---|---|---|
+| OpenLimiter-1.0.3-Beta-macos.pkg | 16487351 | 78dcd562b257523d245648116015a891d2d27f0a1da6988ba45d067c9534467b |
+| OpenLimiter-1.0.3-Beta-windows-x64-setup.exe | 3691649 | 9ba5379c9721fc26a68858eba5be14c6d88d4cd7be4025a753a7b68737423425 |
+| OpenLimiter-1.0.3-Beta-linux-x86_64.tar.gz | 3581908 | b4d87a214bc90d12b84b8e501c355fbd5ff407dc8820c9cdd03b861f2b816b26 |
+| OpenLimiter-1.0.3-Beta-User-Manual.pdf | 474159 | a793fc098d0cc18170c03c94dce9a2f29e6d60fa0a82757e1619c60cc83000b3 |
 
 ## Release soak (200 seeds) and the output bound
 
